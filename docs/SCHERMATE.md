@@ -2,6 +2,8 @@
 
 Le 51 schermate mostrano la demo HTML con l’azienda di esempio **Pixel Giulia**, anno 2026. I dati sono sintetici e alcune funzioni della demo sono simulate o semplificate. Consulta i [limiti della beta](BETA.md).
 
+Le schermate desktop particolarmente lunghe sono ritagliate nella parte superiore per facilitarne la lettura. Le viste per smartphone mantengono il formato originale.
+
 [Indice tabellare completo](screenshots/INDICE.md) · [Torna al README](../README.md)
 
 <details>

@@ -1,6 +1,6 @@
 # Semplicon – Schermate di esempio (azienda «Pixel Giulia», anno 2026)
 
-Schermate della demo (`demo/semplicon-demo.html`) con i dati di esempio di Giulia Pixel (professionista, regime forfettario con IVA). Ogni immagine mostra una pagina completa.
+Schermate della demo (`demo/semplicon-demo.html`) con i dati di esempio di Giulia Pixel (professionista, regime forfettario con IVA). Le schermate desktop particolarmente lunghe sono ritagliate nella parte superiore per facilitarne la lettura; le viste per smartphone mantengono il formato originale.
 
 | N. | Schermata | Descrizione |
 |---|---|---|
