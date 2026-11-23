@@ -1,0 +1,59 @@
+codice;descrizione;tipo;sezione;voce_cee;categoria;iva_rilevante;iva_detraibile_pct;iva_nota;deducibilita_pct;deducibilita_nota;irap_nota;limite;note;normativa
+711001;Compensi per prestazioni professionali;ricavo;compensi;;Compensi;1;;IVA secondo operazione;;Concorre al reddito;Non dovuta (persona fisica);;Compensi incassati nel periodo d’imposta (principio di cassa).;Art. 54 TUIR
+711002;Rivalsa INPS 4% gestione separata;ricavo;compensi;;Compensi;1;;Imponibile IVA;;Concorre al reddito come compenso;Non dovuta (persona fisica);;Solo per gli iscritti alla gestione separata INPS: a differenza del contributo integrativo delle casse private, concorre al reddito.;Art. 54 TUIR
+711003;Contributo integrativo cassa professionale privata;ricavo;non_reddito;;Non concorre al reddito;1;;Imponibile IVA;0;Non concorre al reddito: non è un ricavo;Non dovuta (persona fisica);;Soggetto a IVA: si registra solo ai fini IVA, non come ricavo.;
+711004;Rimborsi spese analitici addebitati in fattura;ricavo;non_reddito;;Non concorre al reddito;1;;IVA secondo operazione;0;Non concorrono alla formazione del reddito;Non dovuta (persona fisica);;"Solo rimborsi analitici delle spese per l’incarico; i rimborsi forfettari sono compensi (conto 711001).";Art. 54 TUIR (D.Lgs. 192/2024)
+711005;Spese anticipate in nome e per conto del cliente;ricavo;non_reddito;;Non concorre al reddito;1;;Escluse art. 15 DPR 633/72 (N1);0;Non concorrono al reddito;Non dovuta (persona fisica);;Documentate e anticipate in nome e per conto del cliente.;Art. 15 DPR 633/72
+712001;Altri proventi dell’attività;ricavo;altri_proventi_re;;Altri proventi;1;;Secondo operazione;;Secondo fattispecie;Non dovuta (persona fisica);;;Art. 54 TUIR
+712002;Plusvalenze su beni strumentali;ricavo;altri_proventi_re;;Altri proventi;1;;Secondo operazione;;Concorrono al reddito;Non dovuta (persona fisica);;;Art. 54 TUIR
+631001;Ammortamento beni strumentali;costo;ammortamenti_re;;Beni strumentali;0;;Fuori campo;;Secondo coefficienti ministeriali;Non dovuta (persona fisica);;;Art. 54 TUIR
+631002;Ammortamento hardware e software;costo;ammortamenti_re;;Beni strumentali;0;;Fuori campo;;Secondo coefficienti ministeriali;Non dovuta (persona fisica);;;Art. 54 TUIR
+631003;Beni strumentali di costo unitario fino a 516,46 Euro;costo;ammortamenti_re;;Beni strumentali;1;;Secondo operazione;100;Deducibili nel periodo di pagamento;Non dovuta (persona fisica);Costo unitario max 516,46 Euro;;Art. 54 TUIR
+631004;Canoni di leasing beni strumentali;costo;ammortamenti_re;;Beni strumentali;1;;Secondo operazione;;Secondo durata minima del contratto;Non dovuta (persona fisica);;Esclusi veicoli e immobili (conti dedicati).;Art. 54 TUIR
+631005;Noleggio beni strumentali;costo;ammortamenti_re;;Beni strumentali;1;;Secondo operazione;100;100% se inerente;Non dovuta (persona fisica);;;Art. 54 TUIR
+632001;Affitto studio professionale;costo;immobili;;Studio;1;;Secondo operazione;100;100% se esclusivamente strumentale;Non dovuta (persona fisica);;Locazione spesso esente: verificare la fattura.;Art. 54 TUIR
+632002;Spese condominiali e utenze comuni studio;costo;immobili;;Studio;1;;Secondo operazione;100;100% se inerente;Non dovuta (persona fisica);;;Art. 54 TUIR
+632003;Manutenzione e riparazione studio;costo;immobili;;Studio;1;;Secondo operazione;;Secondo natura della spesa;Non dovuta (persona fisica);;Manutenzione straordinaria: verificare il trattamento.;Art. 54 TUIR
+632004;Immobile ad uso promiscuo (abitazione e studio);costo;immobili;;Studio;1;;Secondo uso;50;50% della rendita o del canone;Non dovuta (persona fisica);;Uso promiscuo e assenza di altro immobile per l’attività nello stesso comune.;Art. 54 TUIR
+633001;Stipendi e salari dipendenti;costo;lavoro_dipendente;;Personale;0;;Fuori campo;;Deducibile con regole lavoro;Non dovuta (persona fisica);;;Art. 54 TUIR
+633002;Contributi previdenziali e assicurativi dipendenti;costo;lavoro_dipendente;;Personale;0;;Fuori campo;;Deducibile con regole lavoro;Non dovuta (persona fisica);;;Art. 54 TUIR
+633003;Quota TFR dipendenti;costo;lavoro_dipendente;;Personale;0;;Fuori campo;;Deducibile con regole TFR;Non dovuta (persona fisica);;;Art. 54 TUIR
+633004;Compensi a collaboratori coordinati e continuativi;costo;lavoro_dipendente;;Personale;0;;Fuori campo;;Deducibile con regole lavoro;Non dovuta (persona fisica);;;Art. 54 TUIR
+634001;Compensi a professionisti per prestazioni afferenti l’attività;costo;compensi_terzi;;Compensi a terzi;1;;Secondo operazione;100;100% se inerente;Non dovuta (persona fisica);;;Art. 54 TUIR
+634002;Prestazioni occasionali di terzi;costo;compensi_terzi;;Compensi a terzi;0;;Fuori campo;100;100% se inerente;Non dovuta (persona fisica);;Senza IVA, con ritenuta d’acconto.;Art. 54 TUIR
+635001;Telefonia fissa;costo;consumi;;Telefonia;1;;Secondo uso e inerenza;80;80%;Non dovuta (persona fisica);;Verificare eccezioni.;"Art. 54 TUIR; art. 102 c.9 TUIR"
+635002;Telefonia mobile;costo;consumi;;Telefonia;1;;Secondo uso e inerenza;80;80%;Non dovuta (persona fisica);;Verificare eccezioni.;"Art. 54 TUIR; art. 102 c.9 TUIR"
+635003;Internet e traffico dati;costo;consumi;;Telefonia;1;;Secondo uso e inerenza;80;80%;Non dovuta (persona fisica);;;"Art. 54 TUIR; art. 102 c.9 TUIR"
+635004;Energia elettrica studio;costo;consumi;;Utenze;1;;Secondo operazione;100;100% se inerente;Non dovuta (persona fisica);;Immobile promiscuo: 50%.;Art. 54 TUIR
+635005;Acqua, gas e riscaldamento studio;costo;consumi;;Utenze;1;;Secondo operazione;100;100% se inerente;Non dovuta (persona fisica);;Immobile promiscuo: 50%.;Art. 54 TUIR
+635006;Cancelleria e materiali di consumo;costo;consumi;;Materiali;1;;Secondo operazione;100;100% se inerente;Non dovuta (persona fisica);;;Art. 54 TUIR
+636001;Vitto e alloggio;costo;alberghi_ristoranti;;Vitto e alloggio;1;;Secondo inerenza;75;75% / regole speciali;Non dovuta (persona fisica);Limite complessivo 2% dei compensi;Tracciabilità ove richiesta. Convegni e formazione: conto 638001.;"Art. 54 TUIR; DL 84/2025"
+636002;Viaggi, taxi e trasporti;costo;alberghi_ristoranti;;Trasferte;1;;Secondo operazione;100;100% se inerente;Non dovuta (persona fisica);;Tracciabilità per taxi e NCC ove richiesta.;"Art. 54 TUIR; DL 84/2025"
+637001;Spese di rappresentanza;costo;rappresentanza_re;;Rappresentanza;1;0;Non detraibile (spese di rappresentanza);;Limite 1% dei compensi;Non dovuta (persona fisica);Limite 1% dei compensi;Tracciabilità ove richiesta.;"Art. 54 TUIR; art. 19-bis1 c.1 lett. h DPR 633/72"
+637002;Omaggi a clienti fino a 50 Euro;costo;rappresentanza_re;;Rappresentanza;1;100;Detraibile: beni di costo unitario fino a 50 Euro;;Limite 1% dei compensi;Non dovuta (persona fisica);Limite 1% dei compensi;;"Art. 54 TUIR; art. 19-bis1 c.1 lett. h DPR 633/72"
+637003;Omaggi a clienti oltre 50 Euro;costo;rappresentanza_re;;Rappresentanza;1;0;Non detraibile (spese di rappresentanza);;Limite 1% dei compensi;Non dovuta (persona fisica);Limite 1% dei compensi;;"Art. 54 TUIR; art. 19-bis1 c.1 lett. h DPR 633/72"
+638001;Corsi, master, convegni e formazione;costo;formazione;;Formazione;1;;Secondo operazione;100;100% entro 10.000 Euro annui;Non dovuta (persona fisica);Max 10.000 Euro annui, incluse spese di viaggio e soggiorno;;Art. 54 TUIR
+638002;Certificazione delle competenze e orientamento;costo;formazione;;Formazione;1;;Secondo operazione;100;100% entro 5.000 Euro annui;Non dovuta (persona fisica);Max 5.000 Euro annui;;Art. 54 TUIR
+638003;Libri, riviste e banche dati professionali;costo;formazione;;Formazione;1;;Secondo operazione;100;100% se inerente;Non dovuta (persona fisica);;;Art. 54 TUIR
+639001;Carburanti – autovettura;costo;veicoli_re;;Veicoli;1;40;40% in uso promiscuo;20;20%;Non dovuta (persona fisica);"Costo fiscalmente rilevante max 18.075,99 Euro; noleggio max 3.615,20 Euro/anno";Un solo veicolo per professionista.;"Art. 164 TUIR; art. 19-bis1 DPR 633/72"
+639002;Manutenzioni e riparazioni – autovettura;costo;veicoli_re;;Veicoli;1;40;Generalmente 40%;20;20%;Non dovuta (persona fisica);"Costo fiscalmente rilevante max 18.075,99 Euro; noleggio max 3.615,20 Euro/anno";;"Art. 164 TUIR; art. 19-bis1 DPR 633/72"
+639003;Assicurazione – autovettura;costo;veicoli_re;;Veicoli;1;;Operazione in genere esente;20;20%;Non dovuta (persona fisica);"Costo fiscalmente rilevante max 18.075,99 Euro; noleggio max 3.615,20 Euro/anno";;Art. 164 TUIR
+639004;Tassa automobilistica – autovettura;costo;veicoli_re;;Veicoli;0;;Fuori campo;20;20%;Non dovuta (persona fisica);;;Art. 164 TUIR
+639005;Pedaggi e parcheggi – autovettura;costo;veicoli_re;;Veicoli;1;40;Generalmente 40%;20;20%;Non dovuta (persona fisica);"Costo fiscalmente rilevante max 18.075,99 Euro; noleggio max 3.615,20 Euro/anno";;"Art. 164 TUIR; art. 19-bis1 DPR 633/72"
+639006;Noleggio e leasing – autovettura;costo;veicoli_re;;Veicoli;1;40;Generalmente 40%;20;20%;Non dovuta (persona fisica);"Noleggio max 3.615,20 Euro/anno; leasing limite 18.075,99 Euro";;"Art. 164 TUIR; art. 19-bis1 DPR 633/72"
+639007;Ammortamento – autovettura;costo;veicoli_re;;Veicoli;0;;Fuori campo;20;20%;Non dovuta (persona fisica);Costo fiscalmente rilevante max 18.075,99 Euro;;Art. 164 TUIR
+640001;Interessi passivi su finanziamenti per l’attività;costo;interessi;;Finanziari;0;;Fuori campo;100;100% se inerente;Non dovuta (persona fisica);;;Art. 54 TUIR
+640002;Commissioni e spese bancarie;costo;interessi;;Finanziari;1;;Secondo operazione;100;100% se inerente;Non dovuta (persona fisica);;Operazioni spesso esenti: verificare la fattura.;Art. 54 TUIR
+641001;Assicurazione responsabilità civile professionale;costo;altre_spese;;Servizi;1;;Operazione in genere esente;100;100% se inerente;Non dovuta (persona fisica);;;Art. 54 TUIR
+641002;Software, SaaS e cloud;costo;altre_spese;;Servizi;1;;Secondo operazione;100;100% se inerente;Non dovuta (persona fisica);;;Art. 54 TUIR
+641003;Server, hosting e servizi web;costo;altre_spese;;Servizi;1;;Secondo operazione;100;100% se inerente;Non dovuta (persona fisica);;;Art. 54 TUIR
+641004;Consulenze contabili e fiscali;costo;altre_spese;;Servizi;1;;Secondo operazione;100;100% se inerente;Non dovuta (persona fisica);;;Art. 54 TUIR
+641005;Pubblicità e marketing;costo;altre_spese;;Servizi;1;;Secondo operazione;100;100% se inerente;Non dovuta (persona fisica);;;Art. 54 TUIR
+641006;Quote di iscrizione all’albo e associative;costo;altre_spese;;Servizi;0;;Fuori campo;100;100% se inerente;Non dovuta (persona fisica);;;Art. 54 TUIR
+641007;Spese postali e spedizioni;costo;altre_spese;;Servizi;1;;Secondo operazione;100;100% se inerente;Non dovuta (persona fisica);;;Art. 54 TUIR
+641008;Pulizia studio;costo;altre_spese;;Servizi;1;;Secondo operazione;100;100% se inerente;Non dovuta (persona fisica);;;Art. 54 TUIR
+641009;Altre spese per l’attività;costo;altre_spese;;Servizi;1;;Secondo operazione;;Secondo fattispecie;Non dovuta (persona fisica);;;Art. 54 TUIR
+641010;Spese per l’incarico riaddebitate analiticamente al cliente;costo;fuori_re;;Non deducibili;1;;Secondo operazione;0;Non deducibili: riaddebitate in fattura;Non dovuta (persona fisica);;Contropartita dei rimborsi analitici (conto 711004).;Art. 54 TUIR (D.Lgs. 192/2024)
+642002;Imposta di bollo;costo;imposte_re;;Imposte;0;;Fuori campo;100;100% se inerente;Non dovuta (persona fisica);;;Art. 54 TUIR
+643001;Contributi previdenziali propri;costo;fuori_re;;Non nel quadro RE;0;;Fuori campo;0;Non nel quadro RE: onere deducibile dal reddito complessivo;Non dovuta (persona fisica);;Cassa professionale o gestione separata INPS del professionista.;Art. 10 TUIR
+643002;Multe e sanzioni;costo;fuori_re;;Non nel quadro RE;0;;Fuori campo;0;0%;Non dovuta (persona fisica);;;

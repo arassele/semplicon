@@ -1,0 +1,54 @@
+/* Vorgaben aus der Design-Guideline; Referenz, kein Ersatz fuer style.css. */
+:root {
+  --ct-forest: #003d35;
+  --ct-forest-hover: #005247;
+  --ct-forest-pressed: #002e28;
+  --ct-accent: #47e58a;
+  --ct-selected: #c5f7d7;
+  --ct-tint: #edf9f1;
+  --ct-canvas: #f7f5f1;
+  --ct-surface: #ffffff;
+  --ct-surface-subtle: #f1f0eb;
+  --ct-text: #102f2a;
+  --ct-muted: #52665f;
+  --ct-border: #dce3dd;
+  --ct-control-border: #788a81;
+  --ct-success: #17603d;
+  --ct-success-bg: #e6f5eb;
+  --ct-warning: #7a4b00;
+  --ct-warning-bg: #fff0cc;
+  --ct-error: #a32626;
+  --ct-error-bg: #fdecec;
+  --ct-info: #245b78;
+  --ct-info-bg: #eaf3fa;
+  --ct-neutral-bg: #eef1ed;
+  --ct-font: Inter, system-ui, -apple-system, BlinkMacSystemFont,
+             "Segoe UI", sans-serif;
+  --ct-space-1: 4px;
+  --ct-space-2: 8px;
+  --ct-space-3: 12px;
+  --ct-space-4: 16px;
+  --ct-space-6: 24px;
+  --ct-space-8: 32px;
+  --ct-space-12: 48px;
+  --ct-space-16: 64px;
+  --ct-radius-control: 10px;
+  --ct-radius-panel: 16px;
+  --ct-radius-popover: 12px;
+  --ct-sidebar: 248px;
+  --ct-topbar: 72px;
+  --ct-control-height: 44px;
+  --ct-shadow-overlay: 0 12px 32px rgb(0 61 53 / 12%);
+  --ct-duration: 160ms;
+}
+.ct-amount { font-variant-numeric: tabular-nums lining-nums; }
+.ct-focusable:focus-visible {
+  outline: 3px solid var(--ct-forest);
+  outline-offset: 3px;
+}
+.ct-sidebar .ct-focusable:focus-visible {
+  outline-color: var(--ct-selected);
+}
+@media (prefers-reduced-motion: reduce) {
+  :root { --ct-duration: 0ms; }
+}

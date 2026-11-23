@@ -1,0 +1,190 @@
+codice;descrizione;tipo;voce_cee;categoria;iva_rilevante;iva_detraibile_pct;iva_nota;deducibilita_pct;deducibilita_nota;irap_nota;limite;note;normativa
+701001;Ricavi vendite merci;ricavo;A1;Ricavi;1;;IVA secondo operazione;;Imponibile;Rilevante (in linea generale);;Segno negativo per resi e sconti.;
+701002;Ricavi vendite prodotti;ricavo;A1;Ricavi;1;;IVA secondo operazione;;Imponibile;Rilevante (in linea generale);;Segno negativo per resi e sconti.;
+701003;Ricavi prestazioni di servizi;ricavo;A1;Ricavi;1;;IVA secondo operazione;;Imponibile;Rilevante (in linea generale);;Segno negativo per resi e sconti.;
+701004;Ricavi lavorazioni conto terzi;ricavo;A1;Ricavi;1;;IVA secondo operazione;;Imponibile;Rilevante (in linea generale);;Segno negativo per resi e sconti.;
+701005;Ricavi servizi professionali;ricavo;A1;Ricavi;1;;IVA secondo operazione;;Imponibile;Rilevante (in linea generale);;Segno negativo per resi e sconti.;
+701006;Ricavi e-commerce;ricavo;A1;Ricavi;1;;IVA secondo operazione;;Imponibile;Rilevante (in linea generale);;Segno negativo per resi e sconti.;
+701007;Canoni di abbonamento attivi;ricavo;A1;Ricavi;1;;IVA secondo operazione;;Imponibile;Rilevante (in linea generale);;Segno negativo per resi e sconti.;
+701008;Resi su vendite (-);ricavo;A1;Ricavi;1;;IVA secondo operazione;;Imponibile;Rilevante (in linea generale);;Segno negativo per resi e sconti.;
+701009;Sconti e abbuoni su vendite (-);ricavo;A1;Ricavi;1;;IVA secondo operazione;;Imponibile;Rilevante (in linea generale);;Segno negativo per resi e sconti.;
+702001;Variazione rimanenze prodotti finiti;ricavo;A2;Rimanenze;0;;Fuori campo;;Imponibile;Rilevante (in linea generale);;Valorizzazione civilistica/fiscale da verificare.;
+702002;Variazione rimanenze semilavorati;ricavo;A2;Rimanenze;0;;Fuori campo;;Imponibile;Rilevante (in linea generale);;Valorizzazione civilistica/fiscale da verificare.;
+702003;Variazione rimanenze prodotti in corso;ricavo;A2;Rimanenze;0;;Fuori campo;;Imponibile;Rilevante (in linea generale);;Valorizzazione civilistica/fiscale da verificare.;
+703001;Variazione lavori in corso su ordinazione;ricavo;A3;Lavori in corso;0;;Fuori campo;;Imponibile;Rilevante (in linea generale);;;
+704001;Incrementi immobilizzazioni per lavori interni;ricavo;A4;Capitalizzazioni;0;;Fuori campo;;Imponibile/compensazione costi;Rilevante se pertinente;;"Controparte dell'immobilizzazione; verificare capitalizzabilità.";
+704002;Capitalizzazione costi sviluppo;ricavo;A4;Capitalizzazioni;0;;Fuori campo;;Imponibile/compensazione costi;Rilevante se pertinente;;"Controparte dell'immobilizzazione; verificare capitalizzabilità.";
+705001;Affitti attivi;ricavo;A5;Altri ricavi;1;;Secondo operazione;;Variabile;Variabile;;Distinguere componenti imponibili, esenti o non rilevanti secondo la fattispecie.;
+705002;Rimborsi spese imponibili;ricavo;A5;Altri ricavi;1;;Secondo operazione;;Variabile;Variabile;;Distinguere componenti imponibili, esenti o non rilevanti secondo la fattispecie.;
+705003;Indennizzi assicurativi;ricavo;A5;Altri ricavi;1;;Secondo operazione;;Variabile;Variabile;;Distinguere componenti imponibili, esenti o non rilevanti secondo la fattispecie.;
+705004;Contributi in conto esercizio;ricavo;A5;Altri ricavi;1;;Secondo operazione;;Variabile;Variabile;;Distinguere componenti imponibili, esenti o non rilevanti secondo la fattispecie.;
+705005;Plusvalenze ordinarie;ricavo;A5;Altri ricavi;1;;Secondo operazione;;Variabile;Variabile;;Distinguere componenti imponibili, esenti o non rilevanti secondo la fattispecie.;
+705006;Sopravvenienze attive;ricavo;A5;Altri ricavi;1;;Secondo operazione;;Variabile;Variabile;;Distinguere componenti imponibili, esenti o non rilevanti secondo la fattispecie.;
+705007;Altri ricavi e proventi;ricavo;A5;Altri ricavi;1;;Secondo operazione;;Variabile;Variabile;;Distinguere componenti imponibili, esenti o non rilevanti secondo la fattispecie.;
+601001;Acquisto merci;costo;B6;Acquisti;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Beni durevoli eventualmente da capitalizzare.;
+601002;Acquisto materie prime;costo;B6;Acquisti;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Beni durevoli eventualmente da capitalizzare.;
+601003;Materiali di consumo;costo;B6;Acquisti;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Beni durevoli eventualmente da capitalizzare.;
+601004;Materiali di imballaggio;costo;B6;Acquisti;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Beni durevoli eventualmente da capitalizzare.;
+601005;Cancelleria e materiali d'ufficio;costo;B6;Acquisti;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Beni durevoli eventualmente da capitalizzare.;
+601015;Materiali di pulizia;costo;B6;Acquisti;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Beni durevoli eventualmente da capitalizzare.;
+601016;Acquisti beni di modico valore (spesa corrente);costo;B6;Acquisti;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Beni durevoli eventualmente da capitalizzare.;
+601017;Resi e abbuoni su acquisti (-);costo;B6;Acquisti;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Beni durevoli eventualmente da capitalizzare.;
+601020;Carburanti – autovetture aziendali;costo;B6;Veicoli;1;40;40% in uso promiscuo;20;20%;Da verificare (IRAP);"Art.164: limite per ammortamento 18.075,99 Euro; noleggio 3.615,20 Euro/anno";Verificare categoria, effettivo uso e regole speciali.;Art. 164 TUIR
+601021;Lubrificanti – autovetture aziendali;costo;B6;Veicoli;1;40;40% in uso promiscuo;20;20%;Da verificare (IRAP);"Art.164: limite per ammortamento 18.075,99 Euro; noleggio 3.615,20 Euro/anno";Verificare categoria, effettivo uso e regole speciali.;Art. 164 TUIR
+601022;Materiali di consumo – autovetture aziendali;costo;B6;Veicoli;1;40;40% in uso promiscuo;20;20%;Da verificare (IRAP);"Art.164: limite per ammortamento 18.075,99 Euro; noleggio 3.615,20 Euro/anno";Verificare categoria, effettivo uso e regole speciali.;Art. 164 TUIR
+601030;Carburanti – autocarri;costo;B6;Veicoli;1;100;100% se esclusivo/inerente;100;100% se inerente;Da verificare (IRAP);Nessun limite auto se autocarro effettivo;La mera immatricolazione come autocarro non è sufficiente.;Art. 164 TUIR
+601031;Lubrificanti – autocarri;costo;B6;Veicoli;1;100;100% se esclusivo/inerente;100;100% se inerente;Da verificare (IRAP);Nessun limite auto se autocarro effettivo;La mera immatricolazione come autocarro non è sufficiente.;Art. 164 TUIR
+601032;Materiali di consumo – autocarri;costo;B6;Veicoli;1;100;100% se esclusivo/inerente;100;100% se inerente;Da verificare (IRAP);Nessun limite auto se autocarro effettivo;La mera immatricolazione come autocarro non è sufficiente.;Art. 164 TUIR
+601040;Carburanti – auto agenti;costo;B6;Veicoli;1;100;Generalmente 100% se inerente;80;80%;Da verificare (IRAP);"Ammortamento: costo max 25.822,84 Euro; noleggio max 5.164,57 Euro/anno";Solo agenti/rappresentanti di commercio e utilizzo pertinente.;Art. 164 TUIR
+601041;Lubrificanti – auto agenti;costo;B6;Veicoli;1;100;Generalmente 100% se inerente;80;80%;Da verificare (IRAP);"Ammortamento: costo max 25.822,84 Euro; noleggio max 5.164,57 Euro/anno";Solo agenti/rappresentanti di commercio e utilizzo pertinente.;Art. 164 TUIR
+601042;Materiali di consumo – auto agenti;costo;B6;Veicoli;1;100;Generalmente 100% se inerente;80;80%;Da verificare (IRAP);"Ammortamento: costo max 25.822,84 Euro; noleggio max 5.164,57 Euro/anno";Solo agenti/rappresentanti di commercio e utilizzo pertinente.;Art. 164 TUIR
+602001;Consulenze contabili e fiscali;costo;B7;Servizi;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Verificare classificazione fiscale in base alla natura del servizio.;
+602002;Consulenze legali;costo;B7;Servizi;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Verificare classificazione fiscale in base alla natura del servizio.;
+602003;Consulenze informatiche;costo;B7;Servizi;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Verificare classificazione fiscale in base alla natura del servizio.;
+602004;Elaborazione paghe;costo;B7;Servizi;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Verificare classificazione fiscale in base alla natura del servizio.;
+602005;Prestazioni di terzi;costo;B7;Servizi;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Verificare classificazione fiscale in base alla natura del servizio.;
+602006;Trasporti e spedizioni;costo;B7;Servizi;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Verificare classificazione fiscale in base alla natura del servizio.;
+602007;Spese postali;costo;B7;Servizi;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Verificare classificazione fiscale in base alla natura del servizio.;
+602010;Energia elettrica;costo;B7;Servizi;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Verificare classificazione fiscale in base alla natura del servizio.;
+602011;Acqua, gas e riscaldamento;costo;B7;Servizi;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Verificare classificazione fiscale in base alla natura del servizio.;
+602012;Manutenzioni fabbricati e impianti;costo;B7;Servizi;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Verificare classificazione fiscale in base alla natura del servizio.;
+602013;Pubblicità e marketing;costo;B7;Servizi;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Verificare classificazione fiscale in base alla natura del servizio.;
+602014;Marketing digitale;costo;B7;Servizi;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Verificare classificazione fiscale in base alla natura del servizio.;
+602015;Commissioni POS e servizi bancari;costo;B7;Servizi;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Verificare classificazione fiscale in base alla natura del servizio.;
+602016;Assicurazioni generali;costo;B7;Servizi;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Verificare classificazione fiscale in base alla natura del servizio.;
+602020;Formazione e aggiornamento;costo;B7;Servizi;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Verificare classificazione fiscale in base alla natura del servizio.;
+602021;Servizi di pulizia;costo;B7;Servizi;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Verificare classificazione fiscale in base alla natura del servizio.;
+602022;Software SaaS e cloud;costo;B7;Servizi;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Verificare classificazione fiscale in base alla natura del servizio.;
+602023;Server e hosting;costo;B7;Servizi;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Verificare classificazione fiscale in base alla natura del servizio.;
+602024;Compensi amministratori;costo;B7;Servizi;0;;IVA in genere non applicabile;;Condizionata;Generalmente escluso/particolare;;"Compensi amministratori: deducibilità per cassa; IRAP dipende dal rapporto.";Art. 95 c.5 TUIR
+602025;Contributi previdenziali su compensi amministratori;costo;B7;Servizi;0;;IVA in genere non applicabile;;Condizionata;Generalmente escluso/particolare;;"Compensi amministratori: deducibilità per cassa; IRAP dipende dal rapporto.";Art. 95 c.5 TUIR
+602026;Altri costi per servizi;costo;B7;Servizi;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Verificare classificazione fiscale in base alla natura del servizio.;
+60200801;Telefonia fissa;costo;B7;Telefonia;1;;Secondo uso e inerenza;80;80%;In genere rilevante;;Verificare eccezioni e distinzione tra telefonia e servizi dati non telefonici.;Art. 102 c.9 TUIR
+60200802;Telefonia mobile;costo;B7;Telefonia;1;;Secondo uso e inerenza;80;80%;In genere rilevante;;Verificare eccezioni e distinzione tra telefonia e servizi dati non telefonici.;Art. 102 c.9 TUIR
+60200803;Connessioni internet e traffico dati telefonico;costo;B7;Telefonia;1;;Secondo uso e inerenza;80;80%;In genere rilevante;;Verificare eccezioni e distinzione tra telefonia e servizi dati non telefonici.;Art. 102 c.9 TUIR
+60200804;Ricariche telefoniche;costo;B7;Telefonia;1;;Secondo uso e inerenza;80;80%;In genere rilevante;;Verificare eccezioni e distinzione tra telefonia e servizi dati non telefonici.;Art. 102 c.9 TUIR
+60201701;Viaggi dipendenti;costo;B7;Trasferte;1;;Secondo operazione;;Condizionata;Variabile;;Tracciabilità per determinate spese sostenute in Italia e relativi rimborsi.;"Art. 95 TUIR; DL 84/2025"
+60201702;Viaggi amministratori;costo;B7;Trasferte;1;;Secondo operazione;;Condizionata;Variabile;;Tracciabilità per determinate spese sostenute in Italia e relativi rimborsi.;"Art. 95 TUIR; DL 84/2025"
+60201703;Viaggi titolari e soci;costo;B7;Trasferte;1;;Secondo operazione;;Condizionata;Variabile;;Tracciabilità per determinate spese sostenute in Italia e relativi rimborsi.;"Art. 95 TUIR; DL 84/2025"
+60201704;Taxi e NCC per trasferte;costo;B7;Trasferte;1;;Secondo operazione;;Condizionata;Variabile;;Tracciabilità per determinate spese sostenute in Italia e relativi rimborsi.;"Art. 95 TUIR; DL 84/2025"
+60201705;Biglietti ferroviari e aerei;costo;B7;Trasferte;1;;Secondo operazione;;Condizionata;Variabile;;Tracciabilità per determinate spese sostenute in Italia e relativi rimborsi.;"Art. 95 TUIR; DL 84/2025"
+60201801;Vitto e alloggio dipendenti in trasferta fuori comune;costo;B7;Vitto e alloggio;1;;Secondo inerenza;75;75% / regole speciali;Variabile;;"75% regime ordinario; trasferte dipendenti fuori comune soggette a limiti giornalieri e condizioni; rappresentanza soggetta anche a limiti art.108. Verificare tracciabilità.";"Art. 109 c.5 TUIR; art. 95 TUIR; DL 84/2025"
+60201802;Vitto e alloggio amministratori in trasferta;costo;B7;Vitto e alloggio;1;;Secondo inerenza;75;75% / regole speciali;Variabile;;"75% regime ordinario; trasferte dipendenti fuori comune soggette a limiti giornalieri e condizioni; rappresentanza soggetta anche a limiti art.108. Verificare tracciabilità.";"Art. 109 c.5 TUIR; art. 95 TUIR; DL 84/2025"
+60201803;Vitto e alloggio titolare/soci;costo;B7;Vitto e alloggio;1;;Secondo inerenza;75;75% / regole speciali;Variabile;;"75% regime ordinario; trasferte dipendenti fuori comune soggette a limiti giornalieri e condizioni; rappresentanza soggetta anche a limiti art.108. Verificare tracciabilità.";"Art. 109 c.5 TUIR; art. 95 TUIR; DL 84/2025"
+60201804;Vitto e alloggio ordinari fuori trasferta;costo;B7;Vitto e alloggio;1;;Secondo inerenza;75;75% / regole speciali;Variabile;;"75% regime ordinario; trasferte dipendenti fuori comune soggette a limiti giornalieri e condizioni; rappresentanza soggetta anche a limiti art.108. Verificare tracciabilità.";"Art. 109 c.5 TUIR; art. 95 TUIR; DL 84/2025"
+60201805;Vitto e alloggio per clienti – rappresentanza;costo;B7;Vitto e alloggio;1;;Secondo inerenza;75;75% / regole speciali;Variabile;;"75% regime ordinario; trasferte dipendenti fuori comune soggette a limiti giornalieri e condizioni; rappresentanza soggetta anche a limiti art.108. Verificare tracciabilità.";"Art. 109 c.5 TUIR; art. 95 TUIR; DL 84/2025"
+60201806;Vitto e alloggio convegni e formazione;costo;B7;Vitto e alloggio;1;;Secondo inerenza;75;75% / regole speciali;Variabile;;"75% regime ordinario; trasferte dipendenti fuori comune soggette a limiti giornalieri e condizioni; rappresentanza soggetta anche a limiti art.108. Verificare tracciabilità.";"Art. 109 c.5 TUIR; art. 95 TUIR; DL 84/2025"
+60201901;Omaggi a clienti fino a 50 Euro;costo;B7;Rappresentanza;1;;Limitata / secondo bene;;Limiti / 100% omaggi ≤50;Variabile;;"Omaggi ≤50 Euro: interamente deducibili se beni rientranti nella norma; altre spese entro soglia su ricavi. Vitto/alloggio anche 75%. Tracciabilità ove richiesta.";"Art. 108 c.2 TUIR; DM 19/11/2008"
+60201902;Omaggi a clienti oltre 50 Euro;costo;B7;Rappresentanza;1;;Limitata / secondo bene;;Limiti / 100% omaggi ≤50;Variabile;;"Omaggi ≤50 Euro: interamente deducibili se beni rientranti nella norma; altre spese entro soglia su ricavi. Vitto/alloggio anche 75%. Tracciabilità ove richiesta.";"Art. 108 c.2 TUIR; DM 19/11/2008"
+60201903;Pranzi e cene di rappresentanza;costo;B7;Rappresentanza;1;;Limitata / secondo bene;;Limiti / 100% omaggi ≤50;Variabile;;"Omaggi ≤50 Euro: interamente deducibili se beni rientranti nella norma; altre spese entro soglia su ricavi. Vitto/alloggio anche 75%. Tracciabilità ove richiesta.";"Art. 108 c.2 TUIR; DM 19/11/2008"
+60201904;Eventi e manifestazioni rappresentanza;costo;B7;Rappresentanza;1;;Limitata / secondo bene;;Limiti / 100% omaggi ≤50;Variabile;;"Omaggi ≤50 Euro: interamente deducibili se beni rientranti nella norma; altre spese entro soglia su ricavi. Vitto/alloggio anche 75%. Tracciabilità ove richiesta.";"Art. 108 c.2 TUIR; DM 19/11/2008"
+60201905;Ospitalità clienti – rappresentanza;costo;B7;Rappresentanza;1;;Limitata / secondo bene;;Limiti / 100% omaggi ≤50;Variabile;;"Omaggi ≤50 Euro: interamente deducibili se beni rientranti nella norma; altre spese entro soglia su ricavi. Vitto/alloggio anche 75%. Tracciabilità ove richiesta.";"Art. 108 c.2 TUIR; DM 19/11/2008"
+60201906;Spese di rappresentanza indeducibili;costo;B7;Rappresentanza;1;;Limitata / secondo bene;;Limiti / 100% omaggi ≤50;Variabile;;"Omaggi ≤50 Euro: interamente deducibili se beni rientranti nella norma; altre spese entro soglia su ricavi. Vitto/alloggio anche 75%. Tracciabilità ove richiesta.";"Art. 108 c.2 TUIR; DM 19/11/2008"
+602030;Manutenzioni e riparazioni – autovetture aziendali;costo;B7;Veicoli;1;40;Generalmente 40%;20;20%;Da verificare (IRAP);Art.164 TUIR;Salvo uso esclusivamente strumentale o assegnazione a dipendenti.;Art. 164 TUIR
+602031;Assicurazioni – autovetture aziendali;costo;B7;Veicoli;1;40;Generalmente 40%;20;20%;Da verificare (IRAP);Art.164 TUIR;Salvo uso esclusivamente strumentale o assegnazione a dipendenti.;Art. 164 TUIR
+602032;Pedaggi autostradali – autovetture aziendali;costo;B7;Veicoli;1;40;Generalmente 40%;20;20%;Da verificare (IRAP);Art.164 TUIR;Salvo uso esclusivamente strumentale o assegnazione a dipendenti.;Art. 164 TUIR
+602033;Parcheggi – autovetture aziendali;costo;B7;Veicoli;1;40;Generalmente 40%;20;20%;Da verificare (IRAP);Art.164 TUIR;Salvo uso esclusivamente strumentale o assegnazione a dipendenti.;Art. 164 TUIR
+602034;Lavaggi – autovetture aziendali;costo;B7;Veicoli;1;40;Generalmente 40%;20;20%;Da verificare (IRAP);Art.164 TUIR;Salvo uso esclusivamente strumentale o assegnazione a dipendenti.;Art. 164 TUIR
+602035;Revisioni – autovetture aziendali;costo;B7;Veicoli;1;40;Generalmente 40%;20;20%;Da verificare (IRAP);Art.164 TUIR;Salvo uso esclusivamente strumentale o assegnazione a dipendenti.;Art. 164 TUIR
+602036;Pneumatici e sostituzioni – autovetture aziendali;costo;B7;Veicoli;1;40;Generalmente 40%;20;20%;Da verificare (IRAP);Art.164 TUIR;Salvo uso esclusivamente strumentale o assegnazione a dipendenti.;Art. 164 TUIR
+602040;Manutenzioni e riparazioni – autocarri;costo;B7;Veicoli;1;100;Generalmente 100% se inerente;100;100% se inerente;Da verificare (IRAP);Inerenza e reale destinazione;Classificazione tecnica e impiego da verificare.;Art. 164 TUIR
+602041;Assicurazioni – autocarri;costo;B7;Veicoli;1;100;Generalmente 100% se inerente;100;100% se inerente;Da verificare (IRAP);Inerenza e reale destinazione;Classificazione tecnica e impiego da verificare.;Art. 164 TUIR
+602042;Pedaggi autostradali – autocarri;costo;B7;Veicoli;1;100;Generalmente 100% se inerente;100;100% se inerente;Da verificare (IRAP);Inerenza e reale destinazione;Classificazione tecnica e impiego da verificare.;Art. 164 TUIR
+602043;Parcheggi – autocarri;costo;B7;Veicoli;1;100;Generalmente 100% se inerente;100;100% se inerente;Da verificare (IRAP);Inerenza e reale destinazione;Classificazione tecnica e impiego da verificare.;Art. 164 TUIR
+602044;Lavaggi – autocarri;costo;B7;Veicoli;1;100;Generalmente 100% se inerente;100;100% se inerente;Da verificare (IRAP);Inerenza e reale destinazione;Classificazione tecnica e impiego da verificare.;Art. 164 TUIR
+602045;Revisioni – autocarri;costo;B7;Veicoli;1;100;Generalmente 100% se inerente;100;100% se inerente;Da verificare (IRAP);Inerenza e reale destinazione;Classificazione tecnica e impiego da verificare.;Art. 164 TUIR
+602046;Pneumatici e sostituzioni – autocarri;costo;B7;Veicoli;1;100;Generalmente 100% se inerente;100;100% se inerente;Da verificare (IRAP);Inerenza e reale destinazione;Classificazione tecnica e impiego da verificare.;Art. 164 TUIR
+602050;Manutenzioni e riparazioni – auto agenti;costo;B7;Veicoli;1;100;Generalmente 100% se inerente;80;80%;Da verificare (IRAP);Art.164 TUIR;Solo agenti/rappresentanti.;Art. 164 TUIR
+602051;Assicurazioni – auto agenti;costo;B7;Veicoli;1;100;Generalmente 100% se inerente;80;80%;Da verificare (IRAP);Art.164 TUIR;Solo agenti/rappresentanti.;Art. 164 TUIR
+602052;Pedaggi autostradali – auto agenti;costo;B7;Veicoli;1;100;Generalmente 100% se inerente;80;80%;Da verificare (IRAP);Art.164 TUIR;Solo agenti/rappresentanti.;Art. 164 TUIR
+602053;Parcheggi – auto agenti;costo;B7;Veicoli;1;100;Generalmente 100% se inerente;80;80%;Da verificare (IRAP);Art.164 TUIR;Solo agenti/rappresentanti.;Art. 164 TUIR
+602054;Lavaggi – auto agenti;costo;B7;Veicoli;1;100;Generalmente 100% se inerente;80;80%;Da verificare (IRAP);Art.164 TUIR;Solo agenti/rappresentanti.;Art. 164 TUIR
+602055;Revisioni – auto agenti;costo;B7;Veicoli;1;100;Generalmente 100% se inerente;80;80%;Da verificare (IRAP);Art.164 TUIR;Solo agenti/rappresentanti.;Art. 164 TUIR
+602056;Pneumatici e sostituzioni – auto agenti;costo;B7;Veicoli;1;100;Generalmente 100% se inerente;80;80%;Da verificare (IRAP);Art.164 TUIR;Solo agenti/rappresentanti.;Art. 164 TUIR
+603001;Affitti passivi immobili;costo;B8;Godimento beni terzi;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Distinguere leasing finanziario e noleggio operativo.;
+603002;Noleggio macchinari e attrezzature;costo;B8;Godimento beni terzi;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Distinguere leasing finanziario e noleggio operativo.;
+603009;Canoni software in licenza;costo;B8;Godimento beni terzi;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Distinguere leasing finanziario e noleggio operativo.;
+603010;Altri canoni di locazione;costo;B8;Godimento beni terzi;1;;Secondo operazione;100;100% se inerente;In genere rilevante;;Distinguere leasing finanziario e noleggio operativo.;
+603020;Noleggio – autovetture aziendali;costo;B8;Veicoli;1;40;Generalmente 40%;20;20%;Da verificare (IRAP);"Noleggio 3.615,20 Euro/anno; leasing limite 18.075,99 Euro";Per noleggio controllare parte canone soggetta a limite e servizi separati.;Art. 164 TUIR
+603021;Leasing – autovetture aziendali;costo;B8;Veicoli;1;40;Generalmente 40%;20;20%;Da verificare (IRAP);"Noleggio 3.615,20 Euro/anno; leasing limite 18.075,99 Euro";Per noleggio controllare parte canone soggetta a limite e servizi separati.;Art. 164 TUIR
+603030;Noleggio – autocarri;costo;B8;Veicoli;1;100;Generalmente 100% se inerente;100;100% se inerente;Da verificare (IRAP);No limite autovetture se autocarro effettivo;Per noleggio controllare parte canone soggetta a limite e servizi separati.;Art. 164 TUIR
+603031;Leasing – autocarri;costo;B8;Veicoli;1;100;Generalmente 100% se inerente;100;100% se inerente;Da verificare (IRAP);No limite autovetture se autocarro effettivo;Per noleggio controllare parte canone soggetta a limite e servizi separati.;Art. 164 TUIR
+603040;Noleggio – auto agenti;costo;B8;Veicoli;1;100;Generalmente 100% se inerente;80;80%;Da verificare (IRAP);"Noleggio 5.164,57 Euro/anno; leasing limite 25.822,84 Euro";Per noleggio controllare parte canone soggetta a limite e servizi separati.;Art. 164 TUIR
+603041;Leasing – auto agenti;costo;B8;Veicoli;1;100;Generalmente 100% se inerente;80;80%;Da verificare (IRAP);"Noleggio 5.164,57 Euro/anno; leasing limite 25.822,84 Euro";Per noleggio controllare parte canone soggetta a limite e servizi separati.;Art. 164 TUIR
+604001;Salari e stipendi;costo;B9a;Personale;0;;Fuori campo;;Deducibile con regole lavoro;Regole specifiche costo lavoro;;Costo lavoro soggetto a deduzioni/limitazioni IRAP.;
+604002;Premi e incentivi;costo;B9a;Personale;0;;Fuori campo;;Deducibile con regole lavoro;Regole specifiche costo lavoro;;Costo lavoro soggetto a deduzioni/limitazioni IRAP.;
+604003;Ferie e permessi maturati;costo;B9a;Personale;0;;Fuori campo;;Deducibile con regole lavoro;Regole specifiche costo lavoro;;Costo lavoro soggetto a deduzioni/limitazioni IRAP.;
+604004;Oneri INPS dipendenti;costo;B9b;Personale;0;;Fuori campo;;Deducibile con regole lavoro;Regole specifiche costo lavoro;;;
+604005;Premi INAIL;costo;B9b;Personale;0;;Fuori campo;;Deducibile con regole lavoro;Regole specifiche costo lavoro;;;
+604006;Accantonamento TFR;costo;B9c;Personale;0;;Fuori campo;;Deducibile con regole TFR;Regole specifiche costo lavoro;;;
+604007;Trattamento di quiescenza;costo;B9d;Personale;0;;Fuori campo;;Secondo normativa;Regole specifiche;;;
+604008;Altri costi per il personale;costo;B9e;Personale;1;;Secondo operazione;;Variabile;Regole specifiche;;;
+605001;Ammortamento software;costo;B10a;Ammortamenti;0;;Fuori campo;;Limiti fiscali ammortamento;In genere rilevante;;Aliquote e decorrenza fiscale dipendono dal cespite.;
+605002;Ammortamento altre immobilizzazioni immateriali;costo;B10a;Ammortamenti;0;;Fuori campo;;Limiti fiscali ammortamento;In genere rilevante;;Aliquote e decorrenza fiscale dipendono dal cespite.;
+605003;Ammortamento fabbricati;costo;B10b;Ammortamenti;0;;Fuori campo;;Limiti fiscali ammortamento;In genere rilevante;;Verificare coefficienti fiscali e quota terreno per fabbricati.;
+605004;Ammortamento impianti e macchinari;costo;B10b;Ammortamenti;0;;Fuori campo;;Limiti fiscali ammortamento;In genere rilevante;;Verificare coefficienti fiscali e quota terreno per fabbricati.;
+605005;Ammortamento attrezzature;costo;B10b;Ammortamenti;0;;Fuori campo;;Limiti fiscali ammortamento;In genere rilevante;;Verificare coefficienti fiscali e quota terreno per fabbricati.;
+605006;Ammortamento arredi;costo;B10b;Ammortamenti;0;;Fuori campo;;Limiti fiscali ammortamento;In genere rilevante;;Verificare coefficienti fiscali e quota terreno per fabbricati.;
+605007;Ammortamento hardware;costo;B10b;Ammortamenti;0;;Fuori campo;;Limiti fiscali ammortamento;In genere rilevante;;Verificare coefficienti fiscali e quota terreno per fabbricati.;
+605009;Ammortamento – autovetture aziendali;costo;B10b;Ammortamenti veicoli;0;;Fuori campo;20;20%;Da verificare (IRAP);Costo fiscalmente rilevante max 18.075,99 Euro;Ammortamento contabile distinto da fiscalmente deducibile.;Art. 164 TUIR
+605010;Ammortamento – autocarri;costo;B10b;Ammortamenti veicoli;0;;Fuori campo;100;100% se inerente;Da verificare (IRAP);Secondo coefficienti fiscali;Ammortamento contabile distinto da fiscalmente deducibile.;Art. 164 TUIR
+605011;Ammortamento – auto agenti;costo;B10b;Ammortamenti veicoli;0;;Fuori campo;80;80%;Da verificare (IRAP);Costo fiscalmente rilevante max 25.822,84 Euro;Ammortamento contabile distinto da fiscalmente deducibile.;Art. 164 TUIR
+605012;Svalutazione immobilizzazioni;costo;B10c;Svalutazioni;0;;Fuori campo;;Da verificare;Variabile;;Generalmente non automaticamente deducibile.;
+605013;Svalutazione crediti;costo;B10d;Svalutazioni;0;;Fuori campo;;Limiti fiscali crediti;Generalmente non rilevante;;;Art.106 TUIR
+606001;Variazione rimanenze merci;costo;B11;Rimanenze;0;;Fuori campo;;Rilevante con regole fiscali;In genere rilevante;;;
+606002;Variazione rimanenze materie prime;costo;B11;Rimanenze;0;;Fuori campo;;Rilevante con regole fiscali;In genere rilevante;;;
+606003;Variazione rimanenze consumabili;costo;B11;Rimanenze;0;;Fuori campo;;Rilevante con regole fiscali;In genere rilevante;;;
+607001;Accantonamento rischi legali;costo;B12;Accantonamenti;0;;Fuori campo;;Generalmente non immediatamente deducibile;Generalmente non rilevante;;Deducibilità solo nei casi espressamente previsti.;
+607002;Accantonamento rischi garanzie;costo;B12;Accantonamenti;0;;Fuori campo;;Generalmente non immediatamente deducibile;Generalmente non rilevante;;Deducibilità solo nei casi espressamente previsti.;
+607003;Altri accantonamenti per rischi;costo;B12;Accantonamenti;0;;Fuori campo;;Generalmente non immediatamente deducibile;Generalmente non rilevante;;Deducibilità solo nei casi espressamente previsti.;
+608001;Accantonamento manutenzioni cicliche;costo;B13;Accantonamenti;0;;Fuori campo;;Da verificare;Generalmente non rilevante;;;
+608002;Altri accantonamenti;costo;B13;Accantonamenti;0;;Fuori campo;;Da verificare;Generalmente non rilevante;;;
+609001;Imposta di bollo;costo;B14;Oneri gestione;1;;Fuori campo / secondo operazione;;Variabile;Variabile;;IMU e perdite su crediti hanno regole specifiche.;
+609002;Imposta di registro;costo;B14;Oneri gestione;1;;Fuori campo / secondo operazione;;Variabile;Variabile;;IMU e perdite su crediti hanno regole specifiche.;
+609003;IMU;costo;B14;Oneri gestione;1;;Fuori campo / secondo operazione;;Variabile;Variabile;;IMU e perdite su crediti hanno regole specifiche.;
+609004;Tributi locali;costo;B14;Oneri gestione;1;;Fuori campo / secondo operazione;;Variabile;Variabile;;IMU e perdite su crediti hanno regole specifiche.;
+609005;Diritti camerali;costo;B14;Oneri gestione;1;;Fuori campo / secondo operazione;;Variabile;Variabile;;IMU e perdite su crediti hanno regole specifiche.;
+609006;Quote associative;costo;B14;Oneri gestione;1;;Fuori campo / secondo operazione;;Variabile;Variabile;;IMU e perdite su crediti hanno regole specifiche.;
+609008;Perdite su crediti;costo;B14;Oneri gestione;1;;Fuori campo / secondo operazione;;Variabile;Variabile;;IMU e perdite su crediti hanno regole specifiche.;
+609009;Minusvalenze ordinarie;costo;B14;Oneri gestione;1;;Fuori campo / secondo operazione;;Variabile;Variabile;;IMU e perdite su crediti hanno regole specifiche.;
+609010;Sopravvenienze passive;costo;B14;Oneri gestione;1;;Fuori campo / secondo operazione;;Variabile;Variabile;;IMU e perdite su crediti hanno regole specifiche.;
+609011;Arrotondamenti passivi;costo;B14;Oneri gestione;1;;Fuori campo / secondo operazione;;Variabile;Variabile;;IMU e perdite su crediti hanno regole specifiche.;
+609012;Altri oneri di gestione;costo;B14;Oneri gestione;1;;Fuori campo / secondo operazione;;Variabile;Variabile;;IMU e perdite su crediti hanno regole specifiche.;
+609007;Multe e sanzioni non deducibili;costo;B14;Sanzioni;0;;Fuori campo;0;0%;Non deducibile;;Conservare la separazione contabile.;
+609022;Sanzioni tributarie;costo;B14;Sanzioni;0;;Fuori campo;0;0%;Non deducibile;;Conservare la separazione contabile.;
+609013;Tassa automobilistica – autovetture aziendali;costo;B14;Veicoli;0;;Fuori campo;20;20%;Da verificare (IRAP);;;Art. 164 TUIR
+609014;Multe e sanzioni – autovetture aziendali;costo;B14;Sanzioni;0;;Fuori campo;0;0%;Non deducibile;Nessuno;Sanzioni non deducibili.;
+609015;Altri oneri – autovetture aziendali;costo;B14;Veicoli;1;;Secondo operazione;20;20%;Da verificare (IRAP);;;Art. 164 TUIR
+609016;Tassa automobilistica – autocarri;costo;B14;Veicoli;0;;Fuori campo;100;100% se inerente;Da verificare (IRAP);;;Art. 164 TUIR
+609017;Multe e sanzioni – autocarri;costo;B14;Sanzioni;0;;Fuori campo;0;0%;Non deducibile;Nessuno;Sanzioni non deducibili.;
+609018;Altri oneri – autocarri;costo;B14;Veicoli;1;;Secondo operazione;100;100% se inerente;Da verificare (IRAP);;;Art. 164 TUIR
+609019;Tassa automobilistica – auto agenti;costo;B14;Veicoli;0;;Fuori campo;80;80%;Da verificare (IRAP);;;Art. 164 TUIR
+609020;Multe e sanzioni – auto agenti;costo;B14;Sanzioni;0;;Fuori campo;0;0%;Non deducibile;Nessuno;Sanzioni non deducibili.;
+609021;Altri oneri – auto agenti;costo;B14;Veicoli;1;;Secondo operazione;80;80%;Da verificare (IRAP);;;Art. 164 TUIR
+801001;Dividendi da controllate;ricavo;C15;Finanziari;0;;Fuori campo;;Regime dividendi;Generalmente irrilevante;;Imponibilità dipende dal percettore e dal regime.;
+801002;Dividendi da collegate;ricavo;C15;Finanziari;0;;Fuori campo;;Regime dividendi;Generalmente irrilevante;;Imponibilità dipende dal percettore e dal regime.;
+801003;Dividendi da altre partecipazioni;ricavo;C15;Finanziari;0;;Fuori campo;;Regime dividendi;Generalmente irrilevante;;Imponibilità dipende dal percettore e dal regime.;
+802001;Interessi attivi bancari;ricavo;C16;Finanziari;0;;Fuori campo;;Imponibile / variabile;Generalmente irrilevante;;;
+802002;Interessi attivi su finanziamenti;ricavo;C16;Finanziari;0;;Fuori campo;;Imponibile / variabile;Generalmente irrilevante;;;
+802003;Interessi commerciali;ricavo;C16;Finanziari;0;;Fuori campo;;Imponibile / variabile;Generalmente irrilevante;;;
+802004;Altri proventi finanziari;ricavo;C16;Finanziari;0;;Fuori campo;;Imponibile / variabile;Generalmente irrilevante;;;
+803001;Interessi passivi bancari;costo;C17;Finanziari;0;;Fuori campo;;Limiti art. 96 / regole specifiche;Generalmente irrilevante;;;Art. 96 TUIR
+803002;Interessi passivi mutui;costo;C17;Finanziari;0;;Fuori campo;;Limiti art. 96 / regole specifiche;Generalmente irrilevante;;;Art. 96 TUIR
+803003;Interessi passivi leasing;costo;C17;Finanziari;0;;Fuori campo;;Limiti art. 96 / regole specifiche;Generalmente irrilevante;;;Art. 96 TUIR
+803004;Interessi di mora;costo;C17;Finanziari;0;;Fuori campo;;Limiti art. 96 / regole specifiche;Generalmente irrilevante;;;Art. 96 TUIR
+803005;Oneri finanziari diversi;costo;C17;Finanziari;0;;Fuori campo;;Limiti art. 96 / regole specifiche;Generalmente irrilevante;;;Art. 96 TUIR
+804001;Utili su cambi;ricavo;C17-bis;Cambi;0;;Fuori campo;;Variabile;Generalmente irrilevante;;Distinguere realizzati e da valutazione.;
+804002;Perdite su cambi;costo;C17-bis;Cambi;0;;Fuori campo;;Variabile;Generalmente irrilevante;;Distinguere realizzati e da valutazione.;
+901001;Rivalutazione partecipazioni;ricavo;D18;Rettifiche finanziarie;0;;Fuori campo;;Variabile;Generalmente irrilevante;;;
+901002;Rivalutazione titoli;ricavo;D18;Rettifiche finanziarie;0;;Fuori campo;;Variabile;Generalmente irrilevante;;;
+901003;Rivalutazione derivati;ricavo;D18;Rettifiche finanziarie;0;;Fuori campo;;Variabile;Generalmente irrilevante;;;
+902001;Svalutazione partecipazioni;costo;D19;Rettifiche finanziarie;0;;Fuori campo;;Variabile;Generalmente irrilevante;;;
+902002;Svalutazione titoli;costo;D19;Rettifiche finanziarie;0;;Fuori campo;;Variabile;Generalmente irrilevante;;;
+902003;Svalutazione derivati;costo;D19;Rettifiche finanziarie;0;;Fuori campo;;Variabile;Generalmente irrilevante;;;
+951001;IRES corrente;costo;20;Imposte reddito;0;;Fuori campo;;Non deducibile / regole speciali;Non deducibile;;Imposte sul reddito e differite: diversa disciplina dalle imposte indirette.;
+951002;IRAP corrente;costo;20;Imposte reddito;0;;Fuori campo;;Non deducibile / regole speciali;Non deducibile;;Imposte sul reddito e differite: diversa disciplina dalle imposte indirette.;
+951003;Imposte anni precedenti;costo;20;Imposte reddito;0;;Fuori campo;;Non deducibile / regole speciali;Non deducibile;;Imposte sul reddito e differite: diversa disciplina dalle imposte indirette.;
+951004;Imposte differite;costo;20;Imposte reddito;0;;Fuori campo;;Non deducibile / regole speciali;Non deducibile;;Imposte sul reddito e differite: diversa disciplina dalle imposte indirette.;
+951005;Imposte anticipate;costo;20;Imposte reddito;0;;Fuori campo;;Non deducibile / regole speciali;Non deducibile;;Imposte sul reddito e differite: diversa disciplina dalle imposte indirette.;
+999001;Utile d'esercizio;ricavo;21;Risultato;0;;Fuori campo;;Non applicabile;Non applicabile;;Conti di risultato, non costo/ricavo operativo.;
+999002;Perdita d'esercizio;costo;21;Risultato;0;;Fuori campo;;Non applicabile;Non applicabile;;Conti di risultato, non costo/ricavo operativo.;
