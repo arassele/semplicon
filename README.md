@@ -7,8 +7,6 @@
 
 # La contabilità semplice, open source.
 
-**Fatture, IVA, incassi e cespiti. Una visione chiara della tua attività.**
-
 Un’applicazione web per la contabilità italiana, pensata per professionisti e piccole imprese in contabilità semplificata. Da installare sul proprio server, con codice aperto e un’interfaccia in italiano.
 
 ![Stato: Beta](https://img.shields.io/badge/Stato-Beta%20%C2%B7%20in%20fase%20di%20test-e5a539)
