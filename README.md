@@ -13,6 +13,8 @@ Un’applicazione web per la contabilità italiana, pensata per professionisti e
 [![Licenza: AGPL-3.0-only](https://img.shields.io/badge/Licenza-AGPL--3.0--only-00392f)](LICENSE)
 [![Documentazione](https://img.shields.io/badge/Documentazione-Italiano-7fae7b)](docs/README.md)
 
+[Sito ufficiale](https://semplicon.it/) · [Apri la demo online](https://semplicon.it/demo/)
+
 [Perché Semplicon](#perché-semplicon) · [Funzionalità](#funzionalità) · [Schermate](#schermate) · [Provalo](#prova-semplicon) · [Domande frequenti](#domande-frequenti) · [Contribuisci](#contribuisci)
 
 </div>
@@ -84,7 +86,9 @@ Le immagini provengono dalla **demo HTML**, con dati di esempio. Mostrano l’in
 
 ## Prova Semplicon
 
-### Esplora la demo senza installazione
+[Apri la demo nel browser](https://semplicon.it/demo/) per provare Semplicon con i dati di esempio.
+
+### Apri la demo in locale
 
 1. Scarica il repository con **Code → Download ZIP** ed estrailo.
 2. Apri [`demo/semplicon-demo.html`](demo/semplicon-demo.html) nel browser.
