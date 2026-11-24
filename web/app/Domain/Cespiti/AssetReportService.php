@@ -66,21 +66,23 @@ final class AssetReportService
             $exit = $s['exit'];
             $fundEndShown = $exit ? AssetLedger::m($exit->fund_civil) : $s['fund_end'];
             $res = $exit ? 0 : $s['net'];
+            $resF = $exit ? 0 : max(0, $s['cost_fiscal_end'] - $s['fund_fiscal_end']); // residuo fiscale (richieste del 24.11.2026)
             $rows[] = [$a->code, $a->description, $a->category->name, $a->purchase_date->format('Y'), self::e(AssetLedger::costCivil($a)), self::e($cum('rivalutazione')), self::e($cum('svalutazione')),
                 self::e($cum('incremento')), self::e($cum('decremento')), self::e($s['fund_start']), number_format((float) ($s['row']['civil_rate'] ?? 0) / 100, 2, ',', ''), self::e($s['quota_civil']), self::e($s['quota_fiscal']),
-                self::e($fundEndShown), self::e($res), $exit ? (AssetMovementService::TYPES[$exit->type].' '.$exit->movement_date->format('d/m/Y').($exit->price !== null ? ' · '.str_replace('.', ',', (string) $exit->price) : '')) : ''];
+                self::e($fundEndShown), self::e($res), self::e($resF), $exit ? (AssetMovementService::TYPES[$exit->type].' '.$exit->movement_date->format('d/m/Y').($exit->price !== null ? ' · '.str_replace('.', ',', (string) $exit->price) : '')) : ''];
             $t['cost'] += AssetLedger::costCivil($a);
             $t['q'] += $s['quota_civil'];
             $t['qf'] += $s['quota_fiscal'];
             $t['fp'] += $s['fund_start'];
             $t['fe'] += $fundEndShown;
             $t['res'] += $res;
+            $t['resf'] = ($t['resf'] ?? 0) + $resF;
         }
 
         return ['columns' => [['Codice'], ['Descrizione'], ['Categoria'], ['Anno acq.'], ['Costo originario', 'num'], ['Rivalutazioni', 'num'], ['Svalutazioni', 'num'], ['Incrementi', 'num'], ['Decrementi', 'num'],
-            ['Fondo precedente', 'num'], ['Aliquota %', 'num'], ['Quota esercizio', 'num'], ['Quota fiscale', 'num'], ['Fondo finale', 'num'], ['Residuo', 'num'], ['Alienazione / eliminazione']],
+            ['Fondo precedente', 'num'], ['Aliquota %', 'num'], ['Quota esercizio', 'num'], ['Quota fiscale', 'num'], ['Fondo finale', 'num'], ['Residuo', 'num'], ['Residuo fiscale', 'num'], ['Alienazione / eliminazione']],
             'rows' => $rows, 'totals' => ['Costo originario' => self::e($t['cost']), 'Fondo precedente' => self::e($t['fp']), 'Quote dell’esercizio' => self::e($t['q']), 'Quote fiscali' => self::e($t['qf']),
-                'Fondo finale' => self::e($t['fe']), 'Residuo' => self::e($t['res'])],
+                'Fondo finale' => self::e($t['fe']), 'Residuo' => self::e($t['res']), 'Residuo fiscale' => self::e($t['resf'] ?? 0)],
             'notes' => ['Registro dei beni ammortizzabili (art. 16 DPR 600/1973): per le imprese in contabilità semplificata e i professionisti le annotazioni possono essere tenute nei registri IVA o nel libro giornale (art. 13 DPR 435/2001): verifica la modalità adottata.']];
     }
 

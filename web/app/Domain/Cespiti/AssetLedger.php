@@ -87,6 +87,9 @@ final class AssetLedger
                 $r['manual_fiscal'] = $ar->manual_fiscal !== null ? self::m((string) $ar->manual_fiscal) : null;
             }
         }
+        // Richieste del 24.11.2026: l'ammortamento civilistico segue sempre le regole fiscali (stessa aliquota e stessa quota manuale).
+        $r['civil'] = $r['fiscal'];
+        $r['manual_civil'] = $r['manual_fiscal'];
 
         return $r;
     }

@@ -267,6 +267,8 @@ final class DashboardService
             'da_pagare' => $overdue['acquisto'],
             'liquidazioni' => $liq,
             'transfrontaliere' => $xb->filter(fn ($r) => $r['state'] === 'integrazione_mancante' || $r['overdue'])->count(),
+            // Solo per la campanella: regime dell'anno da confermare
+            'regime' => $company->activeVatProfile($year) ? 0 : 1,
         ];
     }
 }

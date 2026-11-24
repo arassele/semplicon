@@ -61,7 +61,7 @@ const doStorno = () => sform.post(target.value!.type === 'movement' ? `${base.va
                                         <button v-else-if="m.status === 'valida'" class="btn link small" type="button" @click="target = { type: 'allocation', id: a.id, label: `l’abbinamento a ${a.number}` }; sform.clearErrors()">Storna abbinamento</button></li>
                                 </ul>
                             </td>
-                            <td class="nowrap"><button v-if="m.status === 'valida'" class="btn link" type="button" @click="target = { type: 'movement', id: m.id, label: `il ${m.kind} n. ${m.id} di ${money(m.amount)}` }; sform.clearErrors()">Storna</button></td>
+                            <td class="nowrap"><button v-if="m.status === 'valida'" class="btn small-btn" type="button" @click="target = { type: 'movement', id: m.id, label: `il ${m.kind} n. ${m.id} di ${money(m.amount)}` }; sform.clearErrors()">Storna</button></td>
                         </tr>
                     </tbody>
                 </table>

@@ -73,6 +73,14 @@ const addPayment = () => { touched.value = true; form.payments.push({ date: addD
 const removePayment = (i: number) => { touched.value = true; form.payments.splice(i, 1); };
 
 const pick = ref('');
+// Ricerca: cliente esistente e articolo con suggerimenti (richieste del 24.11.2026)
+const customerLabel = (c: Customer) => `${c.kind === 'persona' ? `${c.first_name} ${c.last_name}` : c.name}${c.vat ? ` · ${c.vat}` : ''}${c.master ? '' : ' (da fatture)'}`;
+const customerLabels = computed(() => props.customers.map(customerLabel));
+const customerQuery = ref('');
+function pickCustomer() { const i = customerLabels.value.indexOf(customerQuery.value); if (i >= 0) { pick.value = String(i); applyCustomer(); } }
+const articleLabel = (a: { code?: string | null; description: string }) => `${a.code ? `${a.code} · ` : ''}${a.description.slice(0, 60)}`;
+const articleByLabel = (v: string) => props.catalog.articles.find((a) => articleLabel(a) === v);
+watch(() => form.customer.kind, (k) => { if (k === 'persona' && !foreign.value) form.customer.vat = ''; });
 function applyCustomer() {
     const c = props.customers[Number(pick.value)];
     if (!c) return;
@@ -186,7 +194,9 @@ const newLine = (): Line => ({ description: '', quantity: '1', unit: 'pz', price
                 <div class="panel-head"><div><h2>Cliente</h2><p>Per i clienti già fatturati puoi riprendere i dati.</p></div></div>
                 <div class="panel-body mi-grid">
                     <div v-if="customers.length" class="field span3"><label for="is-pick">Cliente esistente</label>
-                        <select id="is-pick" v-model="pick" class="input" @change="applyCustomer"><option value="">— nuovo cliente —</option><option v-for="(c, i) in customers" :key="i" :value="String(i)">{{ c.kind === 'persona' ? `${c.first_name} ${c.last_name}` : c.name }}{{ c.vat ? ` · ${c.vat}` : '' }}{{ c.master ? '' : ' (da fatture)' }}</option></select></div>
+                        <input id="is-pick" v-model="customerQuery" class="input" type="search" list="is-pick-list" autocomplete="off" placeholder="Cerca per nome o partita IVA…" @change="pickCustomer">
+                        <datalist id="is-pick-list"><option v-for="(lab, i) in customerLabels" :key="i" :value="lab" /></datalist>
+                        <p class="hint">Scrivi per cercare e scegli dall’elenco; lascia vuoto per un nuovo cliente.</p></div>
                     <fieldset class="field span3"><legend>Tipo di cliente</legend>
                         <div class="segmented"><label><input v-model="form.customer.kind" type="radio" value="azienda">Azienda o professionista</label><label><input v-model="form.customer.kind" type="radio" value="persona">Persona fisica</label></div></fieldset>
                     <div v-if="form.customer.kind === 'azienda'" class="field span3"><label for="is-cn">Denominazione</label><input id="is-cn" v-model="form.customer.name" class="input" maxlength="80" :aria-invalid="err('customer.name') ? true : undefined"><p v-if="err('customer.name')" class="error">{{ err('customer.name') }}</p></div>
@@ -194,10 +204,11 @@ const newLine = (): Line => ({ description: '', quantity: '1', unit: 'pz', price
                         <div class="field"><label for="is-cfn">Nome</label><input id="is-cfn" v-model="form.customer.first_name" class="input" :aria-invalid="err('customer.first_name') ? true : undefined"><p v-if="err('customer.first_name')" class="error">{{ err('customer.first_name') }}</p></div>
                         <div class="field span2"><label for="is-cln">Cognome</label><input id="is-cln" v-model="form.customer.last_name" class="input"></div>
                     </template>
-                    <div class="field"><label for="is-vat">Partita IVA</label><input id="is-vat" v-model="form.customer.vat" class="input tabular" :placeholder="foreign ? 'es. DE123456789' : 'es. 01234567897'" :aria-invalid="err('customer.vat') ? true : undefined"><p v-if="err('customer.vat')" class="error">{{ err('customer.vat') }}</p></div>
+                    <div v-if="form.customer.kind !== 'persona' || foreign" class="field"><label for="is-vat">{{ form.customer.kind === 'persona' ? 'Identificativo fiscale estero' : 'Partita IVA' }}</label><input id="is-vat" v-model="form.customer.vat" class="input tabular" :placeholder="foreign ? 'es. DE123456789' : 'es. 01234567897'" :aria-invalid="err('customer.vat') ? true : undefined"><p v-if="err('customer.vat')" class="error">{{ err('customer.vat') }}</p></div>
                     <div class="field"><label for="is-cf">Codice fiscale</label><input id="is-cf" v-model="form.customer.cf" class="input tabular" :aria-invalid="err('customer.cf') ? true : undefined"><p v-if="err('customer.cf')" class="error">{{ err('customer.cf') }}</p></div>
                     <div class="field"><label for="is-co">Paese</label><input id="is-co" v-model="form.customer.country" class="input" maxlength="2" style="text-transform: uppercase" :aria-invalid="err('customer.country') ? true : undefined"><p v-if="err('customer.country')" class="error">{{ err('customer.country') }}</p></div>
-                    <div v-if="canVies" class="span3 vies-box">
+                    <p v-if="form.customer.kind === 'persona' && !foreign" class="hint span3">Cliente privato: nessuna partita IVA e nessuna verifica VIES, basta il codice fiscale.</p>
+                    <div v-if="canVies && form.customer.kind !== 'persona'" class="span3 vies-box">
                         <button class="btn" type="button" :disabled="viesBusy" @click="checkVies"><Icon name="search" />{{ viesBusy ? 'Verifica in corso…' : 'Verifica la partita IVA con VIES' }}</button>
                         <p v-if="viesError" class="error" role="alert">{{ viesError }}</p>
                         <p v-if="vies?.status === 'valida'" class="vies-ok" role="status"><strong>Partita IVA valida in VIES</strong><template v-if="vies.name"> · {{ vies.name }}</template><template v-if="vies.address"> · {{ vies.address }}</template>
@@ -224,13 +235,14 @@ const newLine = (): Line => ({ description: '', quantity: '1', unit: 'pz', price
             <section class="panel">
                 <div class="panel-head"><div><h2>Righe</h2><p>Prezzo senza IVA. Per righe senza IVA scegli la natura (es. N4 esente, N2.2 non soggetta).</p></div></div>
                 <div class="table-wrap">
+                    <datalist id="is-art-list"><option v-for="a in catalog.articles" :key="a.id" :value="articleLabel(a)" /></datalist>
                     <table class="mi-lines">
                         <thead><tr><th>Descrizione</th><th class="num">Quantità</th><th>Unità</th><th class="num">Prezzo</th><th class="num">Sconto %</th><th>Aliquota %</th><th>Natura</th><th class="num">Totale riga</th><th><span class="sr-only">Azioni</span></th></tr></thead>
                         <tbody>
                             <tr v-for="(l, i) in form.lines" :key="i">
                                 <td style="min-width: 170px"><input v-model="l.description" class="input" :aria-label="`Descrizione riga ${i + 1}`" :aria-invalid="err(`lines.${i}.description`) ? true : undefined"><p v-if="err(`lines.${i}.description`)" class="error">{{ err(`lines.${i}.description`) }}</p>
                                     <div v-if="catalog.articles.length || rowSnippets.length" class="line-tools">
-                                        <select v-if="catalog.articles.length" class="input small-select" :aria-label="`Articolo per la riga ${i + 1}`" @change="(e) => { const t = (e.target as HTMLSelectElement); applyArticle(l, t.value); t.value = ''; }"><option value="">Articolo…</option><option v-for="a in catalog.articles" :key="a.id" :value="String(a.id)">{{ a.code ? `${a.code} · ` : '' }}{{ a.description.slice(0, 40) }}</option></select>
+                                        <input v-if="catalog.articles.length" class="input small-select" type="search" list="is-art-list" autocomplete="off" placeholder="Cerca articolo…" :aria-label="`Cerca articolo per la riga ${i + 1}`" @change="(e) => { const t = (e.target as HTMLInputElement); const a = articleByLabel(t.value); if (a) applyArticle(l, String(a.id)); t.value = ''; }">
                                         <select v-if="rowSnippets.length" class="input small-select" :aria-label="`Testo predefinito per la riga ${i + 1}`" @change="(e) => { const t = (e.target as HTMLSelectElement); const s = rowSnippets.find((x) => String(x.id) === t.value); if (s) l.description = addText(l.description, s.body).slice(0, 1000); t.value = ''; }"><option value="">Testo…</option><option v-for="s in rowSnippets" :key="s.id" :value="String(s.id)">{{ s.title }}</option></select>
                                     </div></td>
                                 <td style="width: 78px"><input v-model="l.quantity" class="input tabular" inputmode="decimal" style="text-align: right" :aria-label="`Quantità riga ${i + 1}`"><p v-if="err(`lines.${i}.quantity`)" class="error">{{ err(`lines.${i}.quantity`) }}</p></td>

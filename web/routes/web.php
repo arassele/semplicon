@@ -51,6 +51,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/account', [UserAreaController::class, 'index'])->name('account');
+    Route::put('/account/accesso', [UserAreaController::class, 'updateAccess'])->middleware('throttle:10,1')->name('account.access');
     Route::post('/account/backup', [UserAreaController::class, 'backup'])->middleware('throttle:6,1')->name('account.backup');
     Route::post('/account/ripristino', [UserAreaController::class, 'restore'])->middleware('throttle:6,1')->name('account.restore');
     Route::post('/esci', [LoginController::class, 'destroy'])->name('logout');
@@ -58,12 +59,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/aziende', [CompanyController::class, 'index'])->name('companies.index');
     Route::post('/aziende', [CompanyController::class, 'store'])->name('companies.store');
     Route::get('/amministrazione', [AdminController::class, 'index'])->name('admin.index');
+    Route::post('/amministrazione/utenti', [AdminController::class, 'store'])->name('admin.users.store');
+    Route::put('/amministrazione/utenti/{user}/aziende', [AdminController::class, 'companies'])->name('admin.users.companies');
     Route::get('/ateco', AtecoController::class)->middleware('throttle:60,1')->name('ateco.search');
 
     // Tutto sotto un'azienda: accesso proprio o amministratore; gli ID figli devono appartenere all'azienda.
     Route::prefix('/aziende/{company}')->middleware(['company.member', 'active.year'])->scopeBindings()->group(function () {
         Route::get('/', [CompanyController::class, 'dashboard'])->name('companies.dashboard');
         Route::post('/anno', [CompanyController::class, 'setYear'])->name('companies.year');
+        Route::get('/notifiche', [CompanyController::class, 'notifications'])->middleware('throttle:120,1')->name('companies.notifications');
         Route::get('/importa', [ImportController::class, 'index'])->name('imports.index');
         Route::post('/importa', [ImportController::class, 'store'])->middleware('throttle:20,1')->name('imports.store');
         Route::get('/importa/{importBatch}', [ImportController::class, 'show'])->name('imports.show');

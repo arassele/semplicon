@@ -34,7 +34,7 @@ Valori di stato secondo il piano: aperto · in lavorazione · testato tecnicamen
 - **Non disponibili (solo avviso):** Regime del margine, altri regimi particolari, IVA per cassa (art. 32-bis, eventualmente in seguito).
 - **Dati azienda** sul modello dell'Anagrafica: Soggetto, Persona, Sede, Recapiti, Attività, Conti bancari.
 
-## Realizzato (semplicon/web)
+## Realizzato (web)
 
 **I00**
 - Laravel 13, Vue 3 + TypeScript, Inertia 3, PostgreSQL 16. CSS proprio ricavato dai design token.

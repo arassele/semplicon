@@ -18,10 +18,10 @@ class TenancyTest extends TestCase
     {
         $user = $this->customer();
 
-        $this->actingAs($user)->post('/aziende', ['name' => 'Bottega Verdi', 'tipologia' => 'ditta_individuale', 'partita_iva' => PartitaIva::complete('1234567890')])->assertRedirect();
+        $this->actingAs($user)->post('/aziende', ['name' => 'Bottega Verde', 'tipologia' => 'ditta_individuale', 'partita_iva' => PartitaIva::complete('1234567890')])->assertRedirect();
 
         $company = $user->companies()->firstOrFail();
-        $this->assertSame('Bottega Verdi', $company->name);
+        $this->assertSame('Bottega Verde', $company->name);
         $this->assertTrue($user->canAccess($company));
     }
 

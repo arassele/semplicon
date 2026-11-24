@@ -347,7 +347,7 @@ const statusTone: Record<string, string> = { registrata: 'good', da_verificare: 
                             <p v-if="e('direction')" class="error">{{ e('direction') }}</p>
                         </div>
 
-                        <div class="form-row three">
+                        <div class="form-row three reg-dates">
                             <div v-if="dir === 'acquisto'" class="field">
                                 <label for="receipt_date">Data di ricezione</label>
                                 <input id="receipt_date" v-model="draft.receipt_date" class="input" type="date" :min="inv.doc_date" :max="registration.today" :aria-invalid="e('receipt_date') ? true : undefined">
@@ -403,7 +403,7 @@ const statusTone: Record<string, string> = { registrata: 'good', da_verificare: 
                                                 <template v-if="accountById(part.account_id)?.limite"><br>{{ accountById(part.account_id)?.limite }}</template>
                                             </p>
                                             <div v-if="j === draft.groups[i].parts.length - 1" class="split-actions">
-                                                <button v-if="!draft.groups[i].split" class="btn link" type="button" @click="startSplit(i)">Ripartisci su più conti</button>
+                                                <button v-if="!draft.groups[i].split" class="btn small-btn" type="button" @click="startSplit(i)"><Icon name="plus" />Ripartisci su più conti</button>
                                                 <template v-else>
                                                     <button class="btn link" type="button" @click="draft.groups[i].parts.push({ account_id: 0, taxable: '0,00', tax: '0,00', pctManual: null })">Aggiungi conto</button>
                                                     <button v-if="draft.groups[i].parts.length > 2" class="btn link" type="button" @click="draft.groups[i].parts.pop()">Rimuovi ultima</button>
@@ -523,7 +523,8 @@ const statusTone: Record<string, string> = { registrata: 'good', da_verificare: 
                     <div class="panel-body actions">
                         <button class="btn" type="button" :disabled="editing" @click="startEdit"><Icon name="check" />Modifica registrazione</button>
                         <button class="btn danger" type="button" @click="confirmDelete = 'registrazione'">Elimina registrazione</button>
-                        <button class="btn link" type="button" @click="dialog = 'storna'">Storna invece di eliminare</button>
+                        <button v-if="active.direction === 'acquisto'" class="btn link" type="button" @click="dialog = 'storna'">Storna invece di eliminare</button>
+                        <Link class="btn" :href="`${base}/registri/${active.direction === 'acquisto' ? 'acquisti' : 'vendite'}?anno=${active.year}&periodo=${active.period}`">Vedi nel registro</Link>
                     </div>
                 </section>
 

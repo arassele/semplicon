@@ -93,7 +93,7 @@ const doAlloc = () => { aform.allocations = allocRows.value.filter((r) => r.amou
                                 <td><span class="badge" :class="paidClass(r.paid)">{{ r.paid_label }}</span><template v-if="r.due !== 'saldata'"> <span class="badge" :class="dueClass(r.due)">{{ r.due_label }}</span></template>
                                     <template v-if="r.amount_check"><br><span class="small text-warn">Importo da verificare</span></template></td>
                                 <td class="row-actions">
-                                    <button v-if="!r.credit_note && toCents(r.residual) > 0 && !filters.as_of" class="btn link" type="button" @click="pay(r)">Registra {{ word }}</button>
+                                    <button v-if="!r.credit_note && toCents(r.residual) > 0 && !filters.as_of" class="btn small-btn" type="button" :aria-label="`Registra ${word} per ${r.number} rata ${r.seq}`" @click="pay(r)"><Icon name="check" />{{ sale ? 'Incassa' : 'Paga' }}</button>
                                     <button v-if="r.payments.length" class="btn link" type="button" :aria-expanded="openHistory === r.id" @click="openHistory = openHistory === r.id ? null : r.id">Storico ({{ r.payments.length }})</button>
                                 </td>
                             </tr>

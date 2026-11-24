@@ -10,6 +10,7 @@ use App\Models\Company;
 use App\Support\Present;
 use App\Support\Validation\CodiceFiscale;
 use App\Support\Validation\PartitaIva;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -77,6 +78,19 @@ class CompanyController extends Controller
         unset($q['anno'], $q['page']);
 
         return redirect($path.($q ? '?'.http_build_query($q) : ''));
+    }
+
+    /** Notifiche (campanella): lavoro aperto e scadenze dei prossimi 14 giorni o già superate. */
+    public function notifications(Company $company, DashboardService $dashboard): JsonResponse
+    {
+        $o = $dashboard->build($company, ActiveAccountingYear::current(request(), $company));
+        $lim = now()->addDays(14)->toDateString();
+
+        return response()->json([
+            'tasks' => array_map(fn ($t) => ['key' => $t['key'], 'count' => $t['count'], 'label' => $t['label'], 'url' => $t['url'], 'tone' => $t['tone']], $o['tasks']),
+            'deadlines' => array_values(array_map(fn ($d) => ['date' => $d['date'], 'label' => $d['label'], 'url' => $d['url'], 'overdue' => $d['overdue']],
+                array_filter($o['deadlines'], fn ($d) => $d['overdue'] || $d['date'] <= $lim))),
+        ]);
     }
 
     public function dashboard(Company $company, DashboardService $dashboard): Response

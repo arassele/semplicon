@@ -241,10 +241,10 @@ const confirmDraft = () => {
                     <div><h3>Non disponibili</h3><ul class="no"><li v-for="u in unsupported" :key="u">{{ u }}</li></ul></div>
                 </div>
             </section>
-            <section class="panel" aria-labelledby="audit-title">
-                <div class="panel-head">
-                    <div><h2 id="audit-title">Attività</h2><p>Registro non modificabile delle operazioni.</p></div>
-                </div>
+            <details class="panel fold" aria-labelledby="audit-title">
+                <summary class="panel-head">
+                    <div><h2 id="audit-title">Registro delle attività</h2><p>Ultime {{ audit.length }} operazioni, non modificabile.</p></div>
+                </summary>
                 <ol v-if="audit.length" class="timeline" style="margin-top: 18px">
                     <li v-for="a in audit" :key="a.id">
                         <p class="small"><strong>{{ a.label }}</strong><template v-if="a.data?.year"> · {{ a.data.year }}</template><template v-if="a.data?.version"> v{{ a.data.version }}</template></p>
@@ -253,7 +253,7 @@ const confirmDraft = () => {
                     </li>
                 </ol>
                 <p v-else class="panel-body muted small">Nessuna attività.</p>
-            </section>
+            </details>
             </div>
         </div>
 

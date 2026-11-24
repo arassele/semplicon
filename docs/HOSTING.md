@@ -19,7 +19,7 @@ Adatta per demo e pilota, se il fornitore offre quanto segue:
 
 Procedura:
 
-1. In locale: `composer install --no-dev --optimize-autoloader` e `npm ci && npm run build` in `semplicon/web`.
+1. In locale: `composer install --no-dev --optimize-autoloader` e `npm ci && npm run build` in `web`.
 2. Caricare la cartella `web` (inclusi `vendor/` e `public/build/`, senza `node_modules/`).
 3. Impostare il document root su `web/public`.
 4. Creare `.env` sul server (a partire da `.env.example`): `QUEUE_CONNECTION=database`, `APP_ENV=production`, `APP_DEBUG=false`, `APP_URL=https://…`, accesso al database, `SESSION_SECURE_COOKIE=true`, `APP_KEY` con `php artisan key:generate`.

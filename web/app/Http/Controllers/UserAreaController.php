@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Domain\Archive\CompanyBackup;
 use App\Domain\Archive\CompanyRestore;
+use App\Domain\UserAccountService;
 use App\Models\AuditEvent;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Password;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -22,6 +24,16 @@ class UserAreaController extends Controller
             'companies' => $companies->map(fn ($c) => ['id' => $c->id, 'name' => $c->name, 'partita_iva' => $c->partita_iva])->values(),
             'backups' => $last->map(fn ($e) => ['at' => $e->created_at?->toIso8601String(), 'company_id' => $e->company_id, 'sha256' => $e->data['sha256'] ?? null, 'files' => $e->data['files'] ?? null, 'companies' => $e->data['companies'] ?? 1])->unique('sha256')->values(),
         ]);
+    }
+
+    /** E-mail e password dell'utente (serve la password attuale). */
+    public function updateAccess(Request $request, UserAccountService $svc)
+    {
+        $d = $request->validate(['email' => ['required', 'email', 'max:255'], 'current_password' => ['required', 'string'], 'password' => ['nullable', 'confirmed', Password::min(12)]],
+            [], ['current_password' => 'password attuale', 'password' => 'nuova password']);
+        $svc->updateAccount($request->user(), $d);
+
+        return back()->with('success', 'Accesso aggiornato.');
     }
 
     public function backup(Request $request)

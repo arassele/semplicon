@@ -1,6 +1,6 @@
 # Matrice dei test · I00–I04 (versione delle regole 2026.6)
 
-Eseguire in `semplicon/web`: `php artisan test` (PostgreSQL) oppure `DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test`.
+Eseguire in `web`: `php artisan test` (PostgreSQL) oppure `DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test`.
 
 Stato 18.11.2026: 114/114 superati su PostgreSQL 16 e su SQLite. MySQL: **non eseguito**.
 
@@ -295,3 +295,14 @@ Stato 18.11.2026: 114/114 superati su PostgreSQL 16 e su SQLite. MySQL: **non es
 | Cespiti + | Quota ridotta al Calcolo, per categoria, mai Immateriali | CespitiTest::test_reduced_quota, CespitiTest::test_reduced_quota_per_category_and_never_intangible |
 | Cespiti + | Progressivi nel modulo (acquisto 2000, Fondo 2025) | CespitiTest::test_manual_opening_balance_in_form |
 | Cespiti + | Maggiorazione: Calcolo, Stampa K, Conto economico fiscale | CespitiTest::test_extra_deduction_calculated_and_in_income_statement |
+
+## Richieste del 24.11.2026 (Decisione n. 101)
+
+| Caso | Atteso | Test |
+|---|---|---|
+| Notifiche | JSON con attività e scadenze solo per i membri dell'azienda | RequestsNov24Test::test_notifications_return_tasks_and_deadlines_only_for_members |
+| Account | E-mail e password cambiano solo con la password attuale | RequestsNov24Test::test_user_changes_email_and_password_with_current_password |
+| Utenti | L'amministratore crea utenti e assegna/toglie aziende; il cliente no | RequestsNov24Test::test_admin_creates_user_with_companies_and_customer_cannot |
+| Cliente privato | Privato italiano senza partita IVA, basta il codice fiscale | RequestsNov24Test::test_private_customer_in_italy_needs_no_vat_number |
+| Conto economico | Cinque anni di confronto, anno senza dati non applicato | RequestsNov24Test::test_income_statement_offers_previous_years_for_comparison |
+| Cespiti | Civilistico = aliquota fiscale anche con categoria diversa | CespitiTest::test_civil_always_follows_fiscal_rate |

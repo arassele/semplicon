@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
         }
 
         User::create(['name' => 'Admin Demo', 'email' => 'admin@semplicon.test', 'password' => 'semplicon-demo', 'is_admin' => true]);
-        $giulia = User::create(['name' => 'Giulia Pixel', 'email' => 'giulia@semplicon.test', 'password' => 'semplicon-demo']);
+        $giulia = User::create(['name' => 'Jana Pixel', 'email' => 'jana@semplicon.test', 'password' => 'semplicon-demo']);
         $marco = User::create(['name' => 'Marco Rossi', 'email' => 'marco@semplicon.test', 'password' => 'semplicon-demo']);
 
         $companies = app(CompanyService::class);
@@ -42,15 +42,15 @@ class DatabaseSeeder extends Seeder
         };
 
         // Professionista, forfettario con IVA: 2026 confermato, 2027 come bozza con pro rata 80 %.
-        $pixel = $companies->create($giulia, ['name' => 'Giulia Pixel', 'tipologia' => 'professionista', 'partita_iva' => PartitaIva::complete('0123456789')]);
+        $pixel = $companies->create($giulia, ['name' => 'Jana Pixel', 'tipologia' => 'professionista', 'partita_iva' => PartitaIva::complete('0123456789')]);
         $details->update($pixel, $giulia, [
-            'tipologia' => 'professionista', 'name' => '', 'partita_iva' => $pixel->partita_iva, 'codice_fiscale' => 'PXLGLI90D52A952N', 'codice_sdi' => 'M5UXCR1',
-            'titolo' => 'Dott.ssa', 'cognome' => 'Pixel', 'nome' => 'Giulia', 'sesso' => 'F', 'data_nascita' => '1990-04-12',
+            'tipologia' => 'professionista', 'name' => '', 'partita_iva' => $pixel->partita_iva, 'codice_fiscale' => 'PXLJNA90D52A952Y', 'codice_sdi' => 'M5UXCR1',
+            'titolo' => 'Dott.ssa', 'cognome' => 'Pixel', 'nome' => 'Jana', 'sesso' => 'F', 'data_nascita' => '1990-04-12',
             'comune_nascita' => 'Bolzano', 'provincia_nascita' => 'BZ',
             'indirizzo' => 'Via dei Portici', 'numero_civico' => '10', 'cap' => '39100', 'comune' => 'Bolzano', 'provincia' => 'BZ',
             'contacts' => [
-                ['type' => 'email', 'value' => 'giulia@pixel.example', 'is_default' => true],
-                ['type' => 'pec', 'value' => 'giulia.pixel@pec.example', 'is_default' => false],
+                ['type' => 'email', 'value' => 'jana@pixel.example', 'is_default' => true],
+                ['type' => 'pec', 'value' => 'jana.pixel@pec.example', 'is_default' => false],
                 ['type' => 'telefono', 'value' => '0471 000000', 'is_default' => false],
             ],
             'activities' => [['code' => '74.12.01', 'description' => 'Grafica di pagine web', 'is_primary' => true]],
@@ -63,10 +63,10 @@ class DatabaseSeeder extends Seeder
         $batch = ImportBatch::create(['company_id' => $pixel->id, 'created_by' => $giulia->id, 'status' => 'completato']);
         $B = FatturaBuilder::class;
         $samples = [
-            'vendita.xml' => $B::make()->supplier('IT'.$pixel->partita_iva, name: 'Giulia Pixel')->customer('IT09876543217', name: 'Officine Rinaldi S.n.c.')->body('2026/014', '2026-03-15', total: '1464.00', summaries: [['rate' => '22.00', 'taxable' => '1200.00', 'tax' => '264.00']], description: 'Progettazione grafica sito web')->xml(),
-            'hosting.xml' => $B::make()->supplier('IT11111111115', name: 'Hosting Alpha S.r.l.')->customer('IT'.$pixel->partita_iva, name: 'Giulia Pixel')->body('A-77', '2026-02-02', summaries: [['rate' => '22.00', 'taxable' => '40.00', 'tax' => '8.80'], ['rate' => '0.00', 'taxable' => '2.00', 'tax' => '0.00', 'natura' => 'N1']], description: 'Hosting annuale')->xml(),
-            'auto.xml' => $B::make()->supplier('IT33333333334', name: 'Officina Auto Bolzano')->customer('IT'.$pixel->partita_iva, name: 'Giulia Pixel')->body('F-311', '2026-04-08', summaries: [['rate' => '22.00', 'taxable' => '250.00', 'tax' => '55.00']], description: 'Manutenzione automezzo')->xml(),
-            'nota.xml' => $B::make()->supplier('IT11111111115', name: 'Hosting Alpha S.r.l.')->customer('IT'.$pixel->partita_iva, name: 'Giulia Pixel')->body('NC-12', '2026-02-20', 'TD04', summaries: [['rate' => '22.00', 'taxable' => '10.00', 'tax' => '2.20']], description: 'Storno parziale hosting')->xml(),
+            'vendita.xml' => $B::make()->supplier('IT'.$pixel->partita_iva, name: 'Jana Pixel')->customer('IT09876543217', name: 'Officine Rinaldi S.n.c.')->body('2026/014', '2026-03-15', total: '1464.00', summaries: [['rate' => '22.00', 'taxable' => '1200.00', 'tax' => '264.00']], description: 'Progettazione grafica sito web')->xml(),
+            'hosting.xml' => $B::make()->supplier('IT11111111115', name: 'Hosting Alpha S.r.l.')->customer('IT'.$pixel->partita_iva, name: 'Jana Pixel')->body('A-77', '2026-02-02', summaries: [['rate' => '22.00', 'taxable' => '40.00', 'tax' => '8.80'], ['rate' => '0.00', 'taxable' => '2.00', 'tax' => '0.00', 'natura' => 'N1']], description: 'Hosting annuale')->xml(),
+            'auto.xml' => $B::make()->supplier('IT33333333334', name: 'Officina Auto Bolzano')->customer('IT'.$pixel->partita_iva, name: 'Jana Pixel')->body('F-311', '2026-04-08', summaries: [['rate' => '22.00', 'taxable' => '250.00', 'tax' => '55.00']], description: 'Manutenzione automezzo')->xml(),
+            'nota.xml' => $B::make()->supplier('IT11111111115', name: 'Hosting Alpha S.r.l.')->customer('IT'.$pixel->partita_iva, name: 'Jana Pixel')->body('NC-12', '2026-02-20', 'TD04', summaries: [['rate' => '22.00', 'taxable' => '10.00', 'tax' => '2.20']], description: 'Storno parziale hosting')->xml(),
         ];
         foreach ($samples as $name => $xml) {
             $item = ImportItem::create(['import_batch_id' => $batch->id, 'company_id' => $pixel->id, 'filename' => $name, 'status' => 'in_attesa']);

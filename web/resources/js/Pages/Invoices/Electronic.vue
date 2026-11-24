@@ -79,7 +79,7 @@ const unmark = () => router.post(`${base.value}/fatture-elettroniche/da-trasmett
                             <td class="num tabular">{{ money(i.total) }}</td>
                             <td class="small"><span class="tabular">{{ i.filename }}</span><br><span class="muted tabular">SHA-256 {{ i.sha256 }}…</span></td>
                             <td><span v-if="i.transmitted_at" class="badge good">Trasmessa {{ date(i.transmitted_at) }}</span><span v-else class="badge warn">Da trasmettere</span><p v-if="i.note" class="small muted" style="margin: 2px 0 0">{{ i.note }}</p></td>
-                            <td class="num" style="white-space: nowrap"><Link :href="`${base}/fatture/${i.id}/anteprima-xml`" class="btn link">Anteprima</Link> <a :href="`${base}/fatture/${i.id}/xml`" class="btn link">XML</a></td>
+                            <td class="num" style="white-space: nowrap"><span class="row-btns"><Link :href="`${base}/fatture/${i.id}/anteprima-xml`" class="btn small-btn">Anteprima</Link> <a :href="`${base}/fatture/${i.id}/pdf`" class="btn small-btn"><Icon name="download" />PDF</a> <a :href="`${base}/fatture/${i.id}/xml`" class="btn small-btn"><Icon name="download" />XML</a></span></td>
                         </tr>
                     </tbody>
                 </table>

@@ -515,7 +515,8 @@ final class InvoiceIssuer
         if ($person ? ($first === '' || $last === '') : $name === '') {
             $e[$person ? 'customer.first_name' : 'customer.name'] = $person ? 'Indica nome e cognome.' : 'Indica la denominazione del cliente.';
         }
-        $vatRaw = strtoupper(preg_replace('/\s+/', '', (string) ($in['vat'] ?? '')));
+        // Cliente privato in Italia: nessuna partita IVA (richieste del 24.11.2026); all'estero resta l'identificativo fiscale.
+        $vatRaw = $person && $country === 'IT' ? '' : strtoupper(preg_replace('/\s+/', '', (string) ($in['vat'] ?? '')));
         $cf = strtoupper(preg_replace('/\s+/', '', (string) ($in['cf'] ?? '')));
         $vat = null;
         if ($vatRaw !== '') {

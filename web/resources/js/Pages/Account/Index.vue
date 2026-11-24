@@ -14,6 +14,9 @@ const picked = ref<number[]>(props.companies.map((c) => c.id));
 const rest = useForm<{ file: File | null; mode: 'new' | 'replace'; password: string }>({ file: null, mode: 'new', password: '' });
 const restoreErr = computed(() => { const e = rest.errors as Record<string, string>; return e.file || e.mode || e.password || ''; });
 const restore = () => rest.post('/account/ripristino', { forceFormData: true, preserveScroll: true, onSuccess: () => rest.reset(), onError: () => rest.reset('password') });
+// Accesso: e-mail e password (richieste del 24.11.2026)
+const acc = useForm({ email: user.value.email, current_password: '', password: '', password_confirmation: '' });
+const saveAccess = () => acc.put('/account/accesso', { preserveScroll: true, onFinish: () => acc.reset('current_password', 'password', 'password_confirmation') });
 const busy = ref(false);
 const error = ref('');
 const xsrf = () => decodeURIComponent(document.cookie.split('; ').find((c) => c.startsWith('XSRF-TOKEN='))?.split('=')[1] ?? '');
@@ -39,6 +42,17 @@ async function backup() {
                 <p>{{ user.email }} · {{ user.is_admin ? 'Amministratore' : 'Cliente' }}</p>
             </div>
         </div>
+
+        <section class="panel" aria-labelledby="acc-title" style="margin-bottom: 20px">
+            <div class="panel-head"><div><h2 id="acc-title">Accesso</h2><p>E-mail e password per entrare in Semplicon. Per salvare serve la password attuale.</p></div></div>
+            <form class="panel-body mi-grid" novalidate @submit.prevent="saveAccess">
+                <div class="field span3"><label for="acc-email">E-mail</label><input id="acc-email" v-model="acc.email" class="input" type="email" autocomplete="email"><p v-if="acc.errors.email" class="error">{{ acc.errors.email }}</p></div>
+                <div class="field"><label for="acc-new">Nuova password</label><input id="acc-new" v-model="acc.password" class="input" type="password" autocomplete="new-password" placeholder="lascia vuoto per non cambiarla"><p v-if="acc.errors.password" class="error">{{ acc.errors.password }}</p></div>
+                <div class="field"><label for="acc-new2">Ripeti la nuova password</label><input id="acc-new2" v-model="acc.password_confirmation" class="input" type="password" autocomplete="new-password"></div>
+                <div class="field"><label for="acc-cur">Password attuale</label><input id="acc-cur" v-model="acc.current_password" class="input" type="password" autocomplete="current-password"><p v-if="acc.errors.current_password" class="error">{{ acc.errors.current_password }}</p></div>
+                <div class="actions span3"><button class="btn primary" type="submit" :disabled="acc.processing"><Icon name="check" />Salva accesso</button></div>
+            </form>
+        </section>
 
         <section class="panel" aria-labelledby="bk-title">
             <div class="panel-head"><div><h2 id="bk-title">Backup dell’archivio</h2><p>Un file ZIP con tutti i dati delle aziende scelte, di tutti gli anni: fatture, registrazioni, liquidazioni, anagrafiche, registro attività, documenti originali e logo. Contiene le impronte SHA-256 per verificare che nulla sia cambiato. Non include account né password. Per ripristinarlo usa «Ripristina da backup» qui sotto.</p></div></div>

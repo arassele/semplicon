@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { Head, Link, router, useForm, usePage } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import Icon from '@/Components/Icon.vue';
@@ -27,6 +27,9 @@ const browse = () => router.get(base.value, { gruppo: g.value || undefined, spec
 const createFromTable = () => router.post(`${base.value}/da-tabella`, { rates: pick.value }, { preserveScroll: true, onSuccess: () => { pick.value = []; } });
 const rateEdit = ref<number | null>(null);
 const rf = useForm({ from_year: props.year + 1, civil_rate: '', fiscal_rate: '', reason: '' });
+// Il civilistico segue sempre le regole fiscali (richieste del 24.11.2026)
+watch(() => rf.fiscal_rate, (v) => { rf.civil_rate = v; });
+watch(() => form.fiscal_rate, () => { form.civil_rate = ''; });
 const pct = (v: string | null) => (v === null ? '—' : `${String(v).replace('.', ',')}%`);
 </script>
 
@@ -43,8 +46,7 @@ const pct = (v: string | null) => (v === null ? '—' : `${String(v).replace('.'
                 <div class="field"><label for="k-c">Codice</label><input id="k-c" v-model="form.code" class="input tabular" maxlength="20"><p v-if="err('code')" class="error">{{ err('code') }}</p></div>
                 <div class="field span2"><label for="k-n">Descrizione</label><input id="k-n" v-model="form.name" class="input"><p v-if="err('name')" class="error">{{ err('name') }}</p></div>
                 <div class="field"><label for="k-k">Tipologia</label><select id="k-k" v-model="form.kind" class="input"><option v-for="(l, k) in kinds" :key="k" :value="k">{{ l }}</option></select></div>
-                <div class="field"><label for="k-cr">Aliquota civilistica %</label><input id="k-cr" v-model="form.civil_rate" class="input tabular" placeholder="come la fiscale"><p v-if="err('civil_rate')" class="error">{{ err('civil_rate') }}</p></div>
-                <div class="field"><label for="k-fr">Aliquota fiscale applicata %</label><input id="k-fr" v-model="form.fiscal_rate" class="input tabular"><p v-if="err('fiscal_rate')" class="error">{{ err('fiscal_rate') }}</p></div>
+                <div class="field"><label for="k-fr">Aliquota % (vale anche per il civilistico)</label><input id="k-fr" v-model="form.fiscal_rate" class="input tabular"><p v-if="err('fiscal_rate')" class="error">{{ err('fiscal_rate') }}</p></div>
                 <label v-if="form.kind === 'materiale'" class="check span3"><input v-model="form.first_year_half" type="checkbox"> Primo esercizio: limite fiscale ridotto alla metà (art. 102 TUIR)</label>
                 <p v-if="form.kind === 'immateriale'" class="small muted span3">Immateriali (art. 103 TUIR): nessuna riduzione automatica nel primo esercizio; il D.M. 31/12/1988 non si applica. Indica l’aliquota in base al bene e ai principi contabili.</p>
                 <p v-if="err('depreciation_rate_id')" class="error span3">{{ err('depreciation_rate_id') }}</p>
@@ -55,16 +57,15 @@ const pct = (v: string | null) => (v === null ? '—' : `${String(v).replace('.'
 
         <section class="panel" style="margin-bottom: 16px">
             <div v-if="categories.length" class="table-wrap"><table class="data">
-                <thead><tr><th>Codice</th><th>Descrizione</th><th>Tipologia</th><th class="num">Civilistica</th><th class="num">Fiscale</th><th class="num">D.M.</th><th class="num">Cespiti</th><th></th></tr></thead>
+                <thead><tr><th>Codice</th><th>Descrizione</th><th>Tipologia</th><th class="num">Aliquota (civ. = fisc.)</th><th class="num">D.M.</th><th class="num">Cespiti</th><th></th></tr></thead>
                 <tbody><template v-for="c in categories" :key="c.id">
-                    <tr><td class="tabular">{{ c.code }}</td><td>{{ c.name }}<div v-for="(x, k) in c.changes" :key="k" class="small muted">dal {{ x.from_year }}: {{ pct(x.civil_rate) }} / {{ pct(x.fiscal_rate) }} · {{ x.reason }}</div></td>
-                        <td>{{ kinds[c.kind] }}</td><td class="num tabular">{{ pct(c.civil_rate ?? c.fiscal_rate) }}</td><td class="num tabular" :class="{ 'text-bad': c.dm && Number(c.fiscal_rate) > Number(c.dm.coefficient) }">{{ pct(c.fiscal_rate) }}</td>
+                    <tr><td class="tabular">{{ c.code }}</td><td>{{ c.name }}<div v-for="(x, k) in c.changes" :key="k" class="small muted">dal {{ x.from_year }}: {{ pct(x.fiscal_rate) }} · {{ x.reason }}</div></td>
+                        <td>{{ kinds[c.kind] }}</td><td class="num tabular" :class="{ 'text-bad': c.dm && Number(c.fiscal_rate) > Number(c.dm.coefficient) }">{{ pct(c.fiscal_rate) }}</td>
                         <td class="num tabular">{{ c.dm ? `${pct(c.dm.coefficient)} · G${c.dm.gruppo}${c.dm.specie ? ' ' + c.dm.specie : ''}` : '—' }}</td><td class="num tabular">{{ c.assets }}</td>
                         <td class="num" style="white-space: nowrap"><button class="btn link" type="button" @click="edit(c)">Modifica</button> <button class="btn link" type="button" @click="rateEdit = rateEdit === c.id ? null : c.id; rf.civil_rate = String(c.civil_rate ?? c.fiscal_rate ?? ''); rf.fiscal_rate = String(c.fiscal_rate ?? '')">Modifica dal …</button></td></tr>
                     <tr v-if="rateEdit === c.id"><td colspan="8"><form class="mi-grid" @submit.prevent="rf.post(`${base}/${c.id}/aliquote`, { preserveScroll: true, onSuccess: () => { rateEdit = null; } })">
                         <div class="field"><label :for="`rf-y-${c.id}`">Dall’esercizio</label><input :id="`rf-y-${c.id}`" v-model="rf.from_year" class="input tabular"><p v-if="rf.errors.from_year" class="error">{{ rf.errors.from_year }}</p></div>
-                        <div class="field"><label :for="`rf-c-${c.id}`">Civilistica %</label><input :id="`rf-c-${c.id}`" v-model="rf.civil_rate" class="input tabular"></div>
-                        <div class="field"><label :for="`rf-f-${c.id}`">Fiscale %</label><input :id="`rf-f-${c.id}`" v-model="rf.fiscal_rate" class="input tabular"></div>
+                        <div class="field"><label :for="`rf-f-${c.id}`">Aliquota % (civ. = fisc.)</label><input :id="`rf-f-${c.id}`" v-model="rf.fiscal_rate" class="input tabular"></div>
                         <div class="field span2"><label :for="`rf-r-${c.id}`">Motivo</label><input :id="`rf-r-${c.id}`" v-model="rf.reason" class="input"><p v-if="rf.errors.reason" class="error">{{ rf.errors.reason }}</p></div>
                         <div class="actions" style="align-self: end"><button class="btn primary" type="submit">Salva</button></div></form></td></tr>
                 </template></tbody></table></div>

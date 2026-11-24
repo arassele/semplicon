@@ -30,6 +30,8 @@ const cat = computed(() => props.categories.find((c) => String(c.id) === form.as
 const accFor = (r: string) => props.accounts.filter((x) => (['asset', 'fund'].includes(r) ? x.type === 'patrimoniale' : r === 'gain' ? x.type === 'ricavo' : x.type === 'costo'));
 const catAccount = (r: string) => { const id = cat.value?.[`account_${r}_id`]; const x = props.accounts.find((y) => y.id === id); return x ? `${x.code} ${x.name}` : 'nessuno'; };
 watch(() => form.in_service_date, (v) => { if (v && !form.depreciation_start) form.depreciation_start = v; });
+// Entrata in funzione: riprende la data di acquisto finché non viene modificata a mano (richieste del 24.11.2026)
+watch(() => form.purchase_date, (v, old) => { if (v && (!form.in_service_date || form.in_service_date === old)) form.in_service_date = v; });
 const submit = () => (props.asset ? form.put(`${base.value}/${props.asset.id}`) : form.post(base.value));
 const locked = computed(() => !!props.asset?.locked);
 </script>
@@ -43,6 +45,7 @@ const locked = computed(() => !!props.asset?.locked);
         </div>
         <div v-if="locked" class="notice info" role="status" style="margin-bottom: 16px"><Icon name="alert" style="width: 20px; flex: none" /><div><strong>Cespite con ammortamenti o movimenti</strong>Valori, date e categoria si cambiano con un movimento (incremento, decremento, riclassificazione, rettifica): lo storico resta tracciato.</div></div>
         <div v-if="err('version')" class="notice bad" role="alert"><Icon name="alert" style="width: 20px; flex: none" /><div>{{ err('version') }}</div></div>
+        <div v-if="!categories.length" class="notice warn" role="status" style="margin-bottom: 16px"><Icon name="alert" style="width: 20px; flex: none" /><div><strong>Nessuna categoria</strong>Prima di creare un cespite crea almeno una categoria con le aliquote. <Link :href="`${base}/categorie`">Vai a Categorie e aliquote</Link></div></div>
         <form novalidate @submit.prevent="submit">
             <section class="panel" style="margin-bottom: 16px"><div class="panel-head"><h2>Identificazione</h2></div>
                 <div class="panel-body mi-grid">
@@ -51,8 +54,6 @@ const locked = computed(() => !!props.asset?.locked);
                     <div class="field span3"><label for="f-long">Descrizione dettagliata</label><textarea id="f-long" v-model="form.description_long" class="input" rows="2"></textarea></div>
                     <div class="field span2"><label for="f-cat">Categoria</label><select id="f-cat" v-model="form.asset_category_id" class="input" :disabled="locked" :aria-invalid="err('asset_category_id') ? true : undefined"><option value="">Scegli…</option><option v-for="c in categories" :key="c.id" :value="String(c.id)">{{ c.code }} · {{ c.name }} ({{ c.kind }}, {{ (c.civil_rate ?? c.fiscal_rate ?? '—').toString().replace('.', ',') }}%)</option></select><p v-if="err('asset_category_id')" class="error">{{ err('asset_category_id') }}</p></div>
                     <div class="field"><label for="f-sub">Sottocategoria</label><input id="f-sub" v-model="form.subcategory" class="input"></div>
-                    <div class="field"><label for="f-loc">Ubicazione</label><input id="f-loc" v-model="form.location" class="input"></div>
-                    <div class="field"><label for="f-cc">Centro di costo</label><input id="f-cc" v-model="form.cost_center" class="input"></div>
                     <div class="field"><label for="f-sup">Fornitore</label><input id="f-sup" v-model="form.supplier_name" class="input"></div>
                     <div class="field"><label for="f-mat">Matricola</label><input id="f-mat" v-model="form.matricola" class="input"></div>
                     <div class="field"><label for="f-ser">Numero di serie</label><input id="f-ser" v-model="form.serial_number" class="input"></div>
@@ -61,7 +62,7 @@ const locked = computed(() => !!props.asset?.locked);
             <section class="panel" style="margin-bottom: 16px"><div class="panel-head"><h2>Acquisizione</h2></div>
                 <div class="panel-body mi-grid">
                     <div class="field"><label for="f-pd">Data acquisto</label><input id="f-pd" v-model="form.purchase_date" type="date" class="input" :disabled="locked"><p v-if="err('purchase_date')" class="error">{{ err('purchase_date') }}</p></div>
-                    <div class="field"><label for="f-isd">Entrata in funzione</label><input id="f-isd" v-model="form.in_service_date" type="date" class="input" :disabled="locked"><p v-if="err('in_service_date')" class="error">{{ err('in_service_date') }}</p></div>
+                    <div class="field"><label for="f-isd">Entrata in funzione</label><input id="f-isd" v-model="form.in_service_date" type="date" class="input" :disabled="locked" aria-describedby="f-isd-h"><p id="f-isd-h" class="hint">Riprende la data di acquisto; modificala se il bene è entrato in uso più tardi.</p><p v-if="err('in_service_date')" class="error">{{ err('in_service_date') }}</p></div>
                     <div class="field"><label for="f-ds">Inizio ammortamento</label><input id="f-ds" v-model="form.depreciation_start" type="date" class="input" :disabled="locked"><p v-if="err('depreciation_start')" class="error">{{ err('depreciation_start') }}</p></div>
                     <div class="field"><label for="f-in">Numero fattura</label><input id="f-in" v-model="form.invoice_number" class="input"></div>
                     <div class="field"><label for="f-id">Data fattura</label><input id="f-id" v-model="form.invoice_date" type="date" class="input"></div>

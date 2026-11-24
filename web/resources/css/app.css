@@ -87,7 +87,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .topbar { height: var(--ct-topbar); padding: 0 36px; display: flex; align-items: center; gap: 16px; border-bottom: 1px solid var(--ct-border); }
 .topbar .crumb { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ct-muted); font-weight: 650; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .btn.menu-toggle { display: none; padding: 10px 12px; }
-main { padding: 32px 36px 64px; width: 100%; max-width: 1240px; }
+main { padding: 32px 36px 64px; width: 100%; max-width: 1760px; }
 
 .page-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; margin-bottom: 28px; }
 .page-head p { color: var(--ct-muted); margin-top: 8px; max-width: 62ch; }
@@ -440,3 +440,27 @@ tr.highlight td { background: var(--ct-error-bg); }
 .who-link { text-decoration: none; color: inherit; border-radius: 8px; }
 .who-link:hover strong { text-decoration: underline; }
 .who-link:focus-visible { outline: 2px solid var(--ct-selected); outline-offset: 2px; }
+
+/* Notifiche (campanella) e pannelli comprimibili (richieste del 24.11.2026) */
+.bell-wrap { position: relative; }
+.bell-btn { position: relative; display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid var(--ct-border); border-radius: var(--ct-radius-control); background: var(--ct-surface); color: var(--ct-text); cursor: pointer; }
+.bell-btn svg { width: 20px; height: 20px; }
+.bell-n { position: absolute; top: -6px; right: -6px; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 999px; background: var(--ct-warning-bg); color: var(--ct-warning); font-size: 11.5px; font-weight: 700; display: grid; place-items: center; }
+.bell-n.late { background: var(--ct-error-bg); color: var(--ct-error); }
+.bell-pop { position: absolute; right: 0; top: calc(100% + 8px); width: min(380px, calc(100vw - 32px)); max-height: 70vh; overflow-y: auto; background: var(--ct-surface); border: 1px solid var(--ct-border); border-radius: var(--ct-radius-panel); box-shadow: var(--ct-shadow-overlay); z-index: 70; }
+.bell-h { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid var(--ct-border); }
+.bell-s { margin: 10px 14px 4px; font-size: 12px; font-weight: 700; color: var(--ct-muted); text-transform: uppercase; letter-spacing: .04em; }
+.bell-empty { padding: 10px 14px 14px; }
+.bell-pop ul { list-style: none; margin: 0; padding: 0 6px 8px; }
+.bell-pop li a { display: flex; gap: 10px; align-items: center; padding: 8px; border-radius: 8px; color: var(--ct-text); text-decoration: none; font-size: 14px; }
+.bell-pop li a:hover { background: var(--ct-tint); }
+.bell-d { flex: none; width: 44px; font-weight: 700; } .bell-d.late { color: var(--ct-error); }
+details.panel.fold > summary { cursor: pointer; list-style: none; }
+details.panel.fold > summary::-webkit-details-marker { display: none; }
+details.panel.fold > summary::after { content: ''; width: 9px; height: 9px; border-right: 2px solid var(--ct-muted); border-bottom: 2px solid var(--ct-muted); transform: rotate(45deg); margin-left: auto; flex: none; }
+details.panel.fold[open] > summary::after { transform: rotate(-135deg); }
+details.panel.fold:not([open]) > summary { padding-bottom: 20px; }
+.small-btn { min-height: 34px; padding: 5px 12px; font-size: 13.5px; } .small-btn svg { width: 16px; height: 16px; }
+.row-btns { display: inline-flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.reg-dates > .field > label { display: flex; align-items: center; gap: 8px; min-height: 26px; }
+.reg-dates > .field > label .badge { padding: 1px 8px; font-size: 12px; line-height: 1.4; }

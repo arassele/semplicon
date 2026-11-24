@@ -36,7 +36,7 @@ php artisan serve
 Poi aprire http://127.0.0.1:8000. Account demo (dati sintetici):
 
 - `admin@semplicon.test` / `semplicon-demo` (amministratore, vede e modifica tutte le aziende)
-- `giulia@semplicon.test` / `semplicon-demo` (cliente, Contabilità professionisti, forfettario con IVA: 2026 confermato, 2027 come bozza, quattro fatture importate da registrare)
+- `jana@semplicon.test` / `semplicon-demo` (cliente, Contabilità professionisti, forfettario con IVA: 2026 confermato, 2027 come bozza, quattro fatture importate da registrare)
 - `marco@semplicon.test` / `semplicon-demo` (cliente, due aziende con bozze 2026, una delle quali bloccata)
 
 I nuovi clienti si registrano su `/registrati`. Un amministratore si crea solo da console: `php artisan semplicon:user name@example.com "Name" --admin`.

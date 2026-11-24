@@ -28,8 +28,17 @@ class IncomeStatementController extends Controller
     public function show(Request $request, Company $company): Response
     {
         $year = ActiveAccountingYear::current($request, $company);
+        $view = $this->view($request);
+        // Confronto con un anno precedente a scelta (richieste del 24.11.2026): solo anni con dati registrati.
+        $years = [];
+        foreach (range($year - 1, $year - 5) as $y) {
+            $t = $this->svc->build($company, $y, $view)['totals'];
+            $years[] = ['year' => $y, 'has_data' => $t['ricavi'] !== '0.00' || $t['costi'] !== '0.00'];
+        }
+        $cy = (int) $request->query('confronto', 0);
+        $compare = collect($years)->firstWhere(fn ($x) => $x['year'] === $cy && $x['has_data']) ? $this->svc->build($company, $cy, $view) : null;
 
-        return Inertia::render('IncomeStatement/Show', ['data' => $this->svc->build($company, $year, $this->view($request))]);
+        return Inertia::render('IncomeStatement/Show', ['data' => $this->svc->build($company, $year, $view), 'compare' => $compare, 'compareYears' => $years]);
     }
 
     public function csv(Request $request, Company $company): HttpResponse

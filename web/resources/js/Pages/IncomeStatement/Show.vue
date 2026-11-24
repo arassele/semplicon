@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { Head, Link, usePage } from '@inertiajs/vue3';
+import { Head, Link, router, usePage } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import Icon from '@/Components/Icon.vue';
 import { money } from '@/lib/format';
@@ -11,7 +11,15 @@ type Row = { account_id: number | null; code: string; name: string; amount: stri
 type Group = { key: string; label: string; amount: string; fiscal: string; rows: Row[] };
 type Data = { year: number; view: 'competenza' | 'cassa' | 'fiscale'; views: Record<string, string>; criterion: string; mode: string; ricavi: Group[]; costi: Group[];
     totals: Record<string, string>; da_verificare: string; pending: { invoice_id: number; number: string; nature: string; amount: string; reason: string }[]; notes: string[] };
-const props = defineProps<{ data: Data }>();
+const props = defineProps<{ data: Data; compare: Data | null; compareYears: { year: number; has_data: boolean }[] }>();
+// Confronto con un anno precedente (richieste del 24.11.2026)
+const cmp = computed(() => props.compare);
+const setCompare = (e: Event) => { const v = (e.target as HTMLSelectElement).value; router.get(`${base.value}/conto-economico`, { vista: props.data.view, ...(v ? { confronto: v } : {}) }, { preserveScroll: true }); };
+const cents = (v: string | undefined) => Math.round(Number(v ?? '0') * 100);
+const prevGroup = (side: 'ricavi' | 'costi', key: string) => cmp.value?.[side].find((g) => g.key === key)?.amount ?? '0.00';
+const prevRow = (side: 'ricavi' | 'costi', key: string, code: string) => cmp.value?.[side].find((g) => g.key === key)?.rows.find((r) => r.code === code)?.amount ?? '0.00';
+const diff = (a: string, b: string) => { const d = cents(a) - cents(b); return `${d > 0 ? '+' : d < 0 ? '−' : ''}${money((Math.abs(d) / 100).toFixed(2))}`; };
+const pctv = (a: string, b: string) => { const x = cents(a), y = cents(b); return y ? `${x >= y ? '+' : '−'}${(Math.abs((x - y) / y) * 100).toFixed(1).replace('.', ',')}%` : '—'; };
 const base = computed(() => `/aziende/${usePage<SharedProps>().props.currentCompany!.id}`);
 const fiscal = computed(() => props.data.view === 'fiscale');
 const neg = (v: string) => v.startsWith('-');
@@ -37,6 +45,8 @@ const sides = computed(() => [['ricavi', 'Ricavi', props.data.ricavi, 'ricavi'],
             <Link v-for="(l, k) in data.views" :key="k" :href="`${base}/conto-economico?vista=${k}`" class="seg-link" :aria-current="data.view === k ? 'page' : undefined" preserve-scroll>{{ l }}</Link>
         </nav>
 
+        <div class="field" style="max-width: 280px; margin: -4px 0 16px"><label for="ce-cmp">Confronto con</label>
+            <select id="ce-cmp" class="input" :value="cmp ? String(cmp.year) : ''" @change="setCompare"><option value="">Nessun confronto</option><option v-for="y in compareYears" :key="y.year" :value="String(y.year)" :disabled="!y.has_data">{{ y.year }}{{ y.has_data ? '' : ' (nessun dato)' }}</option></select></div>
         <div class="notice info" role="status" style="margin-bottom: 16px"><Icon name="alert" style="width: 20px; flex: none" />
             <div><strong>{{ data.views[data.view] }}</strong>{{ data.criterion }}<template v-if="fiscal"> La colonna “Fiscale” applica la deducibilità del conto (Piano dei conti).</template></div></div>
         <div v-for="(n, k) in data.notes" :key="k" class="small muted" style="margin: -6px 0 12px">{{ n }}</div>
@@ -55,14 +65,14 @@ const sides = computed(() => [['ricavi', 'Ricavi', props.data.ricavi, 'ricavi'],
             <div class="panel-head"><h2 :id="`ce-${key}`">{{ title }}</h2></div>
             <div v-if="groups.length" class="table-wrap">
                 <table class="register">
-                    <thead><tr><th>Conto</th><th class="num">Importo</th><th v-if="fiscal" class="num">Fiscale</th></tr></thead>
+                    <thead><tr><th>Conto</th><th class="num">{{ cmp ? data.year : 'Importo' }}</th><template v-if="cmp"><th class="num">{{ cmp.year }}</th><th class="num">Differenza</th><th class="num">Var. %</th></template><th v-if="fiscal" class="num">Fiscale</th></tr></thead>
                     <template v-for="g in groups" :key="g.key">
                         <tbody>
-                            <tr class="group-row"><td><strong>{{ g.label }}</strong></td><td class="num tabular"><strong>{{ money(g.amount) }}</strong></td><td v-if="fiscal" class="num tabular"><strong>{{ money(g.fiscal) }}</strong></td></tr>
-                            <tr v-for="r in g.rows" :key="`${g.key}-${r.code}`"><td style="padding-left: 28px"><span class="tabular">{{ r.code }}</span> · {{ r.name }}</td><td class="num tabular">{{ money(r.amount) }}</td><td v-if="fiscal" class="num tabular">{{ money(r.fiscal) }}</td></tr>
+                            <tr class="group-row"><td><strong>{{ g.label }}</strong></td><td class="num tabular"><strong>{{ money(g.amount) }}</strong></td><template v-if="cmp"><td class="num tabular"><strong>{{ money(prevGroup(key, g.key)) }}</strong></td><td class="num tabular">{{ diff(g.amount, prevGroup(key, g.key)) }}</td><td class="num tabular">{{ pctv(g.amount, prevGroup(key, g.key)) }}</td></template><td v-if="fiscal" class="num tabular"><strong>{{ money(g.fiscal) }}</strong></td></tr>
+                            <tr v-for="r in g.rows" :key="`${g.key}-${r.code}`"><td style="padding-left: 28px"><span class="tabular">{{ r.code }}</span> · {{ r.name }}</td><td class="num tabular">{{ money(r.amount) }}</td><template v-if="cmp"><td class="num tabular">{{ money(prevRow(key, g.key, r.code)) }}</td><td class="num tabular">{{ diff(r.amount, prevRow(key, g.key, r.code)) }}</td><td class="num tabular">{{ pctv(r.amount, prevRow(key, g.key, r.code)) }}</td></template><td v-if="fiscal" class="num tabular">{{ money(r.fiscal) }}</td></tr>
                         </tbody>
                     </template>
-                    <tbody><tr class="sum-row"><td>Totale {{ title.toLowerCase() }}</td><td class="num tabular">{{ money(data.totals[tot]) }}</td><td v-if="fiscal" class="num tabular">{{ money(data.totals[`${tot}_fiscali`]) }}</td></tr></tbody>
+                    <tbody><tr class="sum-row"><td>Totale {{ title.toLowerCase() }}</td><td class="num tabular">{{ money(data.totals[tot]) }}</td><template v-if="cmp"><td class="num tabular">{{ money(cmp.totals[tot]) }}</td><td class="num tabular">{{ diff(data.totals[tot], cmp.totals[tot]) }}</td><td class="num tabular">{{ pctv(data.totals[tot], cmp.totals[tot]) }}</td></template><td v-if="fiscal" class="num tabular">{{ money(data.totals[`${tot}_fiscali`]) }}</td></tr></tbody>
                 </table>
             </div>
             <p v-else class="panel-body muted small">Nessun importo nel {{ data.year }}.</p>

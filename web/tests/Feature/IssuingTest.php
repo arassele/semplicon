@@ -253,10 +253,10 @@ class IssuingTest extends TestCase
     public function test_professional_issuer_and_private_customer_produce_schema_valid_xml(): void
     {
         // Libero professionista (persona) come emittente e privato come cliente: Nome/Cognome appartengono ad Anagrafica
-        $this->company->update(['tipologia' => 'professionista', 'nome' => 'Giulia', 'cognome' => 'Pixel']);
+        $this->company->update(['tipologia' => 'professionista', 'nome' => 'Jana', 'cognome' => 'Pixel']);
         $inv = $this->issue(['customer' => ['kind' => 'persona', 'first_name' => 'Mario', 'last_name' => 'Rossi', 'name' => '', 'vat' => '', 'cf' => 'RSSMRA80A01H501U', 'sdi_code' => '']]);
         $x = XmlExport::where('invoice_id', $inv->id)->value('content');
-        $this->assertMatchesRegularExpression('#<Anagrafica>\s*<Nome>Giulia</Nome>\s*<Cognome>Pixel</Cognome>\s*</Anagrafica>#', $x);
+        $this->assertMatchesRegularExpression('#<Anagrafica>\s*<Nome>Jana</Nome>\s*<Cognome>Pixel</Cognome>\s*</Anagrafica>#', $x);
         $this->assertMatchesRegularExpression('#<Anagrafica>\s*<Nome>Mario</Nome>\s*<Cognome>Rossi</Cognome>\s*</Anagrafica>#', $x);
     }
 }

@@ -3,6 +3,7 @@ import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { Link, router, usePage } from '@inertiajs/vue3';
 import Icon from '@/Components/Icon.vue';
 import QuickSearch from '@/Components/QuickSearch.vue';
+import NotificationBell from '@/Components/NotificationBell.vue';
 import type { SharedProps } from '@/types';
 
 defineProps<{ crumb?: string }>();
@@ -87,7 +88,6 @@ const groups = computed<NavGroup[]>(() => {
         ] },
         { id: 'report', label: 'Report e scadenze', icon: 'calendar', items: [
             { label: 'Riepilogo per cassa', href: `${b}/scadenziario/riepilogo-fiscale`, icon: 'calendar', module: 'scadenziario' },
-            { label: 'Scadenze fiscali', href: `${b}/scadenziario/scadenze-fiscali`, icon: 'clock', module: 'adempimenti' },
             { label: 'Stampa', href: `${b}/stampa`, icon: 'doc', module: 'adempimenti' },
             { label: 'Archivio annuale', href: `${b}/archivio`, icon: 'layers', module: 'adempimenti' },
         ] },
@@ -98,6 +98,7 @@ const groups = computed<NavGroup[]>(() => {
             { label: 'Piano dei conti', href: `${b}/tabelle/piano-dei-conti`, icon: 'layers' },
             { label: 'Regole conti', href: `${b}/tabelle/regole`, icon: 'check' },
             { label: 'Parametri fiscali', href: `${b}/tabelle/parametri-fiscali`, icon: 'percent' },
+            { label: 'Scadenze fiscali', href: `${b}/scadenziario/scadenze-fiscali`, icon: 'clock', module: 'adempimenti' },
             { label: 'Codici ATECO', href: `${b}/tabelle/ateco`, icon: 'building' },
         ] },
         { id: 'impostazioni', label: 'Impostazioni', icon: 'gear', items: [
@@ -203,6 +204,7 @@ const mainGroups = computed(() => groups.value.filter((g) => g.id !== 'impostazi
         <header class="topbar">
             <button class="btn menu-toggle" type="button" :aria-expanded="open" aria-label="Apri menu" @click="open = !open"><Icon name="menu" /></button>
             <p class="crumb">{{ company ? company.name : 'Semplicon' }}<template v-if="crumb"> / {{ crumb }}</template></p>
+            <NotificationBell v-if="company" :base="base" :counts="navCounts" />
             <label v-if="company?.fiscal_year" class="year-switch"><span>Anno contabile</span>
                 <select :value="company.fiscal_year.active" aria-label="Anno contabile" @change="switchYear"><option v-for="y in company.fiscal_year.years" :key="y" :value="y">{{ y }}</option></select>
             </label>

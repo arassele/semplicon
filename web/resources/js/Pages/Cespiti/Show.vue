@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { Head, Link, router, useForm, usePage } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import Icon from '@/Components/Icon.vue';
@@ -23,6 +23,8 @@ const cat = computed(() => props.asset.category);
 const planShown = computed(() => props.plan.filter((r, i) => r.fixed || i < 60));
 
 const rateForm = useForm({ from_year: props.year + 1, civil_rate: String(cat.value?.civil_rate ?? cat.value?.fiscal_rate ?? ''), fiscal_rate: String(cat.value?.fiscal_rate ?? ''), reason: '', manual_civil: '', manual_fiscal: '' });
+// Il civilistico segue sempre le regole fiscali (richieste del 24.11.2026)
+watch(() => [rateForm.fiscal_rate, rateForm.manual_fiscal], () => { rateForm.civil_rate = rateForm.fiscal_rate; rateForm.manual_civil = rateForm.manual_fiscal; }, { immediate: true });
 const excl = useForm({ excluded: !props.asset.excluded, reason: '' });
 
 const reverse = (m: Mov) => { const reason = prompt(`Motivo dello storno di “${m.type_label}” del ${date(m.movement_date)}?`); if (reason) router.post(`${base.value}/movimenti/${m.id}/storno`, { reason }, { preserveScroll: true }); };
@@ -69,7 +71,7 @@ const tone: Record<string, string> = { attivo: 'good', ammortizzato: 'info', sos
                 <div><dt class="small muted">Valore originario</dt><dd class="tabular">{{ money(asset.original_cost) }}</dd></div><div><dt class="small muted">Costi accessori</dt><dd class="tabular">{{ money(asset.accessory_costs) }}</dd></div><div><dt class="small muted">IVA indetraibile capitalizzata</dt><dd class="tabular">{{ money(asset.nondeductible_vat) }}</dd></div>
                 <div><dt class="small muted">Contributi ({{ asset.grant_treatment }})</dt><dd class="tabular">{{ money(asset.grants) }}</dd></div><div><dt class="small muted">Costo civilistico</dt><dd class="tabular">{{ money(asset.cost_civil) }}</dd></div><div><dt class="small muted">Costo fiscale</dt><dd class="tabular">{{ money(asset.cost_fiscal) }}</dd></div>
                 <div><dt class="small muted">Valore residuo stimato</dt><dd class="tabular">{{ money(asset.residual_value) }}</dd></div><div><dt class="small muted">Metodo</dt><dd>{{ methods[asset.method] }}<template v-if="asset.reduced_pct"> ({{ String(asset.reduced_pct).replace('.', ',') }}% dell’ordinaria)</template></dd></div>
-                <div><dt class="small muted">Aliquote categoria</dt><dd>civ. {{ String(cat?.civil_rate ?? cat?.fiscal_rate).replace('.', ',') }}% · fisc. {{ String(cat?.fiscal_rate).replace('.', ',') }}%<template v-if="cat?.rate"> · D.M. {{ String(cat.rate.coefficient).replace('.', ',') }}%</template></dd></div>
+                <div><dt class="small muted">Aliquote categoria</dt><dd>{{ String(cat?.fiscal_rate).replace('.', ',') }}% (civilistica = fiscale)<template v-if="cat?.rate"> · D.M. {{ String(cat.rate.coefficient).replace('.', ',') }}%</template></dd></div>
                 <div v-if="asset.low_value"><dt class="small muted">Bene di modesto valore</dt><dd>deduzione integrale nell’esercizio</dd></div>
                 <div v-if="asset.fiscal_cost_cap || asset.fiscal_deductible_pct"><dt class="small muted">Deducibilità limitata</dt><dd>limite {{ money(asset.fiscal_cost_cap) || '—' }} · {{ asset.fiscal_deductible_pct ? String(asset.fiscal_deductible_pct).replace('.', ',') + '%' : '—' }}</dd></div>
                 <div v-if="asset.opening"><dt class="small muted">Progressivi al 31/12/{{ asset.opening.last_year }}</dt><dd class="tabular">fondo civ. {{ money(asset.opening.fund_civil) }} · fisc. {{ money(asset.opening.fund_fiscal) }}<template v-if="asset.opening.mode === 'storico'"> (import storico)</template></dd></div>
@@ -81,9 +83,8 @@ const tone: Record<string, string> = { attivo: 'good', ammortizzato: 'info', sos
             <section class="panel" style="margin-bottom: 16px"><div class="panel-head"><div><h2>Modifica dal …</h2><p>Nuove aliquote (o quota manuale) solo per esercizi non ancora calcolati: il passato resta invariato.</p></div></div>
                 <form class="panel-body mi-grid" @submit.prevent="rateForm.post(`${url}/aliquote`, { preserveScroll: true })">
                     <div class="field"><label for="r-y">Dall’esercizio</label><input id="r-y" v-model="rateForm.from_year" class="input tabular" inputmode="numeric"><p v-if="rateForm.errors.from_year" class="error">{{ rateForm.errors.from_year }}</p></div>
-                    <div class="field"><label for="r-c">Aliquota civilistica %</label><input id="r-c" v-model="rateForm.civil_rate" class="input tabular"><p v-if="rateForm.errors.civil_rate" class="error">{{ rateForm.errors.civil_rate }}</p></div>
-                    <div class="field"><label for="r-f">Aliquota fiscale %</label><input id="r-f" v-model="rateForm.fiscal_rate" class="input tabular"><p v-if="rateForm.errors.fiscal_rate" class="error">{{ rateForm.errors.fiscal_rate }}</p></div>
-                    <template v-if="asset.method === 'manuale'"><div class="field"><label for="r-mc">Quota manuale civilistica</label><input id="r-mc" v-model="rateForm.manual_civil" class="input tabular"></div><div class="field"><label for="r-mf">Quota manuale fiscale</label><input id="r-mf" v-model="rateForm.manual_fiscal" class="input tabular"></div></template>
+                    <div class="field"><label for="r-f">Aliquota % (civ. = fisc.)</label><input id="r-f" v-model="rateForm.fiscal_rate" class="input tabular"><p v-if="rateForm.errors.fiscal_rate" class="error">{{ rateForm.errors.fiscal_rate }}</p></div>
+                    <template v-if="asset.method === 'manuale'"><div class="field"><label for="r-mf">Quota manuale (civ. = fisc.)</label><input id="r-mf" v-model="rateForm.manual_fiscal" class="input tabular"></div></template>
                     <div class="field span3"><label for="r-r">Motivo</label><input id="r-r" v-model="rateForm.reason" class="input"><p v-if="rateForm.errors.reason" class="error">{{ rateForm.errors.reason }}</p></div>
                     <div class="actions span3"><button class="btn primary" type="submit"><Icon name="check" />Salva</button></div>
                 </form></section>

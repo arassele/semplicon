@@ -138,6 +138,15 @@ class CespitiTest extends TestCase
         $this->assertNotEmpty($r['warnings']);
     }
 
+    /** Richieste del 24.11.2026: il civilistico segue sempre l'aliquota fiscale, anche se la categoria ne indica un'altra. */
+    public function test_civil_always_follows_fiscal_rate(): void
+    {
+        $a = $this->asset($this->category('materiale', '20', ['civil_rate' => '10']));
+        $r = $this->row($a, 2027);
+        $this->assertSame($r['fiscal_rate'], $r['civil_rate']);
+        $this->assertSame('2000.00', $this->eur($r['civil_amount']));
+    }
+
     /** 6: Completamente ammortizzato: stato, nessuna ulteriore quota. */
     public function test_fully_depreciated(): void
     {
