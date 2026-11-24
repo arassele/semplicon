@@ -88,7 +88,7 @@ Le immagini provengono dalla **demo HTML**, con dati di esempio. Mostrano l’in
 
 1. Scarica il repository con **Code → Download ZIP** ed estrailo.
 2. Apri [`demo/semplicon-demo.html`](demo/semplicon-demo.html) nel browser.
-3. Scegli l’utente demo Giulia ed esplora l’azienda «Pixel Giulia».
+3. Scegli l’utente demo Jana ed esplora l’azienda «Pixel Jana».
 
 Non occorre avviare un server. La demo usa dati nel browser e simula alcune funzioni; non invia documenti allo SdI. Usa soltanto dati fittizi. [Percorso guidato e differenze rispetto all’applicazione →](docs/PRIMI_PASSI.md)
 

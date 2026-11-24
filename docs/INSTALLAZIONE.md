@@ -12,7 +12,7 @@ Questa guida serve a provare la beta con dati sintetici. Per lo stato dei contro
 
 ```sh
 git clone https://github.com/arassele/semplicon.git
-cd semplicon/web
+cd web
 composer install
 npm ci
 cp .env.example .env
@@ -65,7 +65,7 @@ La password dei tre account demo è `semplicon-demo`.
 
 | E-mail | Percorso di prova |
 |---|---|
-| `giulia@semplicon.test` | Contabilità professionisti, anno 2026 confermato e 2027 in bozza, documenti da registrare. |
+| `jana@semplicon.test` | Contabilità professionisti, anno 2026 confermato e 2027 in bozza, documenti da registrare. |
 | `marco@semplicon.test` | Due aziende con configurazioni annuali in bozza; una delle aziende è bloccata. |
 | `admin@semplicon.test` | Amministratore con accesso a tutte le aziende. |
 

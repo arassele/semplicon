@@ -4,7 +4,7 @@ Un percorso per esplorare la beta usando soltanto dati di esempio. Puoi seguire 
 
 ## 1. Scegli un’azienda
 
-Entra con l’utente demo Giulia e scegli «Pixel Giulia». Controlla l’anno contabile nella barra superiore: le impostazioni e i prospetti dipendono dall’anno selezionato.
+Entra con l’utente demo Jana e scegli «Pixel Jana». Controlla l’anno contabile nella barra superiore: le impostazioni e i prospetti dipendono dall’anno selezionato.
 
 ## 2. Parti dalla panoramica
 
