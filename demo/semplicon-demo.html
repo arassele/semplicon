@@ -47,14 +47,16 @@ p.small > svg { width: 16px; height: 16px; vertical-align: -3px; flex: none; }
 .bell-wrap { position: relative; }
 .bell-btn { position: relative; display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid var(--border); border-radius: var(--r-control); background: #fff; color: var(--text); cursor: pointer; }
 .bell-btn svg { width: 20px; height: 20px; }
-.bell-n { position: absolute; top: -6px; right: -6px; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 999px; background: #ffd36a; color: #4d3000; font-size: 11.5px; font-weight: 700; display: grid; place-items: center; }
-.bell-n.late { background: #ffb3a7; color: #5c1006; }
+.bell-n { position: absolute; top: -6px; right: -6px; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 999px; background: var(--count-bg); color: var(--count-ink); font-size: 11.5px; font-weight: 700; display: grid; place-items: center; }
+.bell-n.late { background: var(--count-late-bg); color: var(--count-late-ink); }
 .bell-pop { position: absolute; right: 0; top: calc(100% + 8px); width: min(380px, calc(100vw - 32px)); max-height: 70vh; overflow-y: auto; background: #fff; border: 1px solid var(--border); border-radius: var(--r-panel); box-shadow: var(--shadow); z-index: 70; }
+@media (max-width: 640px) { .bell-pop { position: fixed; left: 16px; right: 16px; top: 64px; width: auto; } }
 .bell-h { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid var(--border); }
 .bell-s { margin: 10px 14px 4px; font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
 .bell-pop ul { list-style: none; margin: 0; padding: 0 6px 8px; }
 .bell-pop li a { display: flex; gap: 10px; align-items: center; padding: 8px; border-radius: 8px; color: var(--text); text-decoration: none; font-size: 14px; }
 .bell-pop li a:hover { background: var(--tint); }
+.dash-count.info { background: var(--neutral-bg); color: var(--muted); }
 .bell-d { flex: none; width: 44px; font-weight: 700; } .bell-d.late { color: var(--bad-ink); }
 .topbar { min-height: 64px; padding: 0 36px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid var(--border); }
 .crumb { flex: 1; min-width: 0; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 650; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -69,7 +71,16 @@ td > input[type="checkbox"], th > input[type="checkbox"] { width: 24px; height: 
 td a:not(.btn):not(.badge) { display: inline-block; padding: 4px 0; }
 details:not(.fold):not(.info) > summary { padding: 3px 0; cursor: pointer; }
 td a[href*="-cespite-"] { white-space: nowrap; }
-.dash-stats { margin-bottom: 18px; } .dstats { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0; margin: 0; } .dstats > div { padding: 14px 18px; border-top: 1px solid var(--border); } .dstats dt { font-size: 12px; color: var(--muted); font-weight: 600; } .dstats dd { margin: 2px 0 0; font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; } .dstats dd.dd { font-size: 12px; font-weight: 400; color: var(--muted); }
+/* Indicatori compatti (25.11.2026): tutti gli otto valori in una fascia, celle separate da linee sottili */
+.dash-stats { margin-bottom: 18px; } .dash-stats .dhd { padding-bottom: 10px; }
+.dstats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin: 0; border-top: 1px solid var(--border); }
+@media (min-width: 1640px) { .dstats { grid-template-columns: repeat(8, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .dstats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.dstats > div { padding: 10px 14px 11px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); min-width: 0; margin-bottom: -1px; }
+.dstats dt { font-size: 11.5px; color: var(--muted); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dstats dd { margin: 1px 0 0; font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.25; }
+.dstats dd.dd { font-size: 11.5px; font-weight: 400; color: var(--muted); line-height: 1.3; overflow-wrap: anywhere; }
+.dash-stats { overflow: hidden; }
 .h1row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; position: relative; }
 @media (max-width: 640px) { details.info { position: static; } details.info > .info-pop { left: 0; right: 0; width: auto; top: calc(100% + 4px); } }
 details.info { position: relative; display: inline-block; }
@@ -250,7 +261,8 @@ form:has(input[name="regime"][value="semplificata"]:checked) .method-box { displ
 .booking-preview { border: 1px solid var(--border); border-radius: var(--r-panel); padding: 16px; display: grid; gap: 12px; background: var(--subtle); }
 .pv-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px 16px; margin: 0; }
 .pv-facts dt { font-size: 13px; color: var(--muted); } .pv-facts dd { margin: 2px 0 0; font-weight: 600; }
-.registered-banner { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
+.notice.registered-banner { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
+.notice.registered-banner > span { flex: 1 1 320px; min-width: 0; } .notice.registered-banner > svg { flex: none; }
 .register tbody.highlight td { background: var(--selected); }
 .rule-hint { color: var(--info); margin-top: 4px; }
 .rule-remember { align-items: flex-start; font-size: 13px; margin-top: 6px; min-height: 0; }
@@ -354,8 +366,9 @@ tbody tr:hover td { background: #f6faf7; }
 .si[aria-current="page"] { background: var(--selected); color: var(--forest); font-weight: 700; }
 .si svg { width: 18px; height: 18px; flex: none; }
 .si .n { margin-left: auto; background: var(--accent); color: var(--forest); font-size: 12px; font-weight: 700; border-radius: 999px; padding: 1px 8px; font-variant-numeric: tabular-nums; }
-.si .n { background: #ffd36a; color: #4d3000; }
-.si .n.late { background: #ffb3a7; color: #5c1006; }
+:root { --count-bg: #ffd36a; --count-ink: #4d3000; --count-late-bg: #ffb3a7; --count-late-ink: #5c1006; }
+.si .n { background: var(--count-bg); color: var(--count-ink); }
+.si .n.late { background: var(--count-late-bg); color: var(--count-late-ink); }
 .si .n + .n { margin-left: 4px; }
 .slist, .ssub { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; }
 .ssub[hidden] { display: none; }
@@ -431,7 +444,22 @@ tr.sum-row td, tfoot td { font-weight: 700; background: var(--subtle); border-to
 .lv-st { position: relative; z-index: 1; flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 5px; text-align: center; }
 .lv-ring { width: 20px; height: 20px; margin-top: 3px; border-radius: 50%; box-sizing: border-box; background: #fff; border: 5px solid #7f908a; }
 .lv-st.done .lv-ring { background: var(--done-c); border-color: var(--done-c); }
-.lv-st.skip .lv-ring { background: #fff; border-style: dashed; }
+@media (max-width: 600px) {
+  .twrap:has(> table.cardify) { overflow: visible; }
+  table.cardify thead { display: none; }
+  table.cardify, table.cardify tbody, table.cardify tr, table.cardify td { display: block; width: 100%; }
+  table.cardify tr { padding: 12px 14px; border-bottom: 1px solid var(--border); position: relative; }
+  table.cardify tr:has(> td:first-child > input[type="checkbox"]) { padding-right: 52px; }
+  table.cardify td { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 3px 0; border: 0; text-align: right; white-space: normal; }
+  table.cardify td::before { content: attr(data-label); color: var(--muted); font-size: 12.5px; text-align: left; flex: none; max-width: 45%; }
+  table.cardify td:first-child:has(> input[type="checkbox"]) { position: absolute; right: 14px; top: 10px; width: auto; padding: 0; }
+  table.cardify td:first-child:has(> input[type="checkbox"])::before { content: none; }
+  table.cardify td:empty { display: none; }
+  table.cardify td a.title { display: inline-block; min-width: 24px; padding: 2px 0; }
+  .prosp td { white-space: normal; overflow-wrap: anywhere; } table.prosp td.num { width: 104px; }
+  .search-btn span { display: none; } .year-switch > span { display: none; }
+}
+.lv-st.lv-skip .lv-ring { background: #fff; border-style: dashed; }
 .lv-st.bad .lv-ring { width: 26px; height: 26px; margin-top: 0; border-width: 7px; border-color: var(--bad-strong); box-shadow: 0 0 0 4px var(--bad-soft); }
 .lv-st.bad .lv-s { color: var(--bad-ink); font-weight: 700; }
 .lv-st.now .lv-ring { width: 26px; height: 26px; margin-top: 0; border-width: 7px; border-color: var(--done-c); box-shadow: 0 0 0 4px color-mix(in srgb, var(--done-c) 22%, #fff); }
@@ -464,8 +492,7 @@ details.fold[open] > summary { padding-bottom: 0; }
 .isum-tab dt { color: var(--muted); } .isum-tab dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
 .isum-tab .sep { border-top: 1px solid var(--border); } .isum-tab .sep dt { color: var(--text); font-weight: 600; }
 .isum-tab .pay { background: var(--tint); border-top: 1px solid var(--border); padding: 12px 14px; } .isum-tab .pay dt { color: var(--forest); font-weight: 700; } .isum-tab .pay dd { font-size: 20px; font-weight: 700; color: var(--forest); }
-.sel-search { display: inline-flex; gap: 6px; } .sel-filter { margin-bottom: 6px; }
-.sel-search .sel-filter { margin-bottom: 0; max-width: 160px; } .isum .actions { display: grid; gap: 8px; } .isum .actions .btn { justify-content: center; width: 100%; }
+.sel-search { display: inline-flex; gap: 6px; } .sel-search .input { max-width: 220px; } .isum .actions { display: grid; gap: 8px; } .isum .actions .btn { justify-content: center; width: 100%; }
 @media (max-width: 1080px) { .isum { position: static; } .iss-split { grid-template-columns: 1fr; } }
 .dsum { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; margin: 14px 0 4px; padding: 12px 14px; background: var(--subtle); border: 1px solid var(--border); border-radius: 8px; font-size: 14px; } .dsum dt { color: var(--muted); } .dsum dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
 </style>
@@ -1321,6 +1348,9 @@ document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape' && state.
 document.addEventListener('click', (ev) => { if (state.bell && !ev.target.closest('.bell-wrap')) { state.bell = false; render(); } });
 document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape') document.querySelectorAll('details.info[open]').forEach((d) => { d.open = false; d.querySelector('summary')?.focus(); }); });
 function afterRender(focusId) {
+  fillPickLists();
+  // Tabelle a schede su telefono: ogni cella riceve l'intestazione della sua colonna (critique 25.11.2026)
+  document.querySelectorAll('table.cardify').forEach((t) => { const hs = [...t.querySelectorAll('thead th')].map((h) => h.textContent.trim()); t.querySelectorAll('tbody tr').forEach((r) => [...r.children].forEach((td, k) => { if (hs[k] && !td.dataset.label) td.dataset.label = hs[k]; })); });
   infoify();
   if (focusId) { const el = document.querySelector(focusId); if (el) el.focus({ preventScroll: true }); }
   const sn = document.querySelector('.snav'); if (sn) { sn.scrollTop = render.navTop || 0; const cur = sn.querySelector('[aria-current="page"]'); if (cur) { const r = cur.getBoundingClientRect(), b = sn.getBoundingClientRect(); if (r.top < b.top || r.bottom > b.bottom) cur.scrollIntoView({ block: 'nearest' }); } }
@@ -1339,7 +1369,7 @@ function navMenu(c, view, listNow, cur) {
   const sub = route().sub, ac = ' aria-current="page"';
   const open = db.invoices.filter((i) => i.company_id === c.id && isOpen(i)).length;
   let xbN = 0; try { xbN = XB.rows(c, 'tutti').filter((r) => r.st === 'integrazione_mancante' || r.overdue).length; } catch (e) { xbN = 0; }
-  const mods = hbOpts(c), pv = route().sub, invDir = view === 'invoice' && !state.verify ? db.invoices.find((i) => i.id === route().invoiceId)?.direction : null;
+  const mods = hbOpts(c), pv = route().sub, invRec = view === 'invoice' ? db.invoices.find((i) => i.id === route().invoiceId) : null, invOpenNow = !!invRec && isOpen(invRec), invDir = view === 'invoice' && !state.verify && !invOpenNow ? invRec?.direction : null;
   // Menu (concetto del committente, 21/11/2026, Decisione n. 82); Cespiti come sottogruppo espandibile in Contabilità.
   const csp = { sub: 'cespiti', label: 'Cespiti', items: [['cespiti', 'Elenco cespiti', ['cspList', 'cspShow', 'cspImport'].includes(view)], ['cespiti-movimenti', 'Movimenti cespiti', view === 'cspMov'], ['cespiti-ammortamenti', 'Calcolo ammortamenti', view === 'cspDep'],
     ['cespiti-prima-nota', 'Prima nota cespiti', view === 'cspJournal'], ['cespiti-stampe', 'Stampe e registri', view === 'cspPrint'], ['cespiti-categorie', 'Categorie e aliquote', view === 'cspCat']] };
@@ -1348,7 +1378,7 @@ function navMenu(c, view, listNow, cur) {
     { id: 'incassi', label: 'Incassi e pagamenti', icon: 'cash', mod: 'scadenziario', items: [
       ['scadenziario', 'Da incassare', view === 'scDa' && sub === 'scadenziario'], ['scadenziario-pagare', 'Da pagare', view === 'scDa' && sub === 'scadenziario-pagare'], ['scadenziario-movimenti', 'Movimenti finanziari', view === 'scMov']] },
     { id: 'contabilita', label: 'Contabilità', icon: 'doc', items: [
-      ['importa', 'Importa XML', view === 'import' || view === 'batch'], ['registrare', 'Da registrare', listNow === 'registrare' || (view === 'invoice' && state.verify), open],
+      ['importa', 'Importa XML', view === 'import' || view === 'batch'], ['registrare', 'Da registrare', listNow === 'registrare' || (view === 'invoice' && (state.verify || invOpenNow)), open],
       ['acquisti', 'Acquisti', listNow === 'acquisti' || view === 'integrate' || invDir === 'acquisto'], ['vendite', 'Vendite', listNow === 'vendite' || invDir === 'vendita'], ['fuori-campo', 'Fuori campo IVA', view === 'nonvat'], ['conto-economico', 'Conto economico', view === 'ce'], csp] },
     { id: 'adempimenti', label: 'Adempimenti fiscali', icon: 'percent', mod: 'adempimenti', items: [
       ['registri-acquisti', 'Registri IVA', view === 'registers'], ['liquidazioni', 'Liquidazioni e LIPE', ['lqIndex', 'lq', 'lqCredit'].includes(view)], ['crediti', 'Crediti IVA', view === 'lqCredits'], ['transfrontaliere', 'Operazioni transfrontaliere', view === 'xb', xbN]] },
@@ -1423,7 +1453,7 @@ function shell(c, view, body) {
     <header class="topbar">
       <button class="btn menu" type="button" data-action="toggle-menu" aria-expanded="${state.menu}" aria-label="Apri menu">${icon('menu')}</button>
       <p class="crumb">${crumbHtml}</p>
-      ${c ? `<button class="search-btn" type="button" data-action="hb-search-open" aria-haspopup="dialog">${icon('search')}<span>Cerca</span><kbd>Ctrl K</kbd></button>${bellHtml(c)}${hbYearSwitch(c)}` : ''}
+      ${c ? `<button class="search-btn" type="button" data-action="hb-search-open" aria-haspopup="dialog" aria-label="Cerca (Ctrl K)">${icon('search')}<span>Cerca</span><kbd>Ctrl K</kbd></button>${bellHtml(c)}${hbYearSwitch(c)}` : ''}
       ${adminView ? '<span class="badge info">Accesso amministratore</span>' : ''}
     </header>
     <main id="contenuto" tabindex="-1">${lastRegBanner(c)}${body}</main>
@@ -1659,12 +1689,12 @@ function invoicesView(c, list) {
   const lupe = (i) => (InvXml.xmlOf(c, i) ? `<button class="btn icon-btn" type="button" data-action="hb-inv-preview" data-id="${i.id}" aria-label="Visualizza documento ${esc(i.number)}" title="Visualizza documento">${icon('search')}</button>` : `<a class="btn icon-btn" href="#azienda-${c.id}-fattura-${i.id}" aria-label="Apri fattura ${esc(i.number)}" title="Apri fattura">${icon('search')}</a>`);
   return `
   <div class="head"><div><h1>${titles[list]}</h1><p>${list === 'registrare' ? 'Fatture importate e non ancora registrate. “Registra” le apre una dopo l’altra.' : scoped ? `Fatture dell’anno contabile ${THIS_YEAR} e stato della registrazione IVA.` : 'Fatture importate e stato della registrazione IVA.'}</p></div>
-    <div class="actions">${list === 'registrare' && rows.length ? `<button class="btn primary" type="button" data-action="verify-start">${icon('check')}Registra</button>` : ''}${list === 'vendite' ? `<a class="btn primary" href="#azienda-${c.id}-emetti">${icon('plus')}Emetti fattura elettronica</a>` : ''}<a class="btn" href="#azienda-${c.id}-nuova-fattura${list === 'vendite' ? '-vendita' : ''}">${icon('plus')}Fattura manuale</a><a class="btn${list === 'registrare' && rows.length ? '' : ' primary'}" href="#azienda-${c.id}-importa">${icon('upload')}Importa XML</a></div></div>
+    <div class="actions">${list === 'registrare' && rows.length ? `<button class="btn primary" type="button" data-action="verify-start">${icon('check')}Verifica in sequenza (${rows.length})</button>` : ''}${list === 'vendite' ? `<a class="btn primary" href="#azienda-${c.id}-emetti">${icon('plus')}Emetti fattura elettronica</a>` : ''}<a class="btn" href="#azienda-${c.id}-nuova-fattura${list === 'vendite' ? '-vendita' : ''}">${icon('plus')}Fattura manuale</a><a class="btn${list === 'registrare' && rows.length ? '' : ' primary'}" href="#azienda-${c.id}-importa">${icon('upload')}Importa XML</a></div></div>
   ${tabsHtml}${list === 'registrare' ? regTabs(c, 'fatture') : ''}
   <section class="panel">
     <form class="pbody" data-form="inv-search" style="display:flex;gap:10px;border-bottom:1px solid var(--border)"><label class="sr-only" for="inv-q">Cerca</label><input id="inv-q" name="q" class="input" type="search" placeholder="Numero o controparte" value="${esc(state.invQ || '')}"><button class="btn" type="submit">Cerca</button></form>
     ${hbBulkBar(scope, sel, true)}
-    ${tabRows.length ? `<div class="twrap" style="position:relative"><table><thead><tr>${hbCheckHead(scope, tabRows, sel)}<th>Documento</th><th>Controparte</th><th>Data</th><th style="text-align:right">Imponibile</th><th style="text-align:right">IVA</th><th>Stato</th><th><span class="sr-only">Azioni</span></th></tr></thead><tbody>
+    ${tabRows.length ? `<div class="twrap" style="position:relative"><table class="cardify"><thead><tr>${hbCheckHead(scope, tabRows, sel)}<th>Documento</th><th>Controparte</th><th>Data</th><th style="text-align:right">Imponibile</th><th style="text-align:right">IVA</th><th>Stato</th><th><span class="sr-only">Azioni</span></th></tr></thead><tbody>
       ${tabRows.map((i) => `<tr>${hbCheckCell(scope, i.id, `Seleziona fattura ${i.number}`, sel)}<td><a class="title" href="#azienda-${c.id}-fattura-${i.id}">${esc(i.number)}</a><br>${looksLikeAsset(i) ? '<span class="badge info" title="Bene ammortizzabile? Nella registrazione puoi indicarlo come cespite.">Possibile cespite</span> ' : ''}<span class="small muted">${esc(TD[i.doc_type] ?? i.doc_type)} · ${i.direction === 'acquisto' ? 'Acquisto' : i.direction === 'vendita' ? 'Vendita' : 'Da definire'}</span></td>
         <td>${esc(cpName(i))}</td><td class="tab nowrap">${fmt(i.date)}</td><td class="tab nowrap" style="text-align:right">${money(i.taxable)}${i.currency !== 'EUR' ? ` <span class="small muted">${i.currency}</span>` : ''}</td><td class="tab nowrap" style="text-align:right">${money(i.tax)}</td>
         <td><span class="badge ${INV_STATUS[i.status][0]}">${INV_STATUS[i.status][1]}</span>${activeReg(i) ? `<br><span class="small muted tab">Prot. ${regLabel(activeReg(i))}</span>` : ''}</td>
@@ -2007,6 +2037,7 @@ function registrationPanel(c, i) {
     <div class="phead"><div><h2 id="rg-t">${editing ? `Modifica registrazione ${regLabel(reg)}` : 'Verifica e registra'}</h2><p>${editing ? 'Cambia date, periodo, conti o % detraibile. Il protocollo resta lo stesso se l’anno non cambia; i dati precedenti restano nel registro attività.' : 'Controlla i dati, assegna i conti e conferma. Semplicon propone periodo, conti e percentuali: ciò che scegli tu è indicato come “manuale”.'}</p></div></div>
     <form class="pbody" data-form="registration" data-id="${i.id}" style="display:grid;gap:18px" novalidate>
       ${state.errors.registration ? `<div class="notice bad">${icon('alert')}<div>${esc(state.errors.registration)}</div></div>` : ''}
+      ${!editing && looksLikeAsset(i) && !document.querySelector('input[name$="-asset"]:checked') ? `<div class="notice info" role="status">${icon('alert')}<div><strong>Possibile cespite</strong>Importo e descrizione fanno pensare a un bene ammortizzabile: in quel caso non va a costo. <button class="btn small-btn" type="button" data-action="reg-asset-on">Registra come cespite</button></div></div>` : ''}
       ${!i.direction ? `<div class="field"><label for="rg-dir">Direzione</label><select id="rg-dir" name="direction" class="input" data-change="reg-redraw"${inv('direction')}><option value="">Scegli…</option><option value="acquisto"${d.direction === 'acquisto' ? ' selected' : ''}>Acquisto (autofattura ricevuta)</option><option value="vendita"${d.direction === 'vendita' ? ' selected' : ''}>Vendita</option></select>${errOf('direction')}</div>` : ''}
       <div class="reg-grid">
         ${acq ? `<div class="field"><label for="rg-receipt">Data di ricezione</label><input id="rg-receipt" name="receipt_date" type="date" class="input" min="${i.date}" max="${todayIso()}" value="${esc(d.receipt_date)}" data-change="reg-redraw"${inv('receipt_date')}><p class="small muted">Proposta: data della fattura. Correggila se l’hai ricevuta dopo.</p>${errOf('receipt_date')}</div>` : ''}
@@ -2033,7 +2064,7 @@ function registrationPanel(c, i) {
       ${acknowledge.length ? `<fieldset class="field"><legend>Segnalazioni da confermare</legend>${acknowledge.map((m, k) => `<label class="check" style="align-items:flex-start"><input type="checkbox" name="ack-${k}" value="${esc(m)}"${d.acknowledged.includes(m) ? ' checked' : ''}><span>${esc(m)}</span></label>`).join('')}${errOf('acknowledged')}</fieldset>` : ''}
       <div class="field"><label for="rg-notes">Note (facoltative)</label><textarea id="rg-notes" name="notes" class="input" rows="2">${esc(d.notes)}</textarea></div>
       <section class="booking-preview" id="pv-box" aria-live="polite">${previewHtml(c, i, d)}</section>
-      ${editing ? `<div class="actions"><button class="btn primary" type="submit">${icon('check')}Salva modifiche</button><button class="btn" type="button" data-action="reg-edit-cancel">Annulla</button></div>` : `<div class="actions"><button class="btn primary" type="submit">${icon('check')}${state.verify ? 'Registra e passa al successivo' : 'Registra'}</button>${state.verify ? `<button class="btn" type="button" data-action="verify-skip" data-id="${i.id}">Salta</button>` : ''}<button class="btn danger" type="button" data-action="discard-open">Scarta</button></div>`}
+      ${editing ? `<div class="actions"><button class="btn primary" type="submit">${icon('check')}Salva modifiche</button><button class="btn" type="button" data-action="reg-edit-cancel">Annulla</button></div>` : `<div class="actions"><button class="btn primary" type="submit">${icon('check')}${state.verify ? 'Registra e passa al successivo' : 'Registra'}</button>${state.verify ? `<button class="btn" type="button" data-action="verify-skip" data-id="${i.id}">Salta</button>` : ''}<button class="btn danger" type="button" data-action="discard-open" style="margin-left:auto">Scarta fattura</button></div>`}
       ${state.discardOpen ? discardBlock(i) : ''}
     </form>
   </section>`;
@@ -2902,6 +2933,7 @@ app.addEventListener('click', (ev) => {
   switch (a) {
     case 'skip': ev.preventDefault(); document.getElementById('contenuto')?.focus(); return;
     case 'inv-tab': state.invTab = el.dataset.t; return render();
+    case 'reg-asset-on': { const cb = document.querySelector('input[name$="-asset"]'); if (cb) { cb.checked = true; cb.dispatchEvent(new Event('change', { bubbles: true })); } return; }
     case 'bell-toggle': state.bell = !state.bell; return render();
     case 'bell-go': state.bell = false; return;
     case 'nav-sub': { const id = el.dataset.id, isOpen = el.getAttribute('aria-expanded') === 'true'; if (isOpen || !el.dataset.go) { state.navOpen = isOpen ? null : id; return render(); } state.navOpen = id; return go(el.dataset.go.slice(1)); }
@@ -3371,7 +3403,7 @@ function scheduleView(c, view) {
     </form>
     ${asOf ? `<p class="pbody small" style="padding-bottom:0"><span class="badge info">Situazione al ${fmt(asOf)}</span> Contano solo fatture e ${sale ? 'incassi' : 'pagamenti'} fino a questa data: una fattura di dicembre incassata a gennaio risulta aperta al 31/12.</p>` : ''}
     <p class="pbody small" style="display:flex;gap:18px;flex-wrap:wrap;border-bottom:1px solid var(--border)"><span>Rate aperte: <strong>${rows.length}</strong></span><span>Residuo: <strong class="tab">${eur(tot)}</strong></span><span>di cui scaduto: <strong class="tab" style="color:${over ? 'var(--bad)' : 'inherit'}">${eur(over)}</strong></span></p>
-    ${rows.length ? `<div class="twrap" style="position:relative"><table class="register"><thead><tr><th><span class="sr-only">Seleziona</span></th><th>${sale ? 'Cliente' : 'Fornitore'}</th><th>Fattura</th><th>Scadenza</th><th class="num">Rata</th><th class="num">Saldato</th><th class="num">Residuo</th><th>Stato</th><th><span class="sr-only">Azioni</span></th></tr></thead><tbody>
+    ${rows.length ? `<div class="twrap" style="position:relative"><table class="register cardify"><thead><tr><th><span class="sr-only">Seleziona</span></th><th>${sale ? 'Cliente' : 'Fornitore'}</th><th>Fattura</th><th>Scadenza</th><th class="num">Rata</th><th class="num">Saldato</th><th class="num">Residuo</th><th>Stato</th><th><span class="sr-only">Azioni</span></th></tr></thead><tbody>
       ${rows.map(({ x, i, s, n }) => { const picked = (state.scPick || []).includes(x.id), pk = state.scPick?.length ? scKey(db.invoices.find((y) => y.id === db.installments.find((z) => z.id === state.scPick[0])?.invoice_id) ?? i) : null; return `<tr>
         <td><input type="checkbox" data-action="sc-pick" data-id="${x.id}" ${picked ? 'checked' : ''} ${asOf || i.doc_type === 'TD04' || (pk && pk !== scKey(i) && !picked) ? 'disabled' : ''} aria-label="Seleziona ${esc(i.number)} rata ${x.seq}"></td>
         <td>${esc(scName(i))}</td><td class="nowrap"><a href="#azienda-${c.id}-fattura-${i.id}">${esc(i.number)}</a><br><span class="small muted">${fmt(i.date)}${i.doc_type === 'TD04' ? ' · nota di credito' : ''}</span></td>
@@ -3453,13 +3485,13 @@ function liqIndexView(c, year) {
     ${rows.map(({ p, s, d, review, f, f24 }) => `<tr><td><a href="#azienda-${c.id}-liquidazione-${y}-${p}"><strong>${Period.label(y, p, prof.periodicity)}</strong></a></td>
       <td><span class="badge ${review ? 'warn' : s ? 'good' : ''}">${review ? 'Da riesaminare' : s ? `Confermata · v${s.version}` : 'Bozza'}</span>${!s && d.checks?.length ? ' <span class="badge warn">Da verificare</span>' : ''}${!s && d.ok && !d.regIds.length && !d.movs.length && !d.f.deferredIn ? ' <span class="small muted">nessun movimento</span>' : ''}</td>
       <td>${f ? RES[s?.result ?? d.result] : '—'}${f?.deferredOut ? `<br><span class="small muted">rinviato ${eur(f.deferredOut)}</span>` : ''}</td><td class="tab num">${f ? eur((s?.result ?? d.result) === 'credito' ? f.credit : f.due) : '—'}</td>
-      <td class="tab">${s?.dueDate ? fmt(s.dueDate) : !s && f?.due ? fmt(d.dueDate) : '—'}</td><td>${f24 ? `<span class="badge ${F24ST[f24.status][1]}">${F24ST[f24.status][0]}</span>` : ''}</td></tr>`).join('')}
+      <td class="tab">${s?.dueDate ? fmt(s.dueDate) : !s && f?.due ? fmt(d.dueDate) : '—'}${!s && d.dueDate && d.dueDate < todayIso() && Period.end(y, p, prof.periodicity) < todayIso() && (d.regIds?.length || f?.due) ? '<br><span class="badge bad">Termine superato</span>' : ''}</td><td>${f24 ? `<span class="badge ${F24ST[f24.status][1]}">${F24ST[f24.status][0]}</span>` : s && s.due > 0 ? (s.dueDate && s.dueDate < todayIso() ? `<span class="badge bad">Da versare · scaduto il ${fmt(s.dueDate)}</span>` : `<span class="badge warn">Da versare entro il ${s.dueDate ? fmt(s.dueDate) : '—'}</span>`) : s ? '<span class="small muted">nessun versamento</span>' : ''}</td></tr>`).join('')}
   </tbody></table></div></section>`}${hbLipePanel(c, y)}`;
 }
 /* Linea verde: linea di avanzamento per flussi reali. steps = [[label, 'done'|'now'|'bad'|'open'|'skip', sub]] */
 function lvLine(steps, color, label) {
   const cur = steps.findIndex(([, st]) => st === 'now' || st === 'bad'), last = cur >= 0 ? cur : steps.map(([, st]) => st === 'done' || st === 'skip').lastIndexOf(true), pct = Math.max(0, last) / Math.max(1, steps.length - 1) * 100;
-  return `<section class="panel lv-line" aria-label="${esc(label)}" style="--n:${steps.length}"><div class="lv-track" style="--done:${pct}%" aria-hidden="true"></div>${steps.map(([l, st, sub]) => `<div class="lv-st ${st === 'skip' ? 'done skip' : st}"${st === 'now' || st === 'bad' ? ' aria-current="step"' : ''}><span class="lv-ring"></span><span class="lv-l">${esc(l)}</span><span class="lv-s">${esc(sub ?? '')}</span></div>`).join('')}${(() => { const k = cur >= 0 ? cur : Math.max(0, last); const [l, , sub] = steps[k]; return `<p class="lv-m" aria-hidden="true">Passo ${k + 1} di ${steps.length} · <strong>${esc(l)}</strong>${sub ? ` · ${esc(sub)}` : ''}</p>`; })()}</section>`;
+  return `<section class="panel lv-line" aria-label="${esc(label)}" style="--n:${steps.length}"><div class="lv-track" style="--done:${pct}%" aria-hidden="true"></div>${steps.map(([l, st, sub]) => `<div class="lv-st ${st === 'skip' ? 'done lv-skip' : st}"${st === 'now' || st === 'bad' ? ' aria-current="step"' : ''}><span class="lv-ring"></span><span class="lv-l">${esc(l)}</span><span class="lv-s">${esc(sub ?? '')}</span></div>`).join('')}${(() => { const k = cur >= 0 ? cur : Math.max(0, last); const [l, , sub] = steps[k]; return `<p class="lv-m" aria-hidden="true">Passo ${k + 1} di ${steps.length} · <strong>${esc(l)}</strong>${sub ? ` · ${esc(sub)}` : ''}</p>`; })()}</section>`;
 }
 function liqView(c, y, p) {
   const prof = activeProfile(c, y), s = latestSettlement(c, y, p), d = liqCalc(c, y, p), review = s && d.ok && s.hash !== d.hash;
@@ -4061,7 +4093,7 @@ function issueView(c) {
     <div class="field span3"><label for="causale">Causale (facoltativa)</label>${inp('causale', s.causale, 'maxlength="200" placeholder="es. Consulenza novembre 2026"')}${E('causale')}${hbSnipSelect('causale', c)}</div>
   </div></div></section>
   <section class="panel"><div class="phead"><div><h2>Cliente</h2><p>Per i clienti già fatturati puoi riprendere i dati.</p></div></div><div class="pbody form"><div class="acc-grid">
-    ${maxCust.length || Pt.list(c, 'cliente').length ? `<div class="field span3"><label for="iss-pick">Cliente esistente</label><input class="input sel-filter" type="search" data-filter-for="iss-pick" placeholder="Cerca per nome o partita IVA…" aria-label="Cerca cliente" autocomplete="off"><select class="input" id="iss-pick" data-iss-pick><option value="">— nuovo cliente —</option>${Pt.list(c, 'cliente').length ? `<optgroup label="Anagrafica clienti">${Pt.list(c, 'cliente').map((p) => `<option value="p${p.id}">${esc(p.name)}${p.vat ? ` · ${esc(p.vat)}` : ''}</option>`).join('')}</optgroup><optgroup label="Già fatturati">` : ''}${maxCust.map((i, k) => `<option value="${k}">${esc(i.customer.name)}${i.customer.vat ? ` · ${esc(i.customer.vat)}` : ''}</option>`).join('')}${Pt.list(c, 'cliente').length ? '</optgroup>' : ''}</select></div>` : ''}
+    ${maxCust.length || Pt.list(c, 'cliente').length ? `<div class="field span3"><label for="iss-pick-q">Cliente esistente</label><input class="input" type="search" id="iss-pick-q" data-pick-for="iss-pick" list="iss-pick-dl" placeholder="Cerca per nome o partita IVA…" autocomplete="off"><datalist id="iss-pick-dl"></datalist><p class="hint">Scrivi e scegli dall’elenco; lascia vuoto per un nuovo cliente.</p><select hidden id="iss-pick" data-iss-pick tabindex="-1" aria-hidden="true"><option value="">— nuovo cliente —</option>${Pt.list(c, 'cliente').length ? `<optgroup label="Anagrafica clienti">${Pt.list(c, 'cliente').map((p) => `<option value="p${p.id}">${esc(p.name)}${p.vat ? ` · ${esc(p.vat)}` : ''}</option>`).join('')}</optgroup><optgroup label="Già fatturati">` : ''}${maxCust.map((i, k) => `<option value="${k}">${esc(i.customer.name)}${i.customer.vat ? ` · ${esc(i.customer.vat)}` : ''}</option>`).join('')}${Pt.list(c, 'cliente').length ? '</optgroup>' : ''}</select></div>` : ''}
     <fieldset class="field span3"><legend>Tipo di cliente</legend><div class="seg"><label><input type="radio" name="c_kind" value="azienda"${cu.kind === 'azienda' ? ' checked' : ''}>Azienda o professionista</label><label><input type="radio" name="c_kind" value="persona"${cu.kind === 'persona' ? ' checked' : ''}>Persona fisica</label></div></fieldset>
     ${cu.kind === 'azienda' ? `<div class="field span3"><label for="c_name">Denominazione</label>${inp('c_name', cu.name, `maxlength="80"${inv2('customer.name')}`)}${E('customer.name')}</div>`
       : `<div class="field"><label for="c_first">Nome</label>${inp('c_first', cu.first_name, inv2('customer.first_name'))}${E('customer.first_name')}</div><div class="field span2"><label for="c_last">Cognome</label>${inp('c_last', cu.last_name)}</div>`}
@@ -4823,12 +4855,9 @@ function hbDraftHtml() {
   return `<div class="qs-backdrop" data-action="hb-draft-bg"><div class="qs" role="dialog" aria-modal="true" aria-label="Anteprima della fattura" style="width:min(860px,100%);height:90vh;max-height:90vh"><div class="qs-input"><strong style="flex:1">${state.hbDraft.title}</strong><button class="btn" type="button" data-action="hb-doc-pdf">${icon('download')}Scarica PDF</button><button class="btn" type="button" data-action="hb-draft-close" id="hb-draft-close">Chiudi</button></div><iframe title="Anteprima della fattura" sandbox="" style="flex:1;border:0;width:100%" srcdoc="${esc(state.hbDraft.html)}"></iframe></div></div>`;
 }
 function hbXmlButtons(c, i) { return InvXml.xmlOf(c, i) ? `<button class="btn" type="button" data-action="hb-inv-preview" data-id="${i.id}">Anteprima</button> <button class="btn" type="button" data-action="hb-inv-pdf" data-id="${i.id}">${icon('download')}PDF</button> <button class="btn" type="button" data-action="hb-inv-xml" data-id="${i.id}">${icon('download')}XML</button> ` : ''; }
-document.addEventListener('input', (ev) => { const t = ev.target; if (!t.dataset?.filterFor) return; const sel = document.getElementById(t.dataset.filterFor); if (!sel) return;
-  const q = t.value.trim().toLowerCase(); let n = 0;
-  sel.querySelectorAll('option').forEach((o) => { if (!o.value) return; const hit = !q || o.textContent.toLowerCase().includes(q); o.hidden = !hit; if (hit) n++; });
-  sel.querySelectorAll('optgroup').forEach((g) => { g.hidden = ![...g.children].some((o) => !o.hidden); });
-  t.setAttribute('aria-description', q ? `${n} risultati: premi Invio per scegliere il primo` : ''); });
-document.addEventListener('keydown', (ev) => { const t = ev.target; if (ev.key !== 'Enter' || !t.dataset?.filterFor) return; ev.preventDefault(); const sel = document.getElementById(t.dataset.filterFor), o = sel && [...sel.querySelectorAll('option')].find((x) => x.value && !x.hidden); if (o) { sel.value = o.value; sel.dispatchEvent(new Event('change', { bubbles: true })); } });
+/* Campo con suggerimenti (richieste del 24.11.2026, audit): un solo campo; i suggerimenti vengono dalla lista nascosta, la scelta la applica. */
+function fillPickLists() { document.querySelectorAll('input[data-pick-for]').forEach((t) => { const sel = document.getElementById(t.dataset.pickFor), dl = document.getElementById(t.getAttribute('list')); if (!sel || !dl || dl.childElementCount) return; [...sel.querySelectorAll('option')].filter((o) => o.value).forEach((o) => { const x = document.createElement('option'); x.value = o.textContent.trim(); dl.appendChild(x); }); }); }
+document.addEventListener('change', (ev) => { const t = ev.target; if (!t.dataset?.pickFor) return; const sel = document.getElementById(t.dataset.pickFor), q = t.value.trim(); if (!sel || !q) return; const o = [...sel.querySelectorAll('option')].find((x) => x.value && x.textContent.trim() === q); if (o) { sel.value = o.value; sel.dispatchEvent(new Event('change', { bubbles: true })); } }, true);
 document.addEventListener('input', (ev) => { const t = ev.target; if (t.id !== 'cs-purchase_date') return; const s2 = document.getElementById('cs-in_service_date'); if (s2 && (!s2.value || s2.dataset.auto === '1')) { s2.value = t.value; s2.dataset.auto = '1'; } });
 document.addEventListener('input', (ev) => { if (ev.target.id === 'cs-in_service_date') ev.target.dataset.auto = '0'; });
 /* ===== Giro demo Fatturazione / Anagrafiche / Opzioni (Decisioni n. 74 e 75) ===== */
@@ -5027,6 +5056,8 @@ function hbWorkCalc(c) {
   const liqOpen = periods.filter((p) => Period.end(y, p, prof.periodicity) < today && !latestSettlement(c, y, p) && db.registrations.some((r) => r.company_id === c.id && r.year === y && r.period === p));
   const f24Late = periods.map((p) => latestSettlement(c, y, p)).filter((s) => s && s.result === 'debito' && s.dueDate && s.dueDate < today && !db.f24s.some((x) => x.settlement_id === s.id && ['presentato', 'addebito_confermato'].includes(x.status)));
   let xb = 0; if (o.adempimenti) { try { xb = XB.rows(c, 'tutti').filter((r) => r.st === 'integrazione_mancante' || r.overdue).length; } catch (e) { xb = 0; } }
+  // Forfettario con IVA: la conferma della liquidazione è bloccata (regola non implementata): niente compito „da confermare“, ma una verifica con il professionista (critique 25.11.2026)
+  const liqBlocked = prof?.forfettario_iva ? liqOpen.splice(0).length : 0;
   const W = { open: open.length, verify: open.filter((i) => i.status === 'da_verificare').length, toSend: o.emissione ? hbToSend(c) : 0, recDue: o.emissione ? db.hbRecurring.filter((r) => r.company_id === c.id && Rec.isDue(r)).length : 0,
     recvLate: o.scadenziario ? insts.filter((r) => r.i.direction === 'vendita').length : 0, payLate: o.scadenziario ? insts.filter((r) => r.i.direction === 'acquisto').length : 0,
     liqOpen: o.adempimenti ? liqOpen.length : 0, f24Late: o.adempimenti ? f24Late.length : 0, f24List: o.adempimenti ? f24Late : [], xb, prof };
@@ -5037,6 +5068,7 @@ function hbWorkCalc(c) {
   t(W.recvLate, W.recvLate === 1 ? 'Rata da incassare scaduta' : 'Rate da incassare scadute', `${base}-scadenziario`, 'bad');
   t(W.payLate, W.payLate === 1 ? 'Rata da pagare scaduta' : 'Rate da pagare scadute', `${base}-scadenziario-pagare`, 'bad');
   t(W.liqOpen, 'Liquidazioni IVA di periodi chiusi da confermare', `${base}-liquidazioni`);
+  if (liqBlocked) W.tasks.push({ count: liqBlocked, label: 'Liquidazioni da verificare con il professionista (forfettario con IVA: calcolo non disponibile in Semplicon)', url: `${base}-liquidazioni`, tone: 'info' });
   t(W.open, 'Fatture da registrare', `${base}-registrare`); t(W.verify, 'di cui con segnalazioni da verificare', `${base}-verificare`);
   t(W.toSend, 'Fatture emesse da trasmettere al SdI', `${base}-fatture-elettroniche`); t(W.recDue, 'Fatture ricorrenti da emettere', `${base}-ricorrenti`);
   t(W.xb, 'Operazioni transfrontaliere da completare', `${base}-transfrontaliere`);
@@ -5048,7 +5080,7 @@ function bellHtml(c) {
   let panel = '';
   if (state.bell) {
     const lim = new Date(Date.now() + 14 * 864e5).toLocaleDateString('sv-SE'), due = hbDashData(c).due.filter((d) => d.overdue || d.date <= lim).slice(0, 8);
-    panel = `<div class="bell-pop" role="dialog" aria-label="Notifiche" id="bell-pop"><div class="bell-h"><strong>Notifiche</strong><button class="btn link" type="button" data-action="bell-toggle">Chiudi</button></div>
+    panel = `<div class="bell-pop" role="region" aria-label="Notifiche" id="bell-pop"><div class="bell-h"><strong>Notifiche</strong><button class="btn link" type="button" data-action="bell-toggle">Chiudi</button></div>
       ${W.tasks.length ? `<p class="bell-s">Da fare</p><ul>${W.tasks.map((t) => `<li><a href="${t.url}" data-action="bell-go"><span class="dash-count tab ${t.tone}">${t.count}</span><span>${esc(t.label)}</span></a></li>`).join('')}</ul>` : ''}
       ${due.length ? `<p class="bell-s">Scadenze (14 giorni)</p><ul>${due.map((d) => `<li><a href="${d.url}" data-action="bell-go"><span class="tab bell-d${d.overdue || d.date < todayIso() ? ' late' : ''}">${fmt(d.date).slice(0, 5)}</span><span>${esc(d.label)}</span></a></li>`).join('')}</ul>` : ''}
       ${!W.tasks.length && !due.length ? '<p class="small muted" style="padding:8px 14px 14px">Nessuna notifica.</p>' : ''}</div>`;
@@ -5935,7 +5967,7 @@ function cspSeedPixel(giulia) {
 function hbSnipSelect(kind, c) { const L = db.hbSnippets.filter((x) => x.company_id === c.id && x.kind === 'causale'); return L.length ? `<select class="input small-select" data-hb-snip="causale" aria-label="Inserisci testo predefinito nella causale"><option value="">+ Inserisci testo predefinito…</option>${L.map((x) => `<option value="${x.id}">${esc(x.title)}</option>`).join('')}</select>` : ''; }
 function hbLineTools(c, i) {
   const A = db.hbArticles.filter((a) => a.company_id === c.id && a.active), S = db.hbSnippets.filter((x) => x.company_id === c.id && x.kind === 'riga'); if (!A.length && !S.length) return '';
-  return `<div class="line-tools">${A.length ? `<span class="sel-search"><input class="input small-select sel-filter" type="search" data-filter-for="hb-art-${i}" placeholder="Cerca articolo…" aria-label="Cerca articolo per la riga ${i + 1}" autocomplete="off"><select class="input small-select" id="hb-art-${i}" data-hb-art="${i}" aria-label="Articolo per la riga ${i + 1}"><option value="">Articolo…</option>${A.map((a) => `<option value="${a.id}">${a.code ? esc(a.code) + ' · ' : ''}${esc(a.description.slice(0, 40))}</option>`).join('')}</select></span>` : ''}${S.length ? `<select class="input small-select" data-hb-snip="${i}" aria-label="Testo predefinito per la riga ${i + 1}"><option value="">Testo…</option>${S.map((x) => `<option value="${x.id}">${esc(x.title)}</option>`).join('')}</select>` : ''}</div>`;
+  return `<div class="line-tools">${A.length ? `<span class="sel-search"><input class="input small-select" type="search" data-pick-for="hb-art-${i}" list="hb-art-dl-${i}" placeholder="Cerca articolo…" aria-label="Articolo per la riga ${i + 1}" autocomplete="off"><datalist id="hb-art-dl-${i}"></datalist><select hidden class="input small-select" id="hb-art-${i}" data-hb-art="${i}" tabindex="-1" aria-hidden="true"><option value="">Articolo…</option>${A.map((a) => `<option value="${a.id}">${a.code ? esc(a.code) + ' · ' : ''}${esc(a.description.slice(0, 40))}</option>`).join('')}</select></span>` : ''}${S.length ? `<select class="input small-select" data-hb-snip="${i}" aria-label="Testo predefinito per la riga ${i + 1}"><option value="">Testo…</option>${S.map((x) => `<option value="${x.id}">${esc(x.title)}</option>`).join('')}</select>` : ''}</div>`;
 }
 
 /* Eventi delle riprese: clic (hb-…), input nel modulo di catalogo/emissione, tastiera della ricerca rapida */

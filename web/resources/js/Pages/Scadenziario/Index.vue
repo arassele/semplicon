@@ -77,7 +77,7 @@ const doAlloc = () => { aform.allocations = allocRows.value.filter((r) => r.amou
                 <span>Residuo: <strong class="tabular">{{ money(totals.residual) }}</strong></span><span>di cui scaduto: <strong class="tabular" :class="{ 'text-bad': toCents(totals.overdue) > 0 }">{{ money(totals.overdue) }}</strong></span>
             </div>
             <div v-if="rows.length" class="table-wrap">
-                <table class="register">
+                <table class="register cardify">
                     <thead><tr><th><span class="sr-only">Seleziona</span></th><th>{{ sale ? 'Cliente' : 'Fornitore' }}</th><th>Fattura</th><th>Data fatt.</th><th>Scadenza</th><th class="num">Rata</th><th class="num">{{ sale ? 'Incassato' : 'Pagato' }}</th><th class="num">Residuo</th><th>Stato</th><th><span class="sr-only">Azioni</span></th></tr></thead>
                     <tbody>
                         <template v-for="r in rows" :key="r.id">

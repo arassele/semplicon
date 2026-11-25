@@ -478,7 +478,7 @@ const statusTone: Record<string, string> = { registrata: 'good', da_verificare: 
                     <div v-else class="actions">
                         <button class="btn primary" type="button" :disabled="!ready || draft.outcome !== 'idle'" @click="send(verify)"><Icon name="check" />{{ draft.outcome === 'sending' ? 'Registrazione…' : verify ? 'Registra e passa al successivo' : 'Registra' }}</button>
                         <button v-if="verify" class="btn" type="button" :disabled="!ready || draft.outcome !== 'idle'" @click="send(false)">Registra e resta qui</button>
-                        <button class="btn danger" type="button" @click="dialog = 'scarta'">Scarta</button>
+                        <button class="btn danger" type="button" style="margin-left: auto" @click="dialog = 'scarta'">Scarta fattura</button>
                     </div>
                 </form>
             </section>

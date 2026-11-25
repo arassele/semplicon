@@ -36,7 +36,7 @@ onUnmounted(() => { document.removeEventListener('click', onDoc); document.remov
             <Icon name="bell" />
             <span v-if="total" class="bell-n" :class="{ late }">{{ total }}</span>
         </button>
-        <div v-if="open" id="bell-pop" class="bell-pop" role="dialog" aria-label="Notifiche">
+        <div v-if="open" id="bell-pop" class="bell-pop" role="region" aria-label="Notifiche">
             <div class="bell-h"><strong>Notifiche</strong><button class="btn link" type="button" @click="open = false">Chiudi</button></div>
             <p v-if="loading" class="small muted bell-empty">Caricamento…</p>
             <template v-else-if="data">

@@ -74,6 +74,19 @@ class RequestsNov24Test extends TestCase
         $this->assertNull($inv->customer_vat);
     }
 
+    public function test_liquidations_list_shows_payment_state_and_passed_terms(): void
+    {
+        $owner = $this->customer();
+        $c = $this->companyFor($owner);
+        $svc = app(VatProfileService::class);
+        $d = $svc->createDraft($c, $owner, 2026);
+        $svc->updateDraft($c, $d, $owner, ['regime' => 'semplificata', 'method' => 'cassa', 'periodicity' => 'mensile']);
+        $svc->confirm($c, $d->fresh(), $owner);
+        $this->travelTo('2026-11-25 10:00:00');
+        $this->actingAs($owner)->get("/aziende/{$c->id}/liquidazioni")->assertOk()
+            ->assertInertia(fn ($p) => $p->component('Liquidazioni/Index')->has('rows.0.pay_state')->has('rows.0.term_passed'));
+    }
+
     public function test_income_statement_offers_previous_years_for_comparison(): void
     {
         $owner = $this->customer();

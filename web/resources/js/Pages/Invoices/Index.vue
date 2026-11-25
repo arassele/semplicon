@@ -67,7 +67,7 @@ const label = (l: string) => l.replace('&laquo;', '‹').replace('&raquo;', '›
                 <Link :href="`${base}/importa`" class="btn"><Icon name="upload" />Importa XML</Link>
                 <Link v-if="direction === 'vendita'" :href="`${base}/fatture/emetti`" class="btn primary"><Icon name="plus" />Emetti fattura elettronica</Link>
                 <Link :href="`${base}/fatture/nuova${direction === 'vendita' ? '?direzione=vendita' : ''}`" class="btn"><Icon name="plus" />{{ direction === 'acquisto' ? 'Nuova fattura di acquisto' : direction === 'vendita' ? 'Registra fattura di vendita già emessa' : 'Fattura manuale' }}</Link>
-                <Link v-if="counts.aperte" :href="`${base}/verifica`" class="btn primary"><Icon name="check" />Registra ({{ counts.aperte }})</Link>
+                <Link v-if="counts.aperte" :href="`${base}/verifica`" class="btn primary"><Icon name="check" />Verifica in sequenza ({{ counts.aperte }})</Link>
             </div>
         </div>
 
@@ -106,7 +106,7 @@ const label = (l: string) => l.replace('&laquo;', '‹').replace('&raquo;', '›
                 <span v-if="error" class="error" role="alert">{{ error }}</span>
             </div>
             <div v-if="invoices.data.length" class="table-wrap">
-                <table>
+                <table class="cardify">
                     <thead><tr>
                         <th class="check-col"><input type="checkbox" :checked="allOn" aria-label="Seleziona tutti i documenti della pagina" @change="toggleAll"></th>
                         <th><button class="btn link" type="button" @click="sortBy('numero')">Documento{{ sortMark('numero') }}</button></th>

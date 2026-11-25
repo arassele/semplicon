@@ -83,7 +83,10 @@ class LiquidazioniController extends Controller
                     'credit' => $fig ? Decimal::fromMinor($fig['credit']) : null, 'deferred' => $fig ? Decimal::fromMinor($fig['deferred_out']) : null,
                     'due_date' => $s?->due_date?->toDateString() ?? ($d && $d['ok'] && $d['figures']['due'] > 0 ? $d['due_date'] : null),
                     'checks' => count($d['checks'] ?? []), 'empty' => ! $s && $d && $d['ok'] && ! $d['registration_ids'] && ! $d['adjustments'] && ! $d['credits'] && ! $d['figures']['deferred_in'],
-                    'f24' => $f ? ['id' => $f->id, 'status' => $f->status, 'label' => F24Service::STATUS[$f->status]] : null, 'year' => $year];
+                    'f24' => $f ? ['id' => $f->id, 'status' => $f->status, 'label' => F24Service::STATUS[$f->status]] : null, 'year' => $year,
+                    // Critique del 25.11.2026: stato del versamento nella lista e termine superato per i periodi non confermati
+                    'pay_state' => $s && $fig && $fig['due'] > 0 && ! ($f && in_array($f->status, ['presentato', 'addebito_confermato'], true)) ? (($s->due_date?->toDateString() ?? '9999') < now()->toDateString() ? 'scaduto' : 'da_versare') : ($s && $fig && $fig['due'] <= 0 ? 'nessuno' : null),
+                    'term_passed' => ! $s && VatPeriod::end($year, $i, $p->periodicity->value) < now()->toDateString() && Rules::dueDate($year, $i, $p->periodicity->value, $p->quarterly_type) < now()->toDateString() && ! ($d && $d['ok'] && ! $d['registration_ids'])];
             }
         }
         $year = $all ? 'tutti' : $year;

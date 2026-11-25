@@ -342,7 +342,8 @@ tr.inactive td { color: var(--ct-muted); background: var(--ct-surface-subtle); }
 .register tr.row-stornato td { color: var(--ct-muted); }
 
 /* Briefing del 18.11.2026 */
-.registered-banner { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
+.registered-banner, .notice.registered-banner { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
+.registered-banner > span { flex: 1 1 320px; min-width: 0; }
 .register tbody.highlight td { background: var(--ct-selected); }
 .split-group td { background: var(--ct-surface-subtle); }
 .split-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
@@ -464,3 +465,19 @@ details.panel.fold:not([open]) > summary { padding-bottom: 20px; }
 .row-btns { display: inline-flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
 .reg-dates > .field > label { display: flex; align-items: center; gap: 8px; min-height: 26px; }
 .reg-dates > .field > label .badge { padding: 1px 8px; font-size: 12px; line-height: 1.4; }
+@media (max-width: 640px) { .bell-pop { position: fixed; left: 16px; right: 16px; top: 64px; width: auto; } }
+.dash-count.info { background: var(--ct-neutral-bg); color: var(--ct-muted); }
+/* Telefono: tabelle di lavoro come schede (critique del 25.11.2026) */
+@media (max-width: 600px) {
+  .table-wrap:has(> table.cardify) { overflow: visible; }
+  table.cardify thead { display: none; }
+  table.cardify, table.cardify tbody, table.cardify tr, table.cardify td { display: block; width: 100%; }
+  table.cardify tr { padding: 12px 14px; border-bottom: 1px solid var(--ct-border); position: relative; }
+  table.cardify tr:has(> td:first-child > input[type="checkbox"]) { padding-right: 52px; }
+  table.cardify td { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 3px 0; border: 0; text-align: right; white-space: normal; }
+  table.cardify td::before { content: attr(data-label); color: var(--ct-muted); font-size: 12.5px; text-align: left; flex: none; max-width: 45%; }
+  table.cardify td:first-child:has(> input[type="checkbox"]) { position: absolute; right: 14px; top: 10px; width: auto; padding: 0; }
+  table.cardify td:first-child:has(> input[type="checkbox"])::before { content: none; }
+  table.cardify td:empty { display: none; }
+  .year-switch > span { display: none; }
+}

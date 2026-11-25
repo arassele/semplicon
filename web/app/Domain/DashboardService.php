@@ -81,7 +81,12 @@ final class DashboardService
                     $first ??= $p;
                 }
             }
-            $task('liquidazioni', $missing, 'Liquidazioni IVA di periodi chiusi da confermare', $first ? "{$base}/liquidazioni/{$year}/{$first}" : "{$base}/liquidazioni");
+            // Forfettario con IVA: la conferma è bloccata (regola non implementata): attività neutra di verifica, non «da confermare» (critique del 25.11.2026)
+            if ($profile->forfettario_iva) {
+                $task('liquidazioni_verifica', $missing, 'Liquidazioni da verificare con il professionista (forfettario con IVA: calcolo non disponibile in Semplicon)', "{$base}/liquidazioni", 'info');
+            } else {
+                $task('liquidazioni', $missing, 'Liquidazioni IVA di periodi chiusi da confermare', $first ? "{$base}/liquidazioni/{$year}/{$first}" : "{$base}/liquidazioni");
+            }
         }
         $review = VatSettlement::where('company_id', $company->id)->where('status', 'confermata')->where('review_required', true)->count();
         $task('riesame', $review, 'Liquidazioni confermate da riesaminare (dati cambiati dopo la conferma)', "{$base}/liquidazioni?anno=tutti", 'bad');
@@ -122,7 +127,7 @@ final class DashboardService
 
         // I moduli disattivati (Funzioni e opzioni) non compaiono
         $mods = CompanyOptions::for($company)['modules'];
-        $hideTasks = array_merge($mods['adempimenti'] ? [] : ['liquidazioni', 'riesame', 'integrazioni', 'xml_scaduti'], $mods['emissione'] ? [] : ['ricorrenti']);
+        $hideTasks = array_merge($mods['adempimenti'] ? [] : ['liquidazioni', 'liquidazioni_verifica', 'riesame', 'integrazioni', 'xml_scaduti'], $mods['emissione'] ? [] : ['ricorrenti']);
         $tasks = array_values(array_filter($tasks, fn ($t) => ! in_array($t['key'], $hideTasks, true)));
         $hideKinds = array_merge($mods['scadenziario'] ? [] : ['Da incassare', 'Da pagare'], $mods['adempimenti'] ? [] : ['Scadenza fiscale', 'Operazione transfrontaliera']);
         $due = array_values(array_filter($due, fn ($d) => ! in_array($d['kind'], $hideKinds, true)));
@@ -251,7 +256,7 @@ final class DashboardService
             }
         }
         $liq = VatSettlement::where('company_id', $company->id)->where('status', 'confermata')->where('review_required', true)->count();
-        if ($profile = $company->activeVatProfile($year)) {
+        if (($profile = $company->activeVatProfile($year)) && ! $profile->forfettario_iva) {
             $per = $profile->periodicity->value;
             for ($p = 1; $p <= VatPeriod::max($per) && VatPeriod::end($year, $p, $per) < $today; $p++) {
                 $liq += self::needsSettlement($company, $year, $p) ? 1 : 0;

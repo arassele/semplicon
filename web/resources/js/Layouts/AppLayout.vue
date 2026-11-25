@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
 import { Link, router, usePage } from '@inertiajs/vue3';
 import Icon from '@/Components/Icon.vue';
 import QuickSearch from '@/Components/QuickSearch.vue';
@@ -24,6 +24,10 @@ const searchPages = computed(() => [{ label: 'Panoramica', href: base.value }, .
     { label: 'Nuovo cespite', href: `${base.value}/cespiti/nuovo` }, { label: 'Importazione progressivi cespiti', href: `${base.value}/cespiti/importazione` }]);
 const onGlobalKey = (e: KeyboardEvent) => { if (company.value && (e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); searchOpen.value = !searchOpen.value; } };
 onMounted(() => window.addEventListener('keydown', onGlobalKey));
+// Tabelle a schede su telefono (critique del 25.11.2026): ogni cella riceve l’intestazione della sua colonna
+const labelTables = () => nextTick(() => document.querySelectorAll('table.cardify').forEach((t) => { const hs = [...t.querySelectorAll('thead th')].map((h) => h.textContent?.trim() ?? ''); t.querySelectorAll('tbody tr').forEach((r) => [...r.children].forEach((td, k) => { if (hs[k] && !(td as HTMLElement).dataset.label) (td as HTMLElement).dataset.label = hs[k]; })); }));
+onMounted(labelTables);
+watch(() => page.props, labelTables, { deep: false });
 onUnmounted(() => window.removeEventListener('keydown', onGlobalKey));
 const toast = ref<string | null>(null);
 
@@ -65,7 +69,7 @@ const groups = computed<NavGroup[]>(() => {
         ] },
         { id: 'contabilita', label: 'Contabilità', icon: 'doc', items: [
             { label: 'Importa XML', href: `${b}/importa`, icon: 'upload' },
-            { label: 'Da registrare', href: `${b}/fatture?stato=aperte`, icon: 'clock', count: 'da_registrare', current: () => page.url.includes('stato=aperte') || page.url.includes('/verifica') },
+            { label: 'Da registrare', href: `${b}/fatture?stato=aperte`, icon: 'clock', count: 'da_registrare', current: () => page.url.includes('stato=aperte') || page.url.includes('/verifica') || (/\/fatture\/\d+/.test(page.url) && ['importata', 'da_verificare'].includes(String((page.props as Record<string, any>).invoice?.status ?? ''))) },
             { label: 'Acquisti', href: `${b}/acquisti`, icon: 'download' },
             { label: 'Vendite', href: `${b}/vendite`, icon: 'out' },
             { label: 'Fuori campo IVA', href: `${b}/fuori-campo`, icon: 'percent' },

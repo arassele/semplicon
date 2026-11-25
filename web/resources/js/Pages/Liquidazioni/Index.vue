@@ -7,7 +7,7 @@ import { date, money } from '@/lib/format';
 import type { SharedProps } from '@/types';
 
 type Row = { period: number; label: string; status: string; version: number | null; result: string | null; due: string | null; credit: string | null; deferred: string | null;
-    due_date: string | null; checks: number; empty: boolean; f24: { id: number; status: string; label: string } | null; year: number };
+    due_date: string | null; checks: number; empty: boolean; f24: { id: number; status: string; label: string } | null; year: number; pay_state: 'scaduto' | 'da_versare' | 'nessuno' | null; term_passed: boolean };
 defineProps<{ year: number | 'tutti'; years: number[]; profile: { label: string; periodicity: string; pro_rata: string } | null; issues: { field: string; message: string }[]; rows: Row[]; lipe: Lipe[]; rules: string | null }>();
 type Lipe = { quarter: number; label: string; ok: boolean; reasons: string[]; modules: number; deadline: string; filename: string | null };
 const page = usePage<SharedProps>();
@@ -45,8 +45,11 @@ const RESULT: Record<string, string> = { debito: 'A debito', credito: 'A credito
                                 <template v-if="r.checks"> <span class="badge warn">Da verificare ({{ r.checks }})</span></template><template v-if="r.empty"> <span class="small muted">nessun movimento</span></template></td>
                             <td>{{ r.result ? RESULT[r.result] : '—' }}<template v-if="r.deferred && r.deferred !== '0.00'"><br><span class="small muted">rinviato {{ money(r.deferred) }}</span></template></td>
                             <td class="num tabular">{{ r.result === 'credito' ? money(r.credit) : r.due ? money(r.due) : '—' }}</td>
-                            <td class="tabular">{{ r.due_date ? date(r.due_date) : '—' }}</td>
-                            <td><span v-if="r.f24" class="badge" :class="r.f24.status === 'scartato' ? 'bad' : r.f24.status === 'bozza' ? 'info' : 'good'">{{ r.f24.label }}</span></td>
+                            <td class="tabular">{{ r.due_date ? date(r.due_date) : '—' }}<template v-if="r.term_passed"><br><span class="badge bad">Termine superato</span></template></td>
+                            <td><span v-if="r.f24 && r.pay_state !== 'scaduto'" class="badge" :class="r.f24.status === 'scartato' ? 'bad' : r.f24.status === 'bozza' ? 'info' : 'good'">{{ r.f24.label }}</span>
+                                <span v-if="r.pay_state === 'scaduto'" class="badge bad">Da versare · scaduto il {{ r.due_date ? date(r.due_date) : '—' }}</span>
+                                <span v-else-if="r.pay_state === 'da_versare' && !r.f24" class="badge warn">Da versare entro il {{ r.due_date ? date(r.due_date) : '—' }}</span>
+                                <span v-else-if="r.pay_state === 'nessuno'" class="small muted">nessun versamento</span></td>
                         </tr>
                     </tbody>
                 </table>
